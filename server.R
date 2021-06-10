@@ -39,6 +39,13 @@ shinyServer(function(input, output, session) {
   observeEvent(input$goover, {
     updateTabItems(session, "pages", "overview")
   })
+  #Go to game page Button
+  observeEvent(input$bsButton2, {
+    updateTabItems(session, "pages", "instr2")
+  })
+  
+
+  
 ###### Download 5 datasets ######
   output$CarsDownload <- downloadHandler(
     filename = function() {
@@ -351,12 +358,20 @@ val <- reactiveValues()
     updateTabItems(session, 'pages', 'exp1')
   })
   
+  observeEvent(input$bsButton2, {
+    updateTabItems(session, 'pages', 'exp3')
+  })
+  
   observeEvent(input$bsButton4, {
-    updateTabItems(session, 'pages', 'cha1')
+    updateTabItems(session, 'games2', 'cha1')
   })
   
   observeEvent(input$bsButton6, {
-    updateTabItems(session, 'pages', 'cha2')
+    updateTabItems(session, 'games1', 'cha2')
+  })
+  
+  observeEvent(input$bsButton7, {
+    updateTabItems(session, 'pages', 'references')
   })
   
   observeEvent(input$next1, {

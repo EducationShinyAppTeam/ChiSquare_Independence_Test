@@ -30,7 +30,7 @@ ui <- dashboardPage(
                        menuSubItem('Fill in the Blank', tabName = 'instr1', icon = icon('gamepad'))
                        #menuSubItem('Fill in the Blank', tabName = 'cha1')
               ),
-              menuItem("References", tabName = "References", icon = icon("leanpub"))
+              menuItem("References", tabName = "references", icon = icon("leanpub"))
   )
 ),
 
@@ -64,7 +64,7 @@ ui <- dashboardPage(
         
       h4('The chi-square distribution is appropriate if the expected count is at least five in each cell.'),
         br(),
-        div(style = "text-align: center",bsButton("goover", "Go to the overview", icon("bolt"), size = "medium"))
+        div(style = "text-align: center",bsButton("goover", "Go to the overview", icon("bolt"), size = "large"))
         
     ),
     
@@ -84,7 +84,7 @@ ui <- dashboardPage(
               tags$li('By uploading your own datafile, you would be given back a', HTML('x<sup>2</sup>'), 'test for independence result of the variables selected.'),
               tags$li('Read the instructions for Fill in the Blanks first and then click on Go button to get started!')
               ),
-            div(style = "text-align: center", bsButton(inputId = "bsButton1", label = "G O !",icon = icon('bolt'), size = 'median')),
+            div(style = "text-align: center", bsButton(inputId = "bsButton1", label = "G O !",icon = icon('bolt'), size = 'large')),
             br(),
             h3(tags$b("Acknowledgements:")),
               h4('This application was coded and developed by Anna (Yinqi) Zhang.'),
@@ -381,7 +381,8 @@ ui <- dashboardPage(
                 
 
               )
-            )
+            ),
+            div(style = "text-align: center", bsButton(inputId = "bsButton2", label = "Play the game!",icon = icon('bolt'), size = 'large'))
     ),
     tabItem(tabName = "instr2",
             div(style="display: inline-block;vertical-align:top;",
@@ -395,7 +396,7 @@ ui <- dashboardPage(
                                    h4(tags$li('Click on the GO! button to start the game.')),
                                    h4(tags$li('Select from the dropdown menu the most appropriate explanation of the graph present.')),
                                    br(),
-                                   div(style = "text-align: center", bsButton(inputId = "bsButton6", label = "GO!", icon = icon('bolt'), size = "median"))
+                                   div(style = "text-align: center", bsButton(inputId = "bsButton6", label = "GO!", icon = icon('bolt'), size = "large"))
                                  
                        )
               ),
@@ -417,7 +418,7 @@ ui <- dashboardPage(
                                                                                      'D. A, B, and C'),
                                                                          selected = ''),
                                                              br(),
-                                                             div(style = 'text-align: left', bsButton(inputId = 'cq1check1', label = 'Check Answer',  size = 'small'), bsButton(inputId = 'next1', label = 'Next', size = 'small'))
+                                                             div(style = 'text-align: left', bsButton(inputId = 'cq1check1', label = 'Check Answer',  size = "large"), bsButton(inputId = 'next1', label = 'Next', size = "large"))
                                             ),
                                             
                                             conditionalPanel('input.graphId == "The Second Graph"',
@@ -430,7 +431,7 @@ ui <- dashboardPage(
                                                                          selected = ''
                                                              ),
                                                              br(),
-                                                             div(style = 'text-align: left', bsButton(inputId = 'cq1check2', label = 'Check', size = 'small'), bsButton(inputId = 'next2', label = 'Next', size = 'small'))
+                                                             div(style = 'text-align: left', bsButton(inputId = 'cq1check2', label = 'Check', size = "large"), bsButton(inputId = 'next2', label = 'Next', size = "large"))
                                             ),
                                             
                                             conditionalPanel('input.graphId == "The Third Graph"',
@@ -442,7 +443,7 @@ ui <- dashboardPage(
                                                                                      'D. The use of lithium is more associated with the non-relapse status than the relapse status'),
                                                                          selected = ''),
                                                              br(),
-                                                             div(style = 'text-align: left', bsButton(inputId = 'cq1check3', label = 'Check', size = 'small'), bsButton(inputId = 'next3', label = 'Next',size = 'small'))
+                                                             div(style = 'text-align: left', bsButton(inputId = 'cq1check3', label = 'Check', size = "large"), bsButton(inputId = 'next3', label = 'Next',size = "large"))
                                             ),
                                             
                                             conditionalPanel('input.graphId == "The Fourth Graph"',
@@ -453,7 +454,7 @@ ui <- dashboardPage(
                                                                                      'C. Both A and B'),
                                                                          selected = ''),
                                                              br(),
-                                                             div(style = 'text-align: left', bsButton(inputId = 'cq1check4', label = 'Check', size = 'small'), bsButton(inputId = 'next4', label = 'Next', size = 'small'))
+                                                             div(style = 'text-align: left', bsButton(inputId = 'cq1check4', label = 'Check', size = "large"), bsButton(inputId = 'next4', label = 'Next', size = "large"))
                                             )
                                           ),
                          
@@ -513,24 +514,25 @@ ui <- dashboardPage(
                                              h4(tags$li('Select from the dropdown menu the answer you think correct.')),
                                              h4(tags$li('Click on "Submit!" to see if your answer is correct or not.')),
                                              br(),
-                                             div(style = "text-align: center", bsButton(inputId = "bsButton4", label = "GO!", icon = icon('bolt'), size = "median"))
+                                             div(style = "text-align: center", bsButton(inputId = "bsButton4", label = "GO!", icon = icon('bolt'), size = "large"))
                                            ) 
                         ),
                         tabPanel(title = h4("Multiple Choice"), value = "cha1",
                                  fluidRow(
-                                   box(width = 12, style = 'color: #FFFFFF; background-color: #ff8080',htmlOutput('questionCha'))
+                                   box(width = 12, style = 'color: #FFFFFF; background-color: #ffa500',htmlOutput('questionCha'))
                                  ),
                                  
                                  fluidRow(
-                                   box(width = 12, style = 'color: #000000; background-color: #ff8080',htmlOutput('choiceCha'))
+                                   box(width = 12, style = 'color: #000000; background-color: #ffa500',htmlOutput('choiceCha'))
                                  ),
                                  
                                  conditionalPanel('input.submitX != 0',
                                                   htmlOutput('challengeFeedback'),
                                                   htmlOutput('textFeedback')),
                                  br(),
-                                 div(style = "text-align: center", actionButton(inputId = 'submitX', label = 'Check Answer',size = 'median'),
-                                     actionButton(inputId = 'nextX', label = 'Next', size = 'median'))
+                                 div(style = "text-align: left", actionButton(inputId = 'submitX', label = 'Check Answer',size = "small"),
+                                     actionButton(inputId = 'nextX', label = 'Next', size = "small")),
+                                 div(style = "text-align: center", bsButton(inputId = "bsButton7", label = "Continue!", icon = icon('bolt'), size = "large"))
                    )
               
             )
