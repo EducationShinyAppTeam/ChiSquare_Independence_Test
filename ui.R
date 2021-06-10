@@ -5,9 +5,20 @@ library(shinyjs)
 library(shinyDND)
 library(plotly)
 
-header = dashboardHeader(title = "Chi-Square Test of Independence", titleWidth = 350)
 
-sidebar = dashboardSidebar(
+ui <- dashboardPage(
+  skin = "yellow",
+  dashboardHeader(title = "Chi-Square Test of Independence",
+                  tags$li(class="dropdown",
+                          actionLink("info", icon("info"), class="myClass")),
+                  tags$li(class = "dropdown",
+                          boastUtils::surveyLink(name = "App_Template")),
+                  tags$li(class="dropdown",
+                          tags$a(href="https://shinyapps.science.psu.edu/",
+                                 icon("home", lib="font-awesome"))),
+                  titleWidth = 200),
+
+  dashboardSidebar(
   sidebarMenu(id = 'pages', #use pages to name the menu
               menuItem('Prerequisites', tabName = 'prerequisite', icon = icon('book')),
               menuItem("Overview", tabName = "overview", icon = icon("dashboard")),
@@ -21,9 +32,9 @@ sidebar = dashboardSidebar(
               ),
               menuItem("References", tabName = "References", icon = icon("leanpub"))
   )
-)
+),
 
-body = dashboardBody(
+  dashboardBody(
   #tags$style(type = "text/css", ".content-wrapper,.right-side {background-color: white;}"),
   tags$head(
     tags$link(rel = "stylesheet", type = "text/css", href = "Feature.css")
@@ -529,5 +540,5 @@ body = dashboardBody(
     
 
 )
-
-shinyUI(dashboardPage( header, sidebar, body))
+)
+#shinyUI(dashboardPage( header, sidebar, body))
