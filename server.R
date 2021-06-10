@@ -37,7 +37,7 @@ saData <- data.frame(bread, hpickles, pbutter, vegemite)
 shinyServer(function(input, output, session) {
   #Go to overview Button
   observeEvent(input$goover, {
-    updateTabItems(session, "tabs", "overview")
+    updateTabItems(session, "pages", "overview")
   })
 ###### Download 5 datasets ######
   output$CarsDownload <- downloadHandler(
@@ -348,34 +348,34 @@ val <- reactiveValues()
   })
   
   observeEvent(input$bsButton1, {
-    updateTabItems(session, 'tabs', 'exp1')
+    updateTabItems(session, 'pages', 'exp1')
   })
   
   observeEvent(input$bsButton4, {
-    updateTabItems(session, 'games2', 'cha1')
+    updateTabItems(session, 'pages', 'cha1')
   })
   
   observeEvent(input$bsButton6, {
-    updateTabItems(session, 'games1', 'cha2')
+    updateTabItems(session, 'pages', 'cha2')
   })
   
   observeEvent(input$next1, {
-    updateTabItems(session, 'tabs', 'cha2_2')
+    updateTabItems(session, 'pages', 'cha2_2')
     updateSelectInput(session, inputId = 'graphId', selected = 'The Second Graph')
   })
   
   observeEvent(input$next2, {
-    updateTabItems(session, 'tabs', 'cha2_3')
+    updateTabItems(session, 'pages', 'cha2_3')
     updateSelectInput(session, inputId = 'graphId', selected = 'The Third Graph')
   })
   
   observeEvent(input$next3, {
-    updateTabItems(session, 'tabs', 'cha2_4')
+    updateTabItems(session, 'pages', 'cha2_4')
     updateSelectInput(session, inputId = 'graphId', selected = 'The Fourth Graph')
   })
 
   observeEvent(input$next4, {
-    updateTabItems(session, 'tabs', 'instr1')
+    updateTabItems(session, 'pages', 'instr1')
   })
 
 ############ What's Going On in This Graph? ############

@@ -8,7 +8,7 @@ library(plotly)
 header = dashboardHeader(title = "Chi-Square Test of Independence", titleWidth = 350)
 
 sidebar = dashboardSidebar(
-  sidebarMenu(id = 'tabs', 
+  sidebarMenu(id = 'pages', #use pages to name the menu
               menuItem('Prerequisites', tabName = 'prerequisite', icon = icon('book')),
               menuItem("Overview", tabName = "overview", icon = icon("dashboard")),
               menuItem('Explore', tabName = "exp1", icon = icon('wpexplorer')),
@@ -18,7 +18,8 @@ sidebar = dashboardSidebar(
                        #menuSubItem('What is Going on Graph?', tabName = 'cha2'),
                        menuSubItem('Fill in the Blank', tabName = 'instr1', icon = icon('gamepad'))
                        #menuSubItem('Fill in the Blank', tabName = 'cha1')
-              )
+              ),
+              menuItem("References", tabName = "References", icon = icon("leanpub"))
   )
 )
 
