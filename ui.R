@@ -11,9 +11,9 @@ sidebar = dashboardSidebar(
   sidebarMenu(id = 'tabs', 
               menuItem('Prerequisites', tabName = 'prerequisite', icon = icon('book')),
               menuItem("Overview", tabName = "overview", icon = icon("dashboard")),
-              menuItem('View an Example', tabName = "exp1", icon = icon('wpexplorer')),
+              menuItem('Explore', tabName = "exp1", icon = icon('wpexplorer')),
               #menuItem('Test Your Own Dataset', tabName = 'exp2', icon = icon('wpexplorer')),
-              menuItem('Get Some Practice', tabName = "exp3", icon = icon('gamepad'),
+              menuItem('Game', tabName = "exp3", icon = icon('gamepad'),
                        menuSubItem('Interpreting the Graph', tabName = 'instr2', icon = icon('gamepad')),
                        #menuSubItem('What is Going on Graph?', tabName = 'cha2'),
                        menuSubItem('Fill in the Blank', tabName = 'instr1', icon = icon('gamepad'))
