@@ -152,7 +152,7 @@ val <- reactiveValues()
   output$hiplotly1 <- renderPlotly ({
     x <- list(title = input$XHeroesInfo)
     y <- list(title = input$YHeroesInfo)
-    hip <- plot_ly(x = hi[ , input$XHeroesInfo], y = hi[ , input$YHeroesInfo]) %>%
+    hip <- plot_ly(x = hi[ , input$XHeroesInfo], y = hi[ , input$YHeroesInfo], type = "histogram2d") %>%
       layout(xaxis = x, yaxis = y)
     hip
   })
@@ -162,6 +162,8 @@ val <- reactiveValues()
     hiSummary <- chisq.test(table(hi[ , c(input$XHeroesInfo, input$YHeroesInfo)]))
     hiSummary
   })
+  #chisq.test(table(hi[ , c(input$XHeroesInfo, input$YHeroesInfo)]))
+  #chisq.test(x = hi[ , input$XHeroesInfo], y = hi[ , input$YHeroesInfo],simulate.p.value = TRUE)
   
   #Challenge Question No.1 for Cars2015
   output$Carsquestion <- renderText({
