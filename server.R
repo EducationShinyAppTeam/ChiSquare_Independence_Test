@@ -403,10 +403,7 @@ val <- reactiveValues()
       layout(xaxis = x, yaxis = y, title = '2D Histogram for the Sandwich & Ants Example')
     cha2p1
   })
-  #cha2 answer1 + feed1
-  #observeEvent(input$cq1check1, {
-    #if(input$cq1 == 'D. A, B, and C') {
-  
+
   observeEvent(input$cq1check1,{
     if(input$cq1 == 'D. A, B, and C') {
       output$cq1ans1 <- boastUtils::renderIcon(
@@ -429,22 +426,7 @@ val <- reactiveValues()
       })
     }
   })
-      #output$cq1ans1 <- renderUI({
-        #div(style = 'text-align: left', img(src = 'correct.png', height = 100, width = 100))
-      #})
-      #output$cq1feed1 <- renderUI({
-        #tags$h4(strong('Congratulations!'))
-      #})
-    #}
-    #else {
-      #output$cq1ans1 <- renderUI({
-        #div(style = 'text-align: left', img(src = 'incorrect.png', height = 100, width = 100))
-      #})
-      #output$cq1feed1 <- renderUI({
-        #tags$h4(strong('Please play with the interactive plots and think about what the axes represent!'))
-      #})
-    #}
-  #})
+
   
   #cha2 plot2
   output$cha2plot2 <- renderPlotly({
@@ -455,19 +437,23 @@ val <- reactiveValues()
     cha2p2
   })
   #cha2 answer2 + feed2
-  observeEvent(input$cq1check2, {
-    if (input$cq2 == 'C. In this dataset, small is the most common size for Sporty cars') {
-      output$cq1ans2 <- renderUI({
-        div(style = 'text-align: left', img(src = 'correct.png', height = 100, width = 100))
-      })
+  observeEvent(input$cq1check2,{
+    if(input$cq2 == 'C. In this dataset, small is the most common size for Sporty cars') {
+      output$cq1ans2 <- boastUtils::renderIcon(
+        icon = "correct", 
+        width = 36,
+        html = FALSE
+      )
       output$cq1feed2 <- renderUI({
         tags$h4(strong('Congratulations!'))
       })
     }
     else {
-      output$cq1ans2 <- renderUI({
-        div(style = 'text-align: left', img(src = 'incorrect.png', height = 100, width = 100))
-      })
+      output$cq1ans2 <- boastUtils::renderIcon(
+        icon = "incorrect", 
+        width = 36,
+        html = FALSE
+      )
       output$cq1feed2 <- renderUI({
         tags$h4(strong('Start with each car types and then go through the sizes corresponding to each type!'))
       })
@@ -482,20 +468,25 @@ val <- reactiveValues()
       layout(xaxis = x, yaxis = y, title = '2D Histogram for the Drug Treatment and Relapse Status')
     cha2p3
   })
+  
   #cha2 answer3 + feed3
-  observeEvent(input$cq1check3, {
-    if (input$cq3 == 'B. People who use desipramine as drug treatment are less likely to relapse compared to those who use lithium and placebo') {
-      output$cq1ans3 <- renderUI({
-        div(style = 'text-align: left', img(src = 'correct.png', height = 100, width = 100))
-      })
+  observeEvent(input$cq1check3,{
+    if(input$cq3 == 'B. People who use desipramine as drug treatment are less likely to relapse compared to those who use lithium and placebo') {
+      output$cq1ans3 <- boastUtils::renderIcon(
+        icon = "correct", 
+        width = 36,
+        html = FALSE
+      )
       output$cq1feed3 <- renderUI({
         tags$h4(strong('Congratulations!'))
       })
     }
     else {
-      output$cq1ans3 <- renderUI({
-        div(style = 'text-align: left', img(src = 'incorrect.png', height = 100, width = 100))
-      })
+      output$cq1ans3 <- boastUtils::renderIcon(
+        icon = "incorrect", 
+        width = 36,
+        html = FALSE
+      )
       output$cq1feed3 <- renderUI({
         tags$h4(strong('Compare the relapse and non-relapse status within each drug treatment! Go both vertically and horizontally!'))
       })
@@ -510,25 +501,31 @@ val <- reactiveValues()
       layout(xaxis = x, yaxis = y, title = '2D Histogram for the Compassionate Rats Example')
     cha2p4
   })
+  
   #cha2 answer4 + feed4
-  observeEvent(input$cq1check4, {
-    if (input$cq4 == 'C. Both A and B') {
-      output$cq1ans4 <- renderUI({
-        div(style = 'text-align: left', img(src = 'correct.png', height = 100, width = 100))
-      })
+  observeEvent(input$cq1check4,{
+    if(input$cq4 == 'C. Both A and B') {
+      output$cq1ans4 <- boastUtils::renderIcon(
+        icon = "correct", 
+        width = 36,
+        html = FALSE
+      )
       output$cq1feed4 <- renderUI({
         tags$h4(strong('Congratulations!'))
       })
     }
     else {
-      output$cq1ans4 <- renderUI({
-        div(style = 'text-align: left', img(src = 'incorrect.png', height = 100, width = 100))
-      })
+      output$cq1ans4 <- boastUtils::renderIcon(
+        icon = "incorrect", 
+        width = 36,
+        html = FALSE
+      )
       output$cq1feed4 <- renderUI({
         tags$h4(strong('Think about what could be done to make the graph more informative!'))
       })
     }
   })
+  
   
 ############ Question Bank ############
 ############ ############ ############ ############
@@ -561,22 +558,27 @@ values <- reactiveValues()
     })
   })
   
+  #feedback and mark
   observeEvent(input$submitX, {
     if (input$challengeChoice == question$Correct[values$num]) {
-      output$challengeFeedback <- renderUI ({
-        div(style = 'text-align: center', img(src = 'correct.png', height = 100, width = 100))
-      })
+      output$challengeFeedback <- boastUtils::renderIcon (
+        icon = "correct", 
+        width = 36,
+        html = FALSE
+      )
       output$textFeedback <- renderUI ({
-        div(h4(style = 'text-align: center', paste('Congratulations!')))
+        div(h4(style = 'text-align: left', paste('Congratulations!')))
       })
     }
     else {
-      output$challengeFeedback <- renderUI ({
-        div(style = 'text-align: center', img(src = 'incorrect.png', height = 100, width = 100))
-      })
+      output$challengeFeedback <- boastUtils::renderIcon (
+        icon = "incorrect", 
+        width = 36,
+        html = FALSE
+      )
       output$textFeedback <- renderUI ({
         text <- question$Feedback[values$num]
-        div(h4(style = 'text-align: center', text))
+        div(h4(style = 'text-align: left', text))
       })
     }
   })
