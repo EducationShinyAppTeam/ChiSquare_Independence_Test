@@ -16,7 +16,7 @@ ui <- dashboardPage(
                   tags$li(class="dropdown",
                           tags$a(href="https://shinyapps.science.psu.edu/",
                                  icon("home", lib="font-awesome"))),
-                  titleWidth = 350),
+                  titleWidth = 250),
 
   dashboardSidebar(
   sidebarMenu(id = 'pages', #use pages to name the menu
@@ -36,7 +36,8 @@ ui <- dashboardPage(
     style = "position: absolute; bottom: 0;",
     class = "sidebar-logo",
     boastUtils::sidebarFooter()
-  )
+  ),
+  width = 250
 ),
 
   dashboardBody(
@@ -90,19 +91,17 @@ ui <- dashboardPage(
         
         h4(tags$li('Set up hypotheses:')),
         h4('\\(H_{0}\\):  Variable A is not associated with variable B.'),
-      h4('\\(H_{a}\\):  Variable A is associated with variable B.'),
-      div(style="font-size: 1.6em", helpText('$$ {logit ( \\hat p )=log({ \\hat p\\over1-\\hat p})}$$')),
+        h4('\\(H_{a}\\):  Variable A is associated with variable B.'),
+      #div(style="font-size: 1.6em", helpText('$$ {logit ( \\hat p )=log({ \\hat p\\over1-\\hat p})}$$')),
         
       h4(tags$li('Compute the expected count under the null for each cell in the table using:')),
       div(style = "font-size: 1.6em", helpText('$${Expected \\ Cell \\ Count} = {Row\\ Total * Column\\ Total\\over Table\\ Total}$$')),
-      #div(style="font-size: 1.6em", helpText('$${\\sum_{i=1}^g}{\\sum_{j=1}^2}{{(obs_{ij} - exp_{ij})^2} 
-                                                                            #\\over exp_{ij}}$$')),
-      
       #h4(tags$li('Compute the expected count under the null for each cell in the table using:')),
         #tags$img(src = 'chi_sqr_stats_1.jpg', width = "384px", height = "100px"),
         
       h4(tags$li('Compute the value for the chi-square statistic using:')),
-        tags$img(src = 'chi_sqr_stats_2.jpg', width = "384px", height = "100px", style = "text-align: center"),
+      div(style = "font-size: 1.6em", helpText('$${X^2} = {\\sum{{(Observed - Expected)^2}\\over {Expected}}}$$')),
+        #tags$img(src = 'chi_sqr_stats_2.jpg', width = "384px", height = "100px", style = "text-align: center"),
         
       h4('Find a p-value using the upper tail of a chi-square distribution with (r-1)(c-1) degrees of freedom or use simulation under the null.'),
         
