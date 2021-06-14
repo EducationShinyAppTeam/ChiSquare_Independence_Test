@@ -91,9 +91,15 @@ ui <- dashboardPage(
         h4(tags$li('Set up hypotheses:')),
         h4('\\(H_{0}\\):  Variable A is not associated with variable B.'),
       h4('\\(H_{a}\\):  Variable A is associated with variable B.'),
+      div(style="font-size: 1.6em", helpText('$$ {logit ( \\hat p )=log({ \\hat p\\over1-\\hat p})}$$')),
         
       h4(tags$li('Compute the expected count under the null for each cell in the table using:')),
-        tags$img(src = 'chi_sqr_stats_1.jpg', width = "384px", height = "100px"),
+      div(style = "font-size: 1.6em", helpText('$${Expected \\ Cell \\ Count} = {Row\\ Total * Column\\ Total\\over Table\\ Total}$$')),
+      #div(style="font-size: 1.6em", helpText('$${\\sum_{i=1}^g}{\\sum_{j=1}^2}{{(obs_{ij} - exp_{ij})^2} 
+                                                                            #\\over exp_{ij}}$$')),
+      
+      #h4(tags$li('Compute the expected count under the null for each cell in the table using:')),
+        #tags$img(src = 'chi_sqr_stats_1.jpg', width = "384px", height = "100px"),
         
       h4(tags$li('Compute the value for the chi-square statistic using:')),
         tags$img(src = 'chi_sqr_stats_2.jpg', width = "384px", height = "100px", style = "text-align: center"),
