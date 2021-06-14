@@ -404,24 +404,47 @@ val <- reactiveValues()
     cha2p1
   })
   #cha2 answer1 + feed1
-  observeEvent(input$cq1check1, {
+  #observeEvent(input$cq1check1, {
+    #if(input$cq1 == 'D. A, B, and C') {
+  
+  observeEvent(input$cq1check1,{
     if(input$cq1 == 'D. A, B, and C') {
-      output$cq1ans1 <- renderUI({
-        div(style = 'text-align: left', img(src = 'correct.png', height = 100, width = 100))
-      })
+      output$cq1ans1 <- boastUtils::renderIcon(
+        icon = "correct", 
+        width = 36,
+        html = FALSE
+      )
       output$cq1feed1 <- renderUI({
         tags$h4(strong('Congratulations!'))
       })
     }
     else {
-      output$cq1ans1 <- renderUI({
-        div(style = 'text-align: left', img(src = 'incorrect.png', height = 100, width = 100))
-      })
+      output$cq1ans1 <- boastUtils::renderIcon(
+        icon = "incorrect", 
+        width = 36,
+        html = FALSE
+      )
       output$cq1feed1 <- renderUI({
         tags$h4(strong('Please play with the interactive plots and think about what the axes represent!'))
       })
     }
   })
+      #output$cq1ans1 <- renderUI({
+        #div(style = 'text-align: left', img(src = 'correct.png', height = 100, width = 100))
+      #})
+      #output$cq1feed1 <- renderUI({
+        #tags$h4(strong('Congratulations!'))
+      #})
+    #}
+    #else {
+      #output$cq1ans1 <- renderUI({
+        #div(style = 'text-align: left', img(src = 'incorrect.png', height = 100, width = 100))
+      #})
+      #output$cq1feed1 <- renderUI({
+        #tags$h4(strong('Please play with the interactive plots and think about what the axes represent!'))
+      #})
+    #}
+  #})
   
   #cha2 plot2
   output$cha2plot2 <- renderPlotly({
