@@ -4,10 +4,10 @@ library(shinyBS)
 library(shinyjs)
 library(shinyDND)
 library(plotly)
-
+#references
 
 ui <- dashboardPage(
-  skin = "yellow",
+  skin = 'yellow',
   dashboardHeader(title = "Chi-Square Test of Independence",
                   tags$li(class="dropdown",
                           actionLink("info", icon("info"), class="myClass")),
@@ -16,7 +16,7 @@ ui <- dashboardPage(
                   tags$li(class="dropdown",
                           tags$a(href="https://shinyapps.science.psu.edu/",
                                  icon("home", lib="font-awesome"))),
-                  titleWidth = 200),
+                  titleWidth = 350),
 
   dashboardSidebar(
   sidebarMenu(id = 'pages', #use pages to name the menu
@@ -31,13 +31,25 @@ ui <- dashboardPage(
                        #menuSubItem('Fill in the Blank', tabName = 'cha1')
               ),
               menuItem("References", tabName = "references", icon = icon("leanpub"))
+  ),
+  tags$div(
+    style = "position: absolute; bottom: 0;",
+    class = "sidebar-logo",
+    boastUtils::sidebarFooter()
   )
 ),
 
   dashboardBody(
   #tags$style(type = "text/css", ".content-wrapper,.right-side {background-color: white;}"),
   tags$head(
-    tags$link(rel = "stylesheet", type = "text/css", href = "Feature.css")
+    tags$style(HTML('#bsButton2{background-color: #ffa500')),
+    tags$style(HTML('#bsButton2{border-color: #ffa500')),
+    tags$style(HTML('#bsButton7{background-color: #ffa500')),
+    tags$style(HTML('#bsButton7{border-color: #ffa500')),
+    tags$style(HTML('#bsButton4{background-color: #ffa500')),
+    tags$style(HTML('#bsButton4{border-color: #ffa500')),
+    #tags$style(type = "text/css", ".content-wrapper,.right-side {background-color: white;}"),
+    #tags$link(rel = "stylesheet", type = "text/css", href = "Feature.css")
   ),
   
   useShinyjs(),
@@ -536,7 +548,33 @@ ui <- dashboardPage(
                    )
               
             )
-            )
+            ),
+    #References page
+    tabItem(
+      tabName = "references",
+      withMathJax(),
+      h2("References"),
+      p(
+        class = "hangingindent",
+        "Carey, R. (2019). boastUtils: BOAST Utilities, R Package.
+                             Available from https://github.com/EducationShinyAppTeam/boastUtils"
+      ),
+      
+      p(
+        class = "hangingindent",
+        "Chang, W. and Borges Ribeio, B. (2018). shinydashboard: Create
+                             dashboards with 'Shiny', R Package. Available from
+                             https://CRAN.R-project.org/package=shinydashboard"
+      ),
+      
+      p(
+        class = "hangingindent",
+        "Wickham, H. (2011), “The Split-apply-combine strategy for data 
+                             analysis.” Journal of Statistical Software, 40, pp. 1-29. 
+                             Available at http://www.jstatsoft.org/v40/i01/."
+      )
+      
+    ) #end of tabItem
     
     )
     
