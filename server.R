@@ -159,10 +159,12 @@ val <- reactiveValues()
   
   #X^2 summary for HeroesInformation
   output$hisur <- renderPrint({
-    hiSummary <- chisq.test(table(hi[ , c(input$XHeroesInfo, input$YHeroesInfo)]))
+    hiSummary <- chisq.test(x = hi[ , input$XHeroesInfo], y = hi[ , input$YHeroesInfo], simulate.p.value = TRUE)
     hiSummary
   })
   #chisq.test(table(hi[ , c(input$XHeroesInfo, input$YHeroesInfo)]))
+  #Warning in chisq.test(table(hi[, c(input$XHeroesInfo, input$YHeroesInfo)])) :
+  #Chi-squared approximation may be incorrect
   #chisq.test(x = hi[ , input$XHeroesInfo], y = hi[ , input$YHeroesInfo],simulate.p.value = TRUE)
   
   #Challenge Question No.1 for Cars2015
@@ -181,22 +183,26 @@ val <- reactiveValues()
   output$carsplotly <- renderPlotly({
     x <- list(title = input$XCars2015)
     y <- list(title = input$YCars2015)
-    carsp <- plot_ly(x = cars[ , input$XCars2015], y = cars[ , input$YCars2015], marker = list(size = seq(0, 50, 5), color = seq(0, 50, 5), colorbar = list(title = 'Count'), colorscale = 'Reds', reversescale = TRUE)) %>%
+    carsp <- plot_ly(x = cars[ , input$XCars2015], y = cars[ , input$YCars2015], marker = list(size = seq(0, 50, 5), color = seq(0, 50, 5),
+                                                                                               colorbar = list(title = 'Count'), colorscale = 'Reds', 
+                                                                                               reversescale = TRUE),type = "histogram2d") %>%
       layout(xaxis = x, yaxis = y)
     carsp
   })
   
   #X^2 summary for Cars2015
   output$carssur <- renderPrint({
-    carsSummary <- chisq.test(table(cars[ , c(input$XCars2015, input$YCars2015)]))
+    carsSummary <- chisq.test(x = cars[ , input$XCars2015], y = cars[ , input$YCars2015],simulate.p.value = TRUE)
     carsSummary
   })
+  #chisq.test(table(cars[ , c(input$XCars2015, input$YCars2015)]))
+  #chisq.test(x = hi[ , input$XHeroesInfo], y = hi[ , input$YHeroesInfo],simulate.p.value = TRUE)
   
   #2D histogram for SandwichAnts
   output$saplotly1 <- renderPlotly({
     x <- list(title = 'Filling')
     y <- list(title = 'Bread')
-    sap1 <- plot_ly(x = sa$Filling, y = sa$Bread) %>%
+    sap1 <- plot_ly(x = sa$Filling, y = sa$Bread,type = "histogram2d") %>%
       layout(xaxis = x, yaxis = y, title = '2D Histogram for the Sandwich & Ants Example')
     sap1
   })
@@ -204,7 +210,7 @@ val <- reactiveValues()
   #stacked bar chart for SandwichAnts
   output$saplotly2 <- renderPlotly({
     x <- list(title = 'Bread')
-    sap2 <- plot_ly(saData, x = ~bread, y = ~hpickles, type = 'bar', name = 'Ham & Pickles') %>%
+    sap2 <- plot_ly(saData, x = ~bread, y = ~hpickles, type = 'bar', name = 'Ham & Pickles',type = "histogram2d") %>%
       add_trace(y = ~pbutter, name = 'Peanut Butter') %>%
       add_trace(y = ~vegemite, name = 'vegemite') %>%
       layout(xaxis = x, yaxis = list(title = 'Count'), barmode = 'stacked')
@@ -221,7 +227,7 @@ val <- reactiveValues()
   output$crplotly1 <- renderPlotly({
     x <- list(title = 'Sex')
     y <- list(title = 'Empathy')
-    cr1 <- plot_ly(x = cr$Sex, y = cr$Empathy) %>%
+    cr1 <- plot_ly(x = cr$Sex, y = cr$Empathy, type = "histogram2d") %>%
       layout(xaxis = x, yaxis = y, title = '2D Histogram for the Compassionate Rats Example')
     cr1
   })
@@ -401,7 +407,7 @@ val <- reactiveValues()
   output$cha2plot1 <- renderPlotly({
     x <- list(title = 'Filling')
     y <- list(title = 'Bread')
-    cha2p1 <- plot_ly(x = sa$Filling, y = sa$Bread) %>%
+    cha2p1 <- plot_ly(x = sa$Filling, y = sa$Bread,type="histogram2d") %>%
       layout(xaxis = x, yaxis = y, title = '2D Histogram for the Sandwich & Ants Example')
     cha2p1
   })
@@ -434,7 +440,7 @@ val <- reactiveValues()
   output$cha2plot2 <- renderPlotly({
     x <- list(title = 'Type')
     y <- list(title = 'Size')
-    cha2p2 <- plot_ly(x = cars$Type, y = cars$Size) %>%
+    cha2p2 <- plot_ly(x = cars$Type, y = cars$Size,type="histogram2d") %>%
       layout(xaxis = x, yaxis = y, title = '2D Histogram for the Cars Example')
     cha2p2
   })
@@ -466,7 +472,7 @@ val <- reactiveValues()
   output$cha2plot3 <- renderPlotly({
     x <- list(title = 'Drug')
     y <- list(title = 'Relapse Status')
-    cha2p3 <- plot_ly(x = ct$Drug, y = ct$Relapse) %>%
+    cha2p3 <- plot_ly(x = ct$Drug, y = ct$Relapse,type="histogram2d") %>%
       layout(xaxis = x, yaxis = y, title = '2D Histogram for the Drug Treatment and Relapse Status')
     cha2p3
   })
@@ -499,7 +505,7 @@ val <- reactiveValues()
   output$cha2plot4 <- renderPlotly({
     x <- list(title = 'Sex')
     y <- list(title = 'Empathy')
-    cha2p4 <- plot_ly(x = cr$Sex, y = cr$Empathy) %>%
+    cha2p4 <- plot_ly(x = cr$Sex, y = cr$Empathy,type="histogram2d") %>%
       layout(xaxis = x, yaxis = y, title = '2D Histogram for the Compassionate Rats Example')
     cha2p4
   })

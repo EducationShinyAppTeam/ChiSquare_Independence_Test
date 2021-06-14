@@ -16,7 +16,7 @@ ui <- dashboardPage(
                   tags$li(class="dropdown",
                           tags$a(href="https://shinyapps.science.psu.edu/",
                                  icon("home", lib="font-awesome"))),
-                  titleWidth = 250),
+                  titleWidth = 350),
 
   dashboardSidebar(
   sidebarMenu(id = 'pages', #use pages to name the menu
@@ -44,7 +44,7 @@ ui <- dashboardPage(
   #tags$style(type = "text/css", ".content-wrapper,.right-side {background-color: white;}"),
   tags$head(
     tags$style(HTML('#goover{background-color: #ffa500')),
-    tags$style(HTML('#goover{border-color: #ffa500')),
+    tags$style(HTML('#goover{border-color:#ffa500')),
     tags$style(HTML('#bsButton2{background-color: #ffa500')),
     tags$style(HTML('#bsButton2{border-color: #ffa500')),
     tags$style(HTML('#bsButton1{background-color: #ffa500')),
@@ -587,6 +587,15 @@ ui <- dashboardPage(
       h2("References"),
       p(
         class = "hangingindent",
+        "https://educationshinyappteam.github.io/Style_Guide/index.html#organization"
+      ),
+      p(
+        class = "hangingindent",
+        "Bailey, E. (2015). shinyBS: Twitter bootstrap components for shiny. 
+            (v0.61). [R package]. Available from https://CRAN.R-project.org/package=shinyBS"
+      ),
+      p(
+        class = "hangingindent",
         "Carey, R. (2019). boastUtils: BOAST Utilities, R Package.
                              Available from https://github.com/EducationShinyAppTeam/boastUtils"
       ),
@@ -596,6 +605,20 @@ ui <- dashboardPage(
         "Chang, W. and Borges Ribeio, B. (2018). shinydashboard: Create
                              dashboards with 'Shiny', R Package. Available from
                              https://CRAN.R-project.org/package=shinydashboard"
+      ),
+      
+      p(
+        class = "hangingindent",
+        "Chang, W., Cheng, J., Allaire, J., Xie, Y., and McPherson, J. (2019). 
+            shiny: Web application framework for R. (v1.4.0) [R Package]. 
+            Available from https://CRAN.R-project.org/package=shiny"
+      ),
+      
+      p(
+        class = "hangingindent",
+        "Attali, D.(2020). 
+            shinyjs: Easily Improve the User Experience of Your Shiny Apps in Seconds. R package version 2.0.0 [R Package]. 
+            Available from https://CRAN.R-project.org/package=shinyjs"
       ),
       
       p(
