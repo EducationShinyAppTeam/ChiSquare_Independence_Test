@@ -35,17 +35,20 @@ ui <- list(
                        icon = icon('wpexplorer')),
               #menuItem(text = 'Test Your Own Dataset', tabName = 'exp2', icon = icon('wpexplorer')),
               menuItem(text = 'Game', 
-                       tabName = "exp3", 
-                       icon = icon('gamepad'),
-                       menuSubItem(text = 'Interpreting the Graph', 
-                                   tabName = 'instr2', 
-                                   icon = icon('gamepad')),
+                       tabName = "instr2", 
+                       icon = icon('gamepad')
+                       #menuSubItem(text = 'Interpreting the Graph', 
+                                   #tabName = 'instr2', 
+                                   #icon = icon('gamepad'))
                        #menuSubItem('What is Going on Graph?', tabName = 'cha2'),
-                       menuSubItem(text = 'Fill in the Blank', 
-                                   tabName = 'instr1', 
-                                   icon = icon('gamepad'))
+                       #menuSubItem(text = 'Fill in the Blank', 
+                                   #tabName = 'instr1', 
+                                   #icon = icon('gamepad'))
                        #menuSubItem('Fill in the Blank', tabName = 'cha1')
               ),
+              menuItem(text = "Challenge",
+                       tabName = 'instr1', 
+                       icon = icon('gears')),
               menuItem(text = "References", 
                        tabName = "references", 
                        icon = icon("leanpub"))
@@ -73,6 +76,8 @@ ui <- list(
       tags$style(HTML('#bsButton1{border-color: #ffa500')),
       tags$style(HTML('#bsButton7{background-color: #ffa500')),
       tags$style(HTML('#bsButton7{border-color: #ffa500')),
+      tags$style(HTML('#bsButton8{background-color: #ffa500')),
+      tags$style(HTML('#bsButton8{border-color: #ffa500')),
       tags$style(HTML('#bsButton4{background-color: #ffa500')),
       tags$style(HTML('#bsButton4{border-color: #ffa500')),
       tags$style(HTML('#bsButton6{background-color: #ffa500')),
@@ -125,7 +130,7 @@ ui <- list(
               bsButton(inputId = "bsButton1", 
                        label = "GO !",
                        icon = icon('bolt'),
-                       style = "color: #ffa500;",
+                       style = 'color: #000000; background-color: #ffa500',
                        size = 'large')),
           br(),
           h3(tags$b("Acknowledgements:")),
@@ -146,10 +151,12 @@ ui <- list(
       h4('\\(H_{a}\\):  Variable A is associated with variable B.'),
         
       h4(tags$li('Compute the expected count under the null for each cell in the table using:')),
-      div(style = "font-size: 1.6em", helpText('$${Expected \\ Cell \\ Count} = {Row\\ Total * Column\\ Total\\over Table\\ Total}$$')),
+      div(style = "font-size: 1.6em", 
+          helpText('$${Expected \\ Cell \\ Count} = {Row\\ Total * Column\\ Total\\over Table\\ Total}$$')),
         
       h4(tags$li('Compute the value for the chi-square statistic using:')),
-      div(style = "font-size: 1.6em", helpText('$${X^2} = {\\sum{{(Observed - Expected)^2}\\over {Expected}}}$$')),
+      div(style = "font-size: 1.6em", 
+          helpText('$${X^2} = {\\sum{{(Observed - Expected)^2}\\over {Expected}}}$$')),
         #tags$img(src = 'chi_sqr_stats_2.jpg', width = "384px", height = "100px", style = "text-align: center"),
         
       h4('Find a p-value using the upper tail of a chi-square distribution with (r-1)(c-1) degrees of freedom or use simulation under the null.'),
@@ -545,28 +552,36 @@ ui <- list(
                 tags$a(href='https://shinyapps.science.psu.edu/',tags$img(src='homebut.PNG', width = 15))
             ),
             tabsetPanel(id = "games1",
-              tabPanel(title = h4("Instructions"), value = "instruct1",
+              tabPanel(title = h4("Instructions"), 
+                       value = "instruct1",
                        fluidPage(theme = 'Muted',
                                  titlePanel('Instructions to Interpreting the Graph'),
                                  
                                    h4(tags$li('Click on the GO! button to start the game.')),
                                    h4(tags$li('Select from the dropdown menu the most appropriate explanation of the graph present.')),
                                    br(),
-                                   div(style = "text-align: center", bsButton(inputId = "bsButton6", label = "GO!", icon = icon('bolt'), size = "large"))
+                                   div(style = "text-align: center", 
+                                       bsButton(inputId = "bsButton6", 
+                                                label = "GO!", 
+                                                icon = icon('bolt'), 
+                                                size = "large"))
                                  
                        )
               ),
-              tabPanel(title = h4("Interpreting the Graph"), value = "cha2",
+              tabPanel(title = h4("Interpreting the Graph"), 
+                       value = "cha2",
                        sidebarLayout(
                                           sidebarPanel(
                                             tags$code("Interpreting the Graph"),
                                             
-                                            selectInput(inputId = 'graphId', label = 'Select Your Graph',
+                                            selectInput(inputId = 'graphId', 
+                                                        label = 'Select Your Graph',
                                                         choices = c('The First Graph', 'The Second Graph', 'The Third Graph', 'The Fourth Graph'),
                                                         selected = 'The First Graph'),
                                             
                                             conditionalPanel('input.graphId == "The First Graph"',
-                                                             selectInput(inputId = 'cq1', label = 'Your Interpretation',
+                                                             selectInput(inputId = 'cq1', 
+                                                                         label = 'Your Interpretation',
                                                                          choices = c('',
                                                                                      'A. The x-axis represents different sandwich fillings',
                                                                                      'B. The y-axis represents different sandwich bread',
@@ -574,7 +589,13 @@ ui <- list(
                                                                                      'D. A, B, and C'),
                                                                          selected = ''),
                                                              br(),
-                                                             div(style = 'text-align: left', bsButton(inputId = 'cq1check1', label = 'Check Answer',  size = "large"), bsButton(inputId = 'next1', label = 'Next', size = "large"))
+                                                             div(style = 'text-align: left', 
+                                                                 bsButton(inputId = 'cq1check1', 
+                                                                          label = 'Check Answer',  
+                                                                          size = "large"), 
+                                                                 bsButton(inputId = 'next1', 
+                                                                          label = 'Next', 
+                                                                          size = "large"))
                                             ),
                                             
                                             conditionalPanel('input.graphId == "The Second Graph"',
@@ -587,7 +608,13 @@ ui <- list(
                                                                          selected = ''
                                                              ),
                                                              br(),
-                                                             div(style = 'text-align: left', bsButton(inputId = 'cq1check2', label = 'Check', size = "large"), bsButton(inputId = 'next2', label = 'Next', size = "large"))
+                                                             div(style = 'text-align: left', 
+                                                                 bsButton(inputId = 'cq1check2', 
+                                                                          label = 'Check', 
+                                                                          size = "large"), 
+                                                                 bsButton(inputId = 'next2', 
+                                                                          label = 'Next', 
+                                                                          size = "large"))
                                             ),
                                             
                                             conditionalPanel('input.graphId == "The Third Graph"',
@@ -599,7 +626,13 @@ ui <- list(
                                                                                      'D. The use of lithium is more associated with the non-relapse status than the relapse status'),
                                                                          selected = ''),
                                                              br(),
-                                                             div(style = 'text-align: left', bsButton(inputId = 'cq1check3', label = 'Check', size = "large"), bsButton(inputId = 'next3', label = 'Next',size = "large"))
+                                                             div(style = 'text-align: left',
+                                                                 bsButton(inputId = 'cq1check3', 
+                                                                          label = 'Check', 
+                                                                          size = "large"),
+                                                                 bsButton(inputId = 'next3', 
+                                                                          label = 'Next',
+                                                                          size = "large"))
                                             ),
                                             
                                             conditionalPanel('input.graphId == "The Fourth Graph"',
@@ -610,7 +643,13 @@ ui <- list(
                                                                                      'C. Both A and B'),
                                                                          selected = ''),
                                                              br(),
-                                                             div(style = 'text-align: left', bsButton(inputId = 'cq1check4', label = 'Check', size = "large"), bsButton(inputId = 'next4', label = 'Next', size = "large"))
+                                                             div(style = 'text-align: left',
+                                                                 bsButton(inputId = 'cq1check4', 
+                                                                          label = 'Check', 
+                                                                          size = "large"), 
+                                                                 bsButton(inputId = 'next4', 
+                                                                          label = 'Next', 
+                                                                          size = "large"))
                                             )
                                           ),
                          
@@ -654,7 +693,12 @@ ui <- list(
                                             )
                            )
                          )
-                       )
+                       ),
+                       div(style = "text-align: left", 
+                           bsButton(inputId = "bsButton8", 
+                                    label = "Challenge!", 
+                                    icon = icon('bolt'), 
+                                    size = "large"))
               )
             )),
     tabItem(tabName = "instr1",
@@ -662,7 +706,8 @@ ui <- list(
                 tags$a(href='https://shinyapps.science.psu.edu/',tags$img(src='homebut.PNG', width = 15))
             ),
             tabsetPanel(id = "games2",
-                        tabPanel(title = h4("Instructions"), value = "instruct2",
+                        tabPanel(title = h4("Instructions"), 
+                                 value = "instruct2",
                                  fluidPage(theme = 'Muted', 
                                            titlePanel('Instructions to Answering the Practice Questions'),
                                        
@@ -670,25 +715,42 @@ ui <- list(
                                              h4(tags$li('Select from the dropdown menu the answer you think correct.')),
                                              h4(tags$li('Click on "Submit!" to see if your answer is correct or not.')),
                                              br(),
-                                             div(style = "text-align: center", bsButton(inputId = "bsButton4", label = "GO!", icon = icon('bolt'), size = "large"))
+                                             div(style = "text-align: center", 
+                                                 bsButton(inputId = "bsButton4",
+                                                          label = "GO!", 
+                                                          icon = icon('bolt'), 
+                                                          size = "large"))
                                            ) 
                         ),
                         tabPanel(title = h4("Multiple Choice"), value = "cha1",
                                  fluidRow(
-                                   box(width = 12, style = 'color: #FFFFFF; background-color: #ffa500',htmlOutput('questionCha'))
+                                   box(width = 12, 
+                                       style = 'color: #FFFFFF; background-color: #ffa500',
+                                       htmlOutput('questionCha'))
                                  ),
                                  
                                  fluidRow(
-                                   box(width = 12, style = 'color: #000000; background-color: #ffa500',htmlOutput('choiceCha'))
+                                   box(width = 12, 
+                                       style = 'color: #000000; background-color: #ffa500',
+                                       htmlOutput('choiceCha'))
                                  ),
                                  
                                  conditionalPanel('input.submitX != 0',
                                                   htmlOutput('challengeFeedback'),
                                                   htmlOutput('textFeedback')),
                                  br(),
-                                 div(style = "text-align: left", actionButton(inputId = 'submitX', label = 'Check Answer',size = "small"),
-                                     actionButton(inputId = 'nextX', label = 'Next', size = "small")),
-                                 div(style = "text-align: center", bsButton(inputId = "bsButton7", label = "Continue!", icon = icon('bolt'), size = "large"))
+                                 div(style = "text-align: left", 
+                                     actionButton(inputId = 'submitX', 
+                                                  label = 'Check Answer',
+                                                  size = "small"),
+                                     actionButton(inputId = 'nextX', 
+                                                  label = 'Next', 
+                                                  size = "small")),
+                                 div(style = "text-align: center", 
+                                     bsButton(inputId = "bsButton7", 
+                                              label = "Continue!",
+                                              icon = icon('bolt'), 
+                                              size = "large"))
                    )
               
             )
@@ -701,21 +763,6 @@ ui <- list(
       p(
         class = "hangingindent",
         "https://educationshinyappteam.github.io/Style_Guide/index.html#organization"
-      ),
-      
-      p(
-        class = "hangingindent",
-        "https://www.superherodb.com/"
-      ),
-      
-      p(
-        class = "hangingindent",
-        "https://www7.securybrowseapp.com/view/item_42854.html"
-      ),
-      
-      p(
-        class = "hangingindent",
-        "https://www.superherodb.com/"
       ),
       
       p(
@@ -755,7 +802,8 @@ ui <- list(
         "Wickham, H. (2011), “The Split-apply-combine strategy for data 
                              analysis.” Journal of Statistical Software, 40, pp. 1-29. 
                              Available at http://www.jstatsoft.org/v40/i01/."
-      )
+      ),
+      boastUtils::copyrightInfo()
       
     ) #end of tabItem
     

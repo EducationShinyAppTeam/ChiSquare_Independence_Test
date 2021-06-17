@@ -382,6 +382,10 @@ val <- reactiveValues()
     updateTabItems(session, 'pages', 'references')
   })
   
+  observeEvent(input$bsButton8, {
+    updateTabItems(session, 'pages', 'instr1')
+  })
+  
   observeEvent(input$next1, {
     updateTabItems(session, 'pages', 'cha2_2')
     updateSelectInput(session, inputId = 'graphId', selected = 'The Second Graph')
