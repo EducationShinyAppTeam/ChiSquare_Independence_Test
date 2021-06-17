@@ -6,7 +6,8 @@ library(shinyDND)
 library(plotly)
 
 #Header setting
-ui <- dashboardPage(
+ui <- list(
+  dashboardPage(
   skin = "yellow",
   dashboardHeader(title = "Chi-Square Test of Independence",
                   titleWidth = 250,
@@ -59,45 +60,48 @@ ui <- dashboardPage(
 
 #Set button color
   dashboardBody(
-  tags$style(type = "text/css", ".content-wrapper,.right-side {background-color: white;}"),
-  tags$head(
-    tags$style(HTML('#goover{background-color: #ffa500')),
-    tags$style(HTML('#goover{border-color:#ffa500')),
-    tags$style(HTML('#bsButton2{background-color: #ffa500')),
-    tags$style(HTML('#bsButton2{border-color: #ffa500')),
-    tags$style(HTML('#bsButton1{background-color: #ffa500')),
-    tags$style(HTML('#bsButton1{border-color: #ffa500')),
-    tags$style(HTML('#bsButton7{background-color: #ffa500')),
-    tags$style(HTML('#bsButton7{border-color: #ffa500')),
-    tags$style(HTML('#bsButton4{background-color: #ffa500')),
-    tags$style(HTML('#bsButton4{border-color: #ffa500')),
-    tags$style(HTML('#bsButton6{background-color: #ffa500')),
-    tags$style(HTML('#bsButton6{border-color: #ffa500')),
-    tags$style(HTML('#next1{background-color: #ffa500')),
-    tags$style(HTML('#next1{border-color: #ffa500')),
-    tags$style(HTML('#next2{background-color: #ffa500')),
-    tags$style(HTML('#next2{border-color: #ffa500')),
-    tags$style(HTML('#next3{background-color: #ffa500')),
-    tags$style(HTML('#next3{border-color: #ffa500')),
-    tags$style(HTML('#next4{background-color: #ffa500')),
-    tags$style(HTML('#next4{border-color: #ffa500')),
-    tags$style(HTML('#submitX{background-color: #ffa500')),
-    tags$style(HTML('#submitX{border-color: #ffa500')),
-    tags$style(HTML('#nextX{background-color: #ffa500')),
-    tags$style(HTML('#nextX{border-color: #ffa500')),
-    tags$style(HTML('#cq1check1{background-color: #ffa500')),
-    tags$style(HTML('#cq1check1{border-color: #ffa500')),
-    tags$style(HTML('#cq1check2{background-color: #ffa500')),
-    tags$style(HTML('#cq1check2{border-color: #ffa500')),
-    tags$style(HTML('#cq1check3{background-color: #ffa500')),
-    tags$style(HTML('#cq1check3{border-color: #ffa500')),
-    tags$style(HTML('#cq1check4{background-color: #ffa500')),
-    tags$style(HTML('#cq1check4{border-color: #ffa500')),
-    tags$style(type = "text/css", ".content-wrapper,.right-side {background-color: yellow;}"),
-    #tags$link(rel = "stylesheet", type = "text/css", href = "Feature.css") cq1check1
-  ),
+    tags$head(
+      tags$style(HTML(".skin-yellow .main-sidebar {background-color:  #ffa500;
+                      }
+                      .skin-yellow .sidebar-menu>li.active>a, .skin-yellow .sidebar-menu>li:hover>a {
+        background-color: #FFD700;")),
+      tags$style(HTML('#goover{background-color: #ffa500')),
+      tags$style(HTML('#goover{border-color:#ffa500')),
+      tags$style(HTML('#bsButton2{background-color: #ffa500')),
+      tags$style(HTML('#bsButton2{border-color: #ffa500')),
+      tags$style(HTML('#bsButton1{background-color: #ffa500')),
+      tags$style(HTML('#bsButton1{border-color: #ffa500')),
+      tags$style(HTML('#bsButton7{background-color: #ffa500')),
+      tags$style(HTML('#bsButton7{border-color: #ffa500')),
+      tags$style(HTML('#bsButton4{background-color: #ffa500')),
+      tags$style(HTML('#bsButton4{border-color: #ffa500')),
+      tags$style(HTML('#bsButton6{background-color: #ffa500')),
+      tags$style(HTML('#bsButton6{border-color: #ffa500')),
+      tags$style(HTML('#next1{background-color: #ffa500')),
+      tags$style(HTML('#next1{border-color: #ffa500')),
+      tags$style(HTML('#next2{background-color: #ffa500')),
+      tags$style(HTML('#next2{border-color: #ffa500')),
+      tags$style(HTML('#next3{background-color: #ffa500')),
+      tags$style(HTML('#next3{border-color: #ffa500')),
+      tags$style(HTML('#next4{background-color: #ffa500')),
+      tags$style(HTML('#next4{border-color: #ffa500')),
+      tags$style(HTML('#submitX{background-color: #ffa500')),
+      tags$style(HTML('#submitX{border-color: #ffa500')),
+      tags$style(HTML('#nextX{background-color: #ffa500')),
+      tags$style(HTML('#nextX{border-color: #ffa500')),
+      tags$style(HTML('#cq1check1{background-color: #ffa500')),
+      tags$style(HTML('#cq1check1{border-color: #ffa500')),
+      tags$style(HTML('#cq1check2{background-color: #ffa500')),
+      tags$style(HTML('#cq1check2{border-color: #ffa500')),
+      tags$style(HTML('#cq1check3{background-color: #ffa500')),
+      tags$style(HTML('#cq1check3{border-color: #ffa500')),
+      tags$style(HTML('#cq1check4{background-color: #ffa500')),
+      tags$style(HTML('#cq1check4{border-color: #ffa500')),
+    ),
+
+
   
-  #useShinyjs(),
+  useShinyjs(),
   
   #Overview page
   tabItems(
@@ -120,7 +124,8 @@ ui <- dashboardPage(
           div(style = "text-align: center",
               bsButton(inputId = "bsButton1", 
                        label = "GO !",
-                       icon = icon('bolt'), 
+                       icon = icon('bolt'),
+                       style = "color: #ffa500;",
                        size = 'large')),
           br(),
           h3(tags$b("Acknowledgements:")),
@@ -155,6 +160,7 @@ ui <- dashboardPage(
             bsButton(inputId = "goover", 
                      label = "Explore !", 
                      icon = icon("bolt"), 
+                     style = "color: #ffffff;",
                      size = "large"))
         
     ),
@@ -169,13 +175,18 @@ ui <- dashboardPage(
             tags$h3('Chi-Square Test for Association Explore Activity'),
             sidebarLayout(
               sidebarPanel(
-                selectInput(inputId = 'inputs', label = 'Select A Dataset to Explore', selected = 'None',
-                            choices = c('None', 'Cars2015', 'HeroesInformation', 'CompassionateRats', 'SandwichAnts', 'CocaineTreatment', 'Test Your Own Dataset')),
+                selectInput(inputId = 'inputs', 
+                            label = 'Select A Dataset to Explore', 
+                            selected = 'None',
+                            choices = c('None', 'Cars2015', 'HeroesInformation', 
+                                        'CompassionateRats', 'SandwichAnts', 'CocaineTreatment', 
+                                        'Test Your Own Dataset')),
                 br(),
                 
                 #test your own dataset
                 conditionalPanel('input.inputs == "Test Your Own Dataset"',
-                                 fileInput(inputId = 'file', 'Choose info-file to upload',
+                                 fileInput(inputId = 'file', 
+                                           label = 'Choose info-file to upload',
                                            accept = c(
                                              'text/csv',
                                              'text/comma-separated-values',
@@ -185,23 +196,38 @@ ui <- dashboardPage(
                                              '.tsv'
                                            )
                                  ),
-                                 bsPopover("file", "File Upload", "If you have your own dataset you would like to enter, upload it through this"),
-                                 checkboxInput(inputId = 'header', 'Header', TRUE),
-                                 bsPopover("header", "Header", "Please check whether there is a header for your data or not"),
+                                 bsPopover("file", 
+                                           "File Upload", 
+                                           "If you have your own dataset you would like to enter, upload it through this"),
+                                 checkboxInput(inputId = 'header', 
+                                               'Header', 
+                                               TRUE),
+                                 bsPopover("header", 
+                                           "Header", 
+                                           "Please check whether there is a header for your data or not"),
                                  radioButtons(inputId = 'sep', 'Separator',
                                               c(Comma = ',',
                                                 Semicolon = ';',
                                                 tab = '\t'),
                                               ','),
-                                 bsPopover("sep", "Separator", "Choose which separation your file is using(If you do not know, it is most likely separating with commas"),
+                                 bsPopover("sep", 
+                                           "Separator", 
+                                           "Choose which separation your file is using(If you do not know, 
+                                           it is most likely separating with commas"),
                                  radioButtons(inputId = 'quote', 'Quote',
                                               c(None = '',
                                                 'Double Quote' = '"',
                                                 'Single Quote' = "'"),
                                               '"'),
-                                 bsPopover("quote", "Quotes", "Check what kind of data you have and whether you need to use quotes or not"),
-                                 selectInput(inputId = "columns", "Select Your X-Axis", choices = NULL),
-                                 selectInput(inputId = "columns2", "Select Your Y-Axis", choices = NULL)
+                                 bsPopover("quote", 
+                                           "Quotes", 
+                                           "Check what kind of data you have and whether you need to use quotes or not"),
+                                 selectInput(inputId = "columns", 
+                                             "Select Your X-Axis", 
+                                             choices = NULL),
+                                 selectInput(inputId = "columns2", 
+                                             "Select Your Y-Axis", 
+                                             choices = NULL)
                                  ),
                 
                 #Cars2015 input conditional panel
@@ -216,9 +242,11 @@ ui <- dashboardPage(
                                    tags$li('The Size variable takes on three levels: Large, Midsized, and Small')
                                  ),
                                  br(),
-                                 selectInput(inputId = 'XCars2015', label = 'Select Your First Variable',
+                                 selectInput(inputId = 'XCars2015', 
+                                             label = 'Select Your First Variable',
                                              choices = c('Type', 'Drive', 'Size')),
-                                 selectInput(inputId = 'YCars2015', label = 'Select Your Second Variable',
+                                 selectInput(inputId = 'YCars2015',
+                                             label = 'Select Your Second Variable',
                                              choices = c('Type', 'Drive', 'Size')),
                                  tags$code('Challenge Question No.1'),
                                  tags$em(textOutput('Carsquestion')),
@@ -245,9 +273,11 @@ ui <- dashboardPage(
                                    tags$li('The Alignment variable takes on three levels: Good, Bad, and Other')
                                  ),
                                  br(),
-                                 selectInput(inputId = 'XHeroesInfo', label = 'Select Your First Variable',
+                                 selectInput(inputId = 'XHeroesInfo', 
+                                             label = 'Select Your First Variable',
                                              choices = c('Gender', 'EyeColor', 'Race', 'HairColor', 'Alignment')),
-                                 selectInput(inputId = 'YHeroesInfo', label = 'Select Your Second Variable',
+                                 selectInput(inputId = 'YHeroesInfo', 
+                                             label = 'Select Your Second Variable',
                                              choices = c('Gender', 'EyeColor', 'Race', 'HairColor', 'Alignment')),
                                  tags$code('Challenge Question'),
                                  tags$em(textOutput('HIquestion')),
@@ -310,19 +340,29 @@ ui <- dashboardPage(
                                  tabsetPanel(type = 'tabs',
                                              tabPanel('Data Description',
                                                       br(),
-                                                      box(style = 'warning', title = 'Dataset Details', width = 12, background = 'yellow', collapsible = TRUE,
+                                                      box(style = 'warning', 
+                                                          title = 'Dataset Details', 
+                                                          width = 12, 
+                                                          background = 'yellow', 
+                                                          collapsible = TRUE,
                                                           'Data for a set of 110 new car models in 2015 based on information in the Consumer Reports New
                                                           Car Buying Guide.'),
                                                       br(),
                                                       br(),
-                                                      box(style = 'info', title = 'Data Source', width = 12, background = 'orange', collapsible = TRUE,
+                                                      box(style = 'info', 
+                                                          title = 'Data Source', 
+                                                          width = 12, 
+                                                          background = 'orange', 
+                                                          collapsible = TRUE,
                                                           tags$a(href = 'http://www.magastack.com/issue/6053-consumer-reports-new-car-buying-guide-february-2015?page=1', 'Consumer Reports 2015 New Car Buying Guide'))
                                                       ),
                                              tabPanel('Graph and Summary Output',
                                                       br(),
                                                       tags$li('2D Histogram Output'),
                                                       plotlyOutput('carsplotly'),
-                                                      bsPopover(id = 'carsplotly', title = NULL, content = 'z corresponds to number of count in each category. For example, there are 20 sedans have AWD.'),
+                                                      bsPopover(id = 'carsplotly', 
+                                                                title = NULL, 
+                                                                content = 'z corresponds to number of count in each category. For example, there are 20 sedans have AWD.'),
                                                       br(),
                                                       verbatimTextOutput('carssur')
                                                       )
@@ -334,20 +374,30 @@ ui <- dashboardPage(
                                  tabsetPanel(type = 'tabs',
                                              tabPanel('Data Description',
                                                       br(),
-                                                      box(style = 'info', title = 'Dataset Details', width = 12, background = 'olive', collapsible = TRUE,
+                                                      box(style = 'info',
+                                                          title = 'Dataset Details', 
+                                                          width = 12, 
+                                                          background = 'olive', 
+                                                          collapsible = TRUE,
                                                           'This data was collected in June/2017 from superherodb and not updated since. Super Heroes have been in popular culture for a long time and now more than ever. 
                                                           Since its creation, super heroes have not been very diverse, but that is changing rapidly. This dataset aims to provide an overview about heroes and their physical as well as power characteristics, 
                                                           helping researchers and curious minds identify trends and patterns.'),
                                                       br(),
                                                       br(),
-                                                      box(style = 'info', title = 'Data Source', width = 12, background = 'teal', collapsible = TRUE,
+                                                      box(style = 'info', 
+                                                          title = 'Data Source', 
+                                                          width = 12, 
+                                                          background = 'teal', 
+                                                          collapsible = TRUE,
                                                           'This data was scraped from SuperHeroDb.')
                                                       ),
                                              tabPanel('Graph and Summary Output',
                                                       br(),
                                                       tags$li('2D Histogram Output'),
                                                       plotlyOutput('hiplotly1'),
-                                                      bsPopover('hiplotly1', title = NULL, content = 'z corresponds to number of count in each category. For example, there are 165 males have bad alignment.'),
+                                                      bsPopover('hiplotly1',
+                                                                title = NULL, 
+                                                                content = 'z corresponds to number of count in each category. For example, there are 165 males have bad alignment.'),
                                                       br(),
                                                       verbatimTextOutput('hisur')
                                                       ))
@@ -358,7 +408,11 @@ ui <- dashboardPage(
                                  tabsetPanel(type = 'tabs',
                                              tabPanel('Data Description',
                                                       br(),
-                                                      box(style = 'info', title = 'Experiment Details', width = 12, background = 'yellow', collapsible = TRUE,
+                                                      box(style = 'info', 
+                                                          title = 'Experiment Details', 
+                                                          width = 12, 
+                                                          background = 'yellow', 
+                                                          collapsible = TRUE,
                                                           'As young students, Dominic Kelly and his friends enjoyed watching ants gather on pieces of sandwiches.
                                                           Later, as a university student, Dominic decided to study this with a more formal experiment.
                                                           He chose three types of sandwich fillings (vegemite, peanut butter, and ham & pickles), four types
@@ -369,15 +423,22 @@ ui <- dashboardPage(
                                                           until he had two samples for each combination of the three factors.'),
                                                       br(),
                                                       br(),
-                                                      box(style = 'info', title = 'Data Source', width = 12, background = 'orange', collapsible = TRUE,
+                                                      box(style = 'info', 
+                                                          title = 'Data Source', 
+                                                          width = 12, 
+                                                          background = 'orange', 
+                                                          collapsible = TRUE,
                                                           tags$p('Margaret Mackisack, "Favourite Experiments: An Addendum to What is the Use of Experiments
-                                                          Conducted by Statistics Students?"', tags$a(href = 'https://ww2.amstat.org/publications/jse/v2n1/mackisack.supp.html', 'Journal of Statistics Education (1994)')))
+                                                          Conducted by Statistics Students?"', 
+                                                          tags$a(href = 'https://ww2.amstat.org/publications/jse/v2n1/mackisack.supp.html', 'Journal of Statistics Education (1994)')))
                                                       ),
                                              tabPanel('Graph and Summary Output',
                                                       br(),
                                                       tags$li('2D Histogram Output'),
                                                       plotlyOutput('saplotly1'),
-                                                      bsPopover(id = 'saplotly1', title = NULL, content = 'z corresponds to number of count in each category. For example, there are 2 white bread with peanut butter filling.'),
+                                                      bsPopover(id = 'saplotly1', 
+                                                                title = NULL, 
+                                                                content = 'z corresponds to number of count in each category. For example, there are 2 white bread with peanut butter filling.'),
                                                       br(),
                                                       plotlyOutput('saplotly2'),
                                                       br(),
@@ -391,14 +452,22 @@ ui <- dashboardPage(
                                  tabsetPanel(type = 'tabs',
                                              tabPanel('Data Description', 
                                                       br(),
-                                                      box(style = 'info', title = 'Experiment Details', width = 12, background = 'light-blue', collapsible = TRUE,
+                                                      box(style = 'info', 
+                                                          title = 'Experiment Details', 
+                                                          width = 12, 
+                                                          background = 'light-blue',
+                                                          collapsible = TRUE,
                                                           'In a recent study, some rats showed compassion by freeing another trapped rat, even when chocolate
                                                           served as a distraction and even when the rats would then have to share the chocolate with their freed
                                                           companion.',
                                                           br()),
                                                       br(),
                                                       br(),
-                                                      box(style = 'info', title = 'Data Source', width = 12, background = 'blue', collapsible = TRUE,
+                                                      box(style = 'info', 
+                                                          title = 'Data Source', 
+                                                          width = 12, 
+                                                          background = 'blue', 
+                                                          collapsible = TRUE,
                                                           'Bartal I.B., Decety J., and Mason P., "Empathy and Pro-Social Behavior in Rats," Science, 2011;
                                                           224(6061):1427-1430.')
                                                       ),
@@ -406,7 +475,9 @@ ui <- dashboardPage(
                                                       br(),
                                                       tags$li('2D Histogram Output'),
                                                       plotlyOutput('crplotly1'),
-                                                      bsPopover(id = 'crplotly1', title = NULL, content = 'z corresponds to number of count in each category. For example, there are 6 female rats show signs of compassion.'),
+                                                      bsPopover(id = 'crplotly1', 
+                                                                title = NULL, 
+                                                                content = 'z corresponds to number of count in each category. For example, there are 6 female rats show signs of compassion.'),
                                                       br(),
                                                       plotlyOutput('crplotly2'),
                                                       br(),
@@ -420,7 +491,11 @@ ui <- dashboardPage(
                                              tabPanel('Data Description',
                                                       br(),
                                                       br(),
-                                                      box(style = 'info', title = 'Experiment Details', width = 12, background = 'light-blue', collapsible = TRUE,
+                                                      box(style = 'info', 
+                                                          title = 'Experiment Details',
+                                                          width = 12, 
+                                                          background = 'light-blue', 
+                                                          collapsible = TRUE,
                                                           'Data from an experiment to investigate the effectiveness of the two drugs, desipramine and lithium,
                                                           in the treatment of cocaine addiction. Subjects (cocaine addicts seeking treatment) were randomly
                                                           assigned to take one of the treatment drugs or a placebo. The response variable is whether or not
@@ -429,7 +504,11 @@ ui <- dashboardPage(
                                                           br()),
                                                       br(),
                                                       br(),
-                                                      box(style = 'info', title = 'Data Source', width = 12, background = 'blue', collapsible = TRUE,
+                                                      box(style = 'info', 
+                                                          title = 'Data Source', 
+                                                          width = 12, 
+                                                          background = 'blue', 
+                                                          collapsible = TRUE,
                                                           'Gawin, F., et.al., "Desipramine Facilitation of Initial Cocaine Abstinence",
                                                           Archives of General Psychiatry, 1989; 46(2): 117 - 121.'
                                                       )
@@ -440,7 +519,9 @@ ui <- dashboardPage(
                                                       br(),
                                                       tags$li('2D Histogram Output'),
                                                       plotlyOutput('plotly1'),
-                                                      bsPopover(id = 'plotly1', title = NULL, content = 'z corresponds to number of count in each category. For example, there are 10 patients relapsed after using desipramine as drug treatment.', placement = 'right'),
+                                                      bsPopover(id = 'plotly1', 
+                                                                title = NULL, 
+                                                                content = 'z corresponds to number of count in each category. For example, there are 10 patients relapsed after using desipramine as drug treatment.', placement = 'right'),
                                                       br(),
                                                       plotlyOutput('stack1'),
                                                       br(),
@@ -451,8 +532,14 @@ ui <- dashboardPage(
 
               )
             ),
-            div(style = "text-align: center", bsButton(inputId = "bsButton2", label = "Play !",icon = icon('bolt'), size = 'large'))
+            div(style = "text-align: center", 
+                bsButton(inputId = "bsButton2", 
+                         label = "Play !",
+                         icon = icon('bolt'), 
+                         size = 'large'))
     ),
+  
+  #
     tabItem(tabName = "instr2",
             div(style="display: inline-block;vertical-align:top;",
                 tags$a(href='https://shinyapps.science.psu.edu/',tags$img(src='homebut.PNG', width = 15))
@@ -675,6 +762,7 @@ ui <- dashboardPage(
     )
     
 
+)
 )
 )
 #shinyUI(dashboardPage( header, sidebar, body))
