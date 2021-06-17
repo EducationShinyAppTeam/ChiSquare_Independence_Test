@@ -37,7 +37,7 @@ saData <- data.frame(bread, hpickles, pbutter, vegemite)
 shinyServer(function(input, output, session) {
   #Go to overview Button
   observeEvent(input$goover, {
-    updateTabItems(session, "pages", "overview")
+    updateTabItems(session, "pages", "exp1")
   })
   #Go to game page Button
   observeEvent(input$bsButton2, {
@@ -251,7 +251,7 @@ val <- reactiveValues()
   output$plotly1 <- renderPlotly ({
     x <- list(title = 'Drug Treatment')
     y <- list(title = 'Relapse Status')
-    ctp1 <- plot_ly(x = ct$Drug, y = ct$Relapse) %>%
+    ctp1 <- plot_ly(x = ct$Drug, y = ct$Relapse,type="histogram2d") %>%
       layout(xaxis = x, yaxis = y)
     ctp1
   })
@@ -363,7 +363,7 @@ val <- reactiveValues()
   })
   
   observeEvent(input$bsButton1, {
-    updateTabItems(session, 'pages', 'exp1')
+    updateTabItems(session, 'pages', 'prerequisite')
   })
   
   observeEvent(input$bsButton2, {

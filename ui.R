@@ -4,44 +4,62 @@ library(shinyBS)
 library(shinyjs)
 library(shinyDND)
 library(plotly)
-#references
 
+#Header setting
 ui <- dashboardPage(
-  skin = 'yellow',
+  skin = "yellow",
   dashboardHeader(title = "Chi-Square Test of Independence",
+                  titleWidth = 250,
                   tags$li(class="dropdown",
                           actionLink("info", icon("info"), class="myClass")),
                   tags$li(class = "dropdown",
                           boastUtils::surveyLink(name = "App_Template")),
                   tags$li(class="dropdown",
                           tags$a(href="https://shinyapps.science.psu.edu/",
-                                 icon("home", lib="font-awesome"))),
-                  titleWidth = 350),
+                                 icon("home", lib="font-awesome")))
+                  ),
 
+#Sidebar menu
   dashboardSidebar(
+    width = 250,
   sidebarMenu(id = 'pages', #use pages to name the menu
-              menuItem('Prerequisites', tabName = 'prerequisite', icon = icon('book')),
-              menuItem("Overview", tabName = "overview", icon = icon("dashboard")),
-              menuItem('Explore', tabName = "exp1", icon = icon('wpexplorer')),
-              #menuItem('Test Your Own Dataset', tabName = 'exp2', icon = icon('wpexplorer')),
-              menuItem('Game', tabName = "exp3", icon = icon('gamepad'),
-                       menuSubItem('Interpreting the Graph', tabName = 'instr2', icon = icon('gamepad')),
+              menuItem(text = "Overview", 
+                       tabName = "overview", 
+                       icon = icon("dashboard")),
+              menuItem(text = 'Prerequisites', 
+                       tabName = 'prerequisite', 
+                       icon = icon('book')),
+              menuItem(text = 'Explore', 
+                       tabName = "exp1", 
+                       icon = icon('wpexplorer')),
+              #menuItem(text = 'Test Your Own Dataset', tabName = 'exp2', icon = icon('wpexplorer')),
+              menuItem(text = 'Game', 
+                       tabName = "exp3", 
+                       icon = icon('gamepad'),
+                       menuSubItem(text = 'Interpreting the Graph', 
+                                   tabName = 'instr2', 
+                                   icon = icon('gamepad')),
                        #menuSubItem('What is Going on Graph?', tabName = 'cha2'),
-                       menuSubItem('Fill in the Blank', tabName = 'instr1', icon = icon('gamepad'))
+                       menuSubItem(text = 'Fill in the Blank', 
+                                   tabName = 'instr1', 
+                                   icon = icon('gamepad'))
                        #menuSubItem('Fill in the Blank', tabName = 'cha1')
               ),
-              menuItem("References", tabName = "references", icon = icon("leanpub"))
+              menuItem(text = "References", 
+                       tabName = "references", 
+                       icon = icon("leanpub"))
   ),
+  #Add psu logo
   tags$div(
     style = "position: absolute; bottom: 0;",
     class = "sidebar-logo",
     boastUtils::sidebarFooter()
-  ),
-  width = 250
+  )
 ),
 
+#Set button color
   dashboardBody(
-  #tags$style(type = "text/css", ".content-wrapper,.right-side {background-color: white;}"),
+  tags$style(type = "text/css", ".content-wrapper,.right-side {background-color: white;}"),
   tags$head(
     tags$style(HTML('#goover{background-color: #ffa500')),
     tags$style(HTML('#goover{border-color:#ffa500')),
@@ -74,14 +92,43 @@ ui <- dashboardPage(
     tags$style(HTML('#cq1check3{background-color: #ffa500')),
     tags$style(HTML('#cq1check3{border-color: #ffa500')),
     tags$style(HTML('#cq1check4{background-color: #ffa500')),
-    tags$style(HTML('#cq1check4{border-color: #ffa500'))
-    #tags$style(type = "text/css", ".content-wrapper,.right-side {background-color: white;}"),
+    tags$style(HTML('#cq1check4{border-color: #ffa500')),
+    tags$style(type = "text/css", ".content-wrapper,.right-side {background-color: yellow;}"),
     #tags$link(rel = "stylesheet", type = "text/css", href = "Feature.css") cq1check1
   ),
   
-  useShinyjs(),
+  #useShinyjs(),
   
+  #Overview page
   tabItems(
+  tabItem(tabName = "overview",
+          tags$a(href='http://stat.psu.edu/',tags$img(src='psu_icon.jpg', align = "left", width = 180)),
+          br(),br(),br(),
+          h3(tags$b("About:")),
+          
+          withMathJax(),
+          h4(p('In this app you will explore examples of', HTML('x<sup>2</sup>') , 'Test of Independence;
+                   you will also be able to test your own dataset.
+                   The Fill in the Blanks exercise would serve to test your understandings about this topic.')),
+          br(),
+          h3(tags$b("Instructions:")),
+          h4(
+            tags$li('In this application, you will first explore a variety of real life examples using both graphical displays and the', HTML('x<sup>2</sup>'), 'test for independence.'),
+            tags$li('By uploading your own datafile, you would be given back a', HTML('x<sup>2</sup>'), 'test for independence result of the variables selected.'),
+            tags$li('Read the instructions for Fill in the Blanks first and then click on Go button to get started!')
+          ),
+          div(style = "text-align: center",
+              bsButton(inputId = "bsButton1", 
+                       label = "GO !",
+                       icon = icon('bolt'), 
+                       size = 'large')),
+          br(),
+          h3(tags$b("Acknowledgements:")),
+          h4('This application was coded and developed by Anna (Yinqi) Zhang.'),
+          h4('Special Thanks to Dr. Pearl, Alex Chen, James M. Kopf, Angela Ting, Yingjie (Chealsea) Wang, and Yubaihe Zhou for being really supportive throughout the program.')
+  ),
+  
+  #Prerequisite page
     tabItem(
       tabName = 'prerequisite', withMathJax(),
       h3(strong('Background: Chi-Square Test of Independence')),br(),
@@ -89,15 +136,12 @@ ui <- dashboardPage(
                 that has r rows as categories for variable A and c columns as categories for variable B:'),
         br(),
         
-        h4(tags$li('Set up hypotheses:')),
-        h4('\\(H_{0}\\):  Variable A is not associated with variable B.'),
-        h4('\\(H_{a}\\):  Variable A is associated with variable B.'),
-      #div(style="font-size: 1.6em", helpText('$$ {logit ( \\hat p )=log({ \\hat p\\over1-\\hat p})}$$')),
+      h4(tags$li('Set up hypotheses:')),
+      h4('\\(H_{0}\\):  Variable A is not associated with variable B.'),
+      h4('\\(H_{a}\\):  Variable A is associated with variable B.'),
         
       h4(tags$li('Compute the expected count under the null for each cell in the table using:')),
       div(style = "font-size: 1.6em", helpText('$${Expected \\ Cell \\ Count} = {Row\\ Total * Column\\ Total\\over Table\\ Total}$$')),
-      #h4(tags$li('Compute the expected count under the null for each cell in the table using:')),
-        #tags$img(src = 'chi_sqr_stats_1.jpg', width = "384px", height = "100px"),
         
       h4(tags$li('Compute the value for the chi-square statistic using:')),
       div(style = "font-size: 1.6em", helpText('$${X^2} = {\\sum{{(Observed - Expected)^2}\\over {Expected}}}$$')),
@@ -107,35 +151,17 @@ ui <- dashboardPage(
         
       h4('The chi-square distribution is appropriate if the expected count is at least five in each cell.'),
         br(),
-        div(style = "text-align: center",bsButton("goover", "Go to the overview", icon("bolt"), size = "large"))
+        div(style = "text-align: center",
+            bsButton(inputId = "goover", 
+                     label = "Explore !", 
+                     icon = icon("bolt"), 
+                     size = "large"))
         
     ),
     
-    tabItem(tabName = "overview",
-            tags$a(href='http://stat.psu.edu/',tags$img(src='psu_icon.jpg', align = "left", width = 180)),
-            br(),br(),br(),
-            h3(tags$b("About:")),
-            
-            withMathJax(),
-            h4(p('In this app you will explore examples of', HTML('x<sup>2</sup>') , 'Test of Independence;
-                   you will also be able to test your own dataset.
-                   The Fill in the Blanks exercise would serve to test your understandings about this topic.')),
-            br(),
-            h3(tags$b("Instructions:")),
-            h4(
-              tags$li('In this application, you will first explore a variety of real life examples using both graphical displays and the', HTML('x<sup>2</sup>'), 'test for independence.'),
-              tags$li('By uploading your own datafile, you would be given back a', HTML('x<sup>2</sup>'), 'test for independence result of the variables selected.'),
-              tags$li('Read the instructions for Fill in the Blanks first and then click on Go button to get started!')
-              ),
-            div(style = "text-align: center", bsButton(inputId = "bsButton1", label = "G O !",icon = icon('bolt'), size = 'large')),
-            br(),
-            h3(tags$b("Acknowledgements:")),
-              h4('This application was coded and developed by Anna (Yinqi) Zhang.'),
-              h4('Special Thanks to Dr. Pearl, Alex Chen, James M. Kopf, Angela Ting, Yingjie (Chealsea) Wang, and Yubaihe Zhou for being really supportive throughout the program.')
-            ),
-    
     ############ Explore Activity No.1 with Different Datasets ############
     ############ ############ ############ ############
+    #Explore page
     tabItem(tabName = 'exp1', 
             div(style="display: inline-block;vertical-align:top;",
                 tags$a(href='https://shinyapps.science.psu.edu/',tags$img(src='homebut.PNG', width = 15))
@@ -425,7 +451,7 @@ ui <- dashboardPage(
 
               )
             ),
-            div(style = "text-align: center", bsButton(inputId = "bsButton2", label = "Play the game!",icon = icon('bolt'), size = 'large'))
+            div(style = "text-align: center", bsButton(inputId = "bsButton2", label = "Play !",icon = icon('bolt'), size = 'large'))
     ),
     tabItem(tabName = "instr2",
             div(style="display: inline-block;vertical-align:top;",
@@ -589,6 +615,29 @@ ui <- dashboardPage(
         class = "hangingindent",
         "https://educationshinyappteam.github.io/Style_Guide/index.html#organization"
       ),
+      
+      p(
+        class = "hangingindent",
+        "https://www.superherodb.com/"
+      ),
+      
+      p(
+        class = "hangingindent",
+        "https://www7.securybrowseapp.com/view/item_42854.html"
+      ),
+      
+      p(
+        class = "hangingindent",
+        "https://www.superherodb.com/"
+      ),
+      
+      p(
+        class = "hangingindent",
+        "Attali, D.(2020). 
+            shinyjs: Easily Improve the User Experience of Your Shiny Apps in Seconds. R package version 2.0.0 [R Package]. 
+            Available from https://CRAN.R-project.org/package=shinyjs"
+      ),
+      
       p(
         class = "hangingindent",
         "Bailey, E. (2015). shinyBS: Twitter bootstrap components for shiny. 
@@ -612,13 +661,6 @@ ui <- dashboardPage(
         "Chang, W., Cheng, J., Allaire, J., Xie, Y., and McPherson, J. (2019). 
             shiny: Web application framework for R. (v1.4.0) [R Package]. 
             Available from https://CRAN.R-project.org/package=shiny"
-      ),
-      
-      p(
-        class = "hangingindent",
-        "Attali, D.(2020). 
-            shinyjs: Easily Improve the User Experience of Your Shiny Apps in Seconds. R package version 2.0.0 [R Package]. 
-            Available from https://CRAN.R-project.org/package=shinyjs"
       ),
       
       p(
