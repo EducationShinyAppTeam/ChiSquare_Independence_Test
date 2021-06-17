@@ -4,6 +4,7 @@ library(shinyBS)
 library(shinyjs)
 library(shinyDND)
 library(plotly)
+library(boastUtils)
 
 #Header setting
 ui <- dashboardPage(
@@ -122,7 +123,7 @@ ui <- dashboardPage(
                              size = 'large')),
                 br(),
                 h3(tags$b("Acknowledgements:")),
-                h4('This application was coded and developed by Anna (Yinqi) Zhang.'),
+                h4('This application was coded, developed by Anna (Yinqi) Zhang and further updated by Jiayue He in 2021.'),
                 h4('Special Thanks to Dr. Pearl, Alex Chen, James M. Kopf, Angela Ting, Yingjie (Chealsea) Wang, and Yubaihe Zhou for being really supportive throughout the program.')
         ),
         
@@ -840,8 +841,61 @@ saData <- data.frame(bread, hpickles, pbutter, vegemite)
 #Server ----
 server <- function(input, output, session) {
   
-
+  # Learning Locker Statement Generation
+  .generateStatement <- function(session, verb = NA, object = NA, description = NA, value = NA) {
+    if (is.na(object)) {
+      object <- paste0("#shiny-tab-", session$input$pages)
+    } else {
+      object <- paste0("#", object)
+    }
+    
+    stmt <- list(
+      verb = verb,
+      object = list(
+        id = paste0(boastUtils::getCurrentAddress(session), object),
+        name = paste0(APP_TITLE),
+        description = description
+      )
+    )
+    
+    if (!is.na(value)) {
+      stmt$result <- list(
+        response = paste(value)
+      )
+    }
+    
+    statement <- rlocker::createStatement(stmt)
+    response <- rlocker::store(session, statement)
+    
+    return(response)
+  }
   
+  .generateAnsweredStatement <- 
+    function(session, 
+             verb = NA, 
+             object = NA, 
+             description = NA, 
+             interactionType = NA, 
+             response = NA, 
+             success = NA, 
+             completion = FALSE) {
+      statement <- rlocker::createStatement(list(
+        verb = verb,
+        object = list(
+          id = paste0(getCurrentAddress(session), "#", object),
+          name = paste0(APP_TITLE),
+          description = paste0("Identify the distribution of given text: ", description),
+          interactionType = interactionType
+        ),
+        result = list(
+          success = success,
+          response = response,
+          completion = completion
+        )
+      ))
+      
+      return(rlocker::store(session, statement))
+    }
   
   #Go to overview Button
   observeEvent(input$goover, {
