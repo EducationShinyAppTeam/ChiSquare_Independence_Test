@@ -1,7 +1,7 @@
 Title: Chi-Square Independence Test
 ShortName: Chi-Square Independence Test
 Date: 2021-06-17
-Lifecycle: experimental
+Lifecycle: questioning
 Authors@R: c(
     person(given = "Anna (Yinqi)", family = "Zhang", email = "", role = c("aut", "cre")),
     person(given = "Jiayue", family = "He", email = "jph6197@psu.edu", role = c("aut"))

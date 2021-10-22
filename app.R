@@ -1,3 +1,4 @@
+# Load packages ----
 library(shiny)
 library(shinydashboard)
 library(shinyBS)
@@ -6,226 +7,214 @@ library(shinyDND)
 library(plotly)
 library(boastUtils)
 
-#Header setting
-ui <- dashboardPage(
+# Load files ----
+
+# Define UI ----
+ui <- list(
+  dashboardPage(
     skin = "yellow",
-    dashboardHeader(title = "Chi-Square Test of Independence",
-                    titleWidth = 250,
-                    tags$li(class="dropdown",
-                            actionLink("info", icon("info"), class="myClass")),
-                    tags$li(class = "dropdown",
-                            boastUtils::surveyLink(name = "App_Template")),
-                    tags$li(class="dropdown",
-                            tags$a(href="https://shinyapps.science.psu.edu/",
-                                   icon("home", lib="font-awesome")))
+    ## Header ----
+    dashboardHeader(
+      title = "Test of Independence",
+      titleWidth = 250,
+      tags$li(class = "dropdown", actionLink("info", icon("info"))),
+      tags$li(
+        class = "dropdown",
+        boastUtils::surveyLink(name = "App_Template")
+      ),
+      tags$li(
+        class = "dropdown",
+        tags$a(href = "https://shinyapps.science.psu.edu/", icon("home"))
+      )
     ),
-    
-    #Sidebar menu
+    ## Sidebar ----
     dashboardSidebar(
       width = 250,
-      sidebarMenu(id = 'pages', #use pages to name the menu
-                  menuItem(text = "Overview", 
-                           tabName = "overview", 
-                           icon = icon("dashboard")),
-                  menuItem(text = 'Prerequisites', 
-                           tabName = 'prerequisite', 
-                           icon = icon('book')),
-                  menuItem(text = 'Explore', 
-                           tabName = "exp1", 
-                           icon = icon('wpexplorer')),
-                  menuItem(text = 'Game', 
-                           tabName = "instr2", 
-                           icon = icon('gamepad')),
-                  menuItem(text = "Challenge",
-                           tabName = 'instr1', 
-                           icon = icon('gears')),
-                  menuItem(text = "References", 
-                           tabName = "references", 
-                           icon = icon("leanpub"))
+      sidebarMenu(
+        id = "pages", 
+        menuItem("Overview", tabName = "overview", icon = icon("tachometer-alt")),
+        menuItem("Prerequisites", tabName = "prerequisite", icon = icon("book")),
+        menuItem("Explore", tabName = "exp1", icon = icon('wpexplorer')),
+        menuItem("Game", tabName = "instr2", icon = icon('gamepad')),
+        menuItem("Challenge", tabName = 'instr1', icon = icon('cogs')),
+        menuItem("References", tabName = "references", icon = icon("leanpub"))
       ),
-      #Add psu logo
       tags$div(
-        style = "position: absolute; bottom: 0;",
-        class = "sidebar-logo",
+        class = "sidebar-logo", 
         boastUtils::sidebarFooter()
       )
     ),
-    
-    #Set button color
+    ## Body ----
     dashboardBody(
-      tags$head(
-        tags$style(HTML(".skin-yellow .main-sidebar {background-color:  #ffa500;
-                      }
-                      .skin-yellow .sidebar-menu>li.active>a, .skin-yellow .sidebar-menu>li:hover>a {
-        background-color: #FFD700;")),
-        tags$style(HTML('#goover{background-color: #ffa500')),
-        tags$style(HTML('#goover{border-color:#ffa500')),
-        tags$style(HTML('#bsButton2{background-color: #ffa500')),
-        tags$style(HTML('#bsButton2{border-color: #ffa500')),
-        tags$style(HTML('#bsButton1{background-color: #ffa500')),
-        tags$style(HTML('#bsButton1{border-color: #ffa500')),
-        tags$style(HTML('#bsButton7{background-color: #ffa500')),
-        tags$style(HTML('#bsButton7{border-color: #ffa500')),
-        tags$style(HTML('#bsButton8{background-color: #ffa500')),
-        tags$style(HTML('#bsButton8{border-color: #ffa500')),
-        tags$style(HTML('#bsButton4{background-color: #ffa500')),
-        tags$style(HTML('#bsButton4{border-color: #ffa500')),
-        tags$style(HTML('#bsButton6{background-color: #ffa500')),
-        tags$style(HTML('#bsButton6{border-color: #ffa500')),
-        tags$style(HTML('#next1{background-color: #ffa500')),
-        tags$style(HTML('#next1{border-color: #ffa500')),
-        tags$style(HTML('#next2{background-color: #ffa500')),
-        tags$style(HTML('#next2{border-color: #ffa500')),
-        tags$style(HTML('#next3{background-color: #ffa500')),
-        tags$style(HTML('#next3{border-color: #ffa500')),
-        tags$style(HTML('#next4{background-color: #ffa500')),
-        tags$style(HTML('#next4{border-color: #ffa500')),
-        tags$style(HTML('#submitX{background-color: #ffa500')),
-        tags$style(HTML('#submitX{border-color: #ffa500')),
-        tags$style(HTML('#nextX{background-color: #ffa500')),
-        tags$style(HTML('#nextX{border-color: #ffa500')),
-        tags$style(HTML('#cq1check1{background-color: #ffa500')),
-        tags$style(HTML('#cq1check1{border-color: #ffa500')),
-        tags$style(HTML('#cq1check2{background-color: #ffa500')),
-        tags$style(HTML('#cq1check2{border-color: #ffa500')),
-        tags$style(HTML('#cq1check3{background-color: #ffa500')),
-        tags$style(HTML('#cq1check3{border-color: #ffa500')),
-        tags$style(HTML('#cq1check4{background-color: #ffa500')),
-        tags$style(HTML('#cq1check4{border-color: #ffa500')),
-      ),
-      
-      
-      
       useShinyjs(),
-      
-      #Overview page
       tabItems(
-        tabItem(tabName = "overview",
-                tags$a(href='http://stat.psu.edu/',tags$img(src='psu_icon.jpg', align = "left", width = 180)),
-                br(),br(),br(),
-                h3(tags$b("About:")),
-                
-                withMathJax(),
-                h4(p('In this app you will explore examples of', HTML('x<sup>2</sup>') , 'Test of Independence;
-                   you will also be able to test your own dataset.
-                   The Fill in the Blanks exercise would serve to test your understandings about this topic.')),
-                br(),
-                h3(tags$b("Instructions:")),
-                h4(
-                  tags$li('In this application, you will first explore a variety of real life examples using both graphical displays and the', HTML('x<sup>2</sup>'), 'test for independence.'),
-                  tags$li('By uploading your own datafile, you would be given back a', HTML('x<sup>2</sup>'), 'test for independence result of the variables selected.'),
-                  tags$li('Read the instructions for Fill in the Blanks first and then click on Go button to get started!')
-                ),
-                div(style = "text-align: center",
-                    bsButton(inputId = "bsButton1", 
-                             label = "GO !",
-                             icon = icon('bolt'),
-                             size = 'large')),
-                br(),
-                h3(tags$b("Acknowledgements:")),
-                h4('This application was coded, developed by Anna (Yinqi) Zhang and further updated by Jiayue He in 2021.'),
-                h4('Special Thanks to Dr. Pearl, Alex Chen, James M. Kopf, Angela Ting, Yingjie (Chealsea) Wang, and Yubaihe Zhou for being really supportive throughout the program.')
-        ),
-        
-        #Prerequisite page
+        ### Overview ----
         tabItem(
-          tabName = 'prerequisite', withMathJax(),
-          h3(strong('Background: Chi-Square Test of Independence')),br(),
+          tabName = "overview",
+          withMathJax(),
+          h1("The", HTML("&chi;<sup>2</sup>"), "Test of Independence"),
+          p('In this app you will explore examples of', HTML('&chi;<sup>2</sup>'),
+            'Test of Independence; you will also be able to test your own dataset.
+            The Fill in the Blanks exercise would serve to test your
+            understandings about this topic.'),
+          br(),
+          h2("Instructions"),
+          tags$ol(
+            tags$li('In this application, you will first explore a variety of
+                    real life examples using both graphical displays and the',
+                    HTML('&chi;<sup>2</sup>'), 'test for independence.'),
+            tags$li('By uploading your own datafile, you would be given back a',
+                    HTML('&chi;<sup>2</sup>'), 'test for independence result of
+                    the variables selected.'),
+            tags$li('Read the instructions for Fill in the Blanks first and then
+                    click on Go button to get started!')
+          ),
+          div(
+            style = "text-align: center;",
+            bsButton(
+              inputId = "bsButton1", 
+              label = "GO !",
+              icon = icon('bolt'),
+              size = 'large')
+          ),
+          br(),
+          h2("Acknowledgements"),
+          p('This application was coded, developed by Anna (Yinqi) Zhang and
+            further updated by Jiayue He in 2021. Special Thanks to Dr. Pearl,
+            Alex Chen, James M. Kopf, Angela Ting, Yingjie (Chealsea) Wang,
+            and Yubaihe Zhou for being really supportive throughout the
+            program.',
+            br(),
+            br(),
+            "Cite this app as:",
+            br(),
+            boastUtils::citeApp(),
+            br(),
+            br(),
+            div(class = "updated", "Last Update: 7/9/2021 by LSB.")
+          )
+        ),
+        ### Prerequisite ----
+        tabItem(
+          tabName = 'prerequisite',
+          withMathJax(),
+          h3(strong('Background: Chi-Square Test of Independence')),
+          br(),
           h4('To test for an association between two categorical variables, based on a two-way table 
                 that has r rows as categories for variable A and c columns as categories for variable B:'),
           br(),
-          
           h4(tags$li('Set up hypotheses:')),
           h4('\\(H_{0}\\):  Variable A is not associated with variable B.'),
           h4('\\(H_{a}\\):  Variable A is associated with variable B.'),
-          
           h4(tags$li('Compute the expected count under the null for each cell in the table using:')),
           div(style = "font-size: 1.6em", 
               helpText('$${Expected \\ Cell \\ Count} = {Row\\ Total * Column\\ Total\\over Table\\ Total}$$')),
-          
           h4(tags$li('Compute the value for the chi-square statistic using:')),
           div(style = "font-size: 1.6em", 
               helpText('$${X^2} = {\\sum{{(Observed - Expected)^2}\\over {Expected}}}$$')),
           #tags$img(src = 'chi_sqr_stats_2.jpg', width = "384px", height = "100px", style = "text-align: center"),
-          
           h4('Find a p-value using the upper tail of a chi-square distribution with (r-1)(c-1) degrees of freedom or use simulation under the null.'),
-          
           h4('The chi-square distribution is appropriate if the expected count is at least five in each cell.'),
           br(),
-          div(style = "text-align: center",
-              bsButton(inputId = "goover", 
-                       label = "Explore !", 
-                       icon = icon("bolt"), 
-                       style = "color: #ffffff;",
-                       size = "large"))
-          
+          div(
+            style = "text-align: center;",
+            bsButton(
+              inputId = "goover", 
+              label = "Explore !", 
+              icon = icon("bolt"), 
+              style = "color: #ffffff;",
+              size = "large"
+            )
+          )
         ),
-        
-        ############ Explore Activity No.1 with Different Datasets ############
-        ############ ############ ############ ############
-        #Explore page
-        tabItem(tabName = 'exp1', 
-                div(style="display: inline-block;vertical-align:top;",
-                    tags$a(href='https://shinyapps.science.psu.edu/',tags$img(src='homebut.PNG', width = 15))
+        ### Explore page ----
+        tabItem(
+          tabName = 'exp1', 
+          tags$h3('Chi-Square Test for Association Explore Activity'),
+          sidebarLayout(
+            sidebarPanel(
+              selectInput(
+                inputId = 'inputs', 
+                label = 'Select A Dataset to Explore', 
+                selected = 'None',
+                choices = c('None', 'Cars2015', 'HeroesInformation', 
+                            'CompassionateRats', 'SandwichAnts', 'CocaineTreatment', 
+                            'Test Your Own Dataset')
+              ),
+              br(),
+              #### Use your own data ----
+              conditionalPanel(
+                condition = 'input.inputs == "Test Your Own Dataset"',
+                fileInput(
+                  inputId = 'file', 
+                  label = 'Choose info-file to upload',
+                  accept = c(
+                    'text/csv',
+                    'text/comma-separated-values',
+                    'text/tab-separated-values',
+                    'text/plain',
+                    '.csv',
+                    '.tsv'
+                  )
                 ),
-                tags$h3('Chi-Square Test for Association Explore Activity'),
-                sidebarLayout(
-                  sidebarPanel(
-                    selectInput(inputId = 'inputs', 
-                                label = 'Select A Dataset to Explore', 
-                                selected = 'None',
-                                choices = c('None', 'Cars2015', 'HeroesInformation', 
-                                            'CompassionateRats', 'SandwichAnts', 'CocaineTreatment', 
-                                            'Test Your Own Dataset')),
-                    br(),
-                    
-                    #test your own dataset
-                    conditionalPanel('input.inputs == "Test Your Own Dataset"',
-                                     fileInput(inputId = 'file', 
-                                               label = 'Choose info-file to upload',
-                                               accept = c(
-                                                 'text/csv',
-                                                 'text/comma-separated-values',
-                                                 'text/tab-separated-values',
-                                                 'text/plain',
-                                                 '.csv',
-                                                 '.tsv'
-                                               )
-                                     ),
-                                     bsPopover("file", 
-                                               "File Upload", 
-                                               "If you have your own dataset you would like to enter, upload it through this"),
-                                     checkboxInput(inputId = 'header', 
-                                                   'Header', 
-                                                   TRUE),
-                                     bsPopover("header", 
-                                               "Header", 
-                                               "Please check whether there is a header for your data or not"),
-                                     radioButtons(inputId = 'sep', 'Separator',
-                                                  c(Comma = ',',
-                                                    Semicolon = ';',
-                                                    tab = '\t'),
-                                                  ','),
-                                     bsPopover("sep", 
-                                               "Separator", 
-                                               "Choose which separation your file is using(If you do not know, 
-                                           it is most likely separating with commas"),
-                                     radioButtons(inputId = 'quote', 'Quote',
-                                                  c(None = '',
-                                                    'Double Quote' = '"',
-                                                    'Single Quote' = "'"),
-                                                  '"'),
-                                     bsPopover("quote", 
-                                               "Quotes", 
-                                               "Check what kind of data you have and whether you need to use quotes or not"),
-                                     selectInput(inputId = "columns", 
-                                                 "Select Your X-Axis", 
-                                                 choices = NULL),
-                                     selectInput(inputId = "columns2", 
-                                                 "Select Your Y-Axis", 
-                                                 choices = NULL)
-                    ),
-                    
+                # ERROR: not showing up in app
+                bsPopover(
+                  id = "file", 
+                  title = "File Upload", 
+                  content = "If you have your own dataset you would like to enter, upload it through this"
+                ),
+                checkboxInput(
+                  inputId = 'header', 
+                  label = 'Header', 
+                  value = TRUE
+                ),
+                bsPopover(
+                  id = "header", 
+                  title = "Header", 
+                  content = "Please check whether there is a header for your data or not"
+                ),
+                radioButtons(
+                  inputId = 'sep',
+                  label = 'Separator',
+                  choices = c(
+                    Comma = ',',
+                    Semicolon = ';',
+                    tab = '\t'
+                  ),
+                  selected = ','
+                ),
+                bsPopover(
+                  id = "sep", 
+                  title = "Separator", 
+                  content = "Choose which separation your file is using (If you do not know, it is most likely separating with commas"
+                ),
+                radioButtons(
+                  inputId = 'quote',
+                  label = 'Quote',
+                  choices = c(
+                    None = '',
+                    'Double Quote' = '"',
+                    'Single Quote' = "'"
+                  ),
+                  selected = '"'
+                ),
+                bsPopover(
+                  id = "quote", 
+                  title = "Quotes", 
+                  content = "Check what kind of data you have and whether you need to use quotes or not"
+                ),
+                selectInput(
+                  inputId = "columns", 
+                  label = "Select Your X-Axis", 
+                  choices = NULL
+                ),
+                selectInput(
+                  inputId = "columns2", 
+                  label = "Select Your Y-Axis", 
+                  choices = NULL
+                )
+              ),
+              # Neil stopped reformatting lines here
                     #Cars2015 input conditional panel
                     conditionalPanel('input.inputs == "Cars2015"', 
                                      tags$ul(
@@ -805,6 +794,7 @@ ui <- dashboardPage(
       
     )
   )
+)
 
 
 #import dataset: Cars2015.csv
