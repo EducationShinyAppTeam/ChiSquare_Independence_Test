@@ -527,68 +527,50 @@ ui <- list(
         #Game page
         tabItem(
           tabName = "instr2",
-          tabsetPanel(
-            id = "games1",
-            tabPanel(
-              title = h4("Instructions"), 
-              value = "instruct1",
-              fluidPage(theme = 'Muted',
-                titlePanel('Instructions to Interpreting the Graph'),
-                  h4(tags$li('Click on the GO! button to start the game.')),
-                  h4(tags$li('Select from the dropdown menu the most appropriate explanation of the graph present.')),
-                  br(),
-                  div(style = "text-align: center", 
-                    bsButton(inputId = "bsButton6", 
-                      label = "GO!", icon = icon('bolt'), 
-                       size = "large"))
-                )
+          sidebarLayout(
+            sidebarPanel(
+              tags$code("Interpreting the Graph"),
+              selectInput(inputId = 'graphId', 
+                label = 'Select Your Graph',
+                choices = c('The First Graph', 'The Second Graph', 'The Third Graph', 'The Fourth Graph'),
+                selected = 'The First Graph'),
+              conditionalPanel('input.graphId == "The First Graph"',
+                selectInput(inputId = 'cq1', 
+                  label = 'Your Interpretation',
+                  choices = c('',
+                    'A. The x-axis represents different sandwich fillings',
+                    'B. The y-axis represents different sandwich bread',
+                    'C. The color bar represents how many sandwiches are in each Bread & Filling combination',
+                    'D. A, B, and C'),
+                  selected = ''),
+                br(),
+                div(style = 'text-align: left', 
+                  bsButton(inputId = 'cq1check1', 
+                    label = 'Check Answer',  
+                    size = "large"), 
+                  bsButton(inputId = 'next1', 
+                    label = 'Next', 
+                    size = "large"))
               ),
-              tabPanel(
-                title = h4("Interpreting the Graph"), 
-                value = "cha2",
-                sidebarLayout(
-                  sidebarPanel(
-                    tags$code("Interpreting the Graph"),
-                    selectInput(inputId = 'graphId', 
-                    label = 'Select Your Graph',
-                    choices = c('The First Graph', 'The Second Graph', 'The Third Graph', 'The Fourth Graph'),
-                    selected = 'The First Graph'),
-                    conditionalPanel('input.graphId == "The First Graph"',
-                    selectInput(inputId = 'cq1', 
-                      label = 'Your Interpretation',
-                        choices = c('',
-                                    'A. The x-axis represents different sandwich fillings',
-                                    'B. The y-axis represents different sandwich bread',
-                                    'C. The color bar represents how many sandwiches are in each Bread & Filling combination',
-                                    'D. A, B, and C'),
-                        selected = ''),
-                    br(),
-                    div(style = 'text-align: left', 
-                      bsButton(inputId = 'cq1check1', 
-                        label = 'Check Answer',  
-                        size = "large"), 
-                      bsButton(inputId = 'next1', 
-                        label = 'Next', 
-                        size = "large"))
-                    ),
-                    conditionalPanel('input.graphId == "The Second Graph"',
-                                                          selectInput('cq2', label = 'Your Interpretation',
-                                                                      choices = c('',
-                                                                                  'A. In this dataset, midsized is the most common size for 7Pass cars',
-                                                                                  'B. In this dataset, midsized is the most common size for SUV cars',
-                                                                                  'C. In this dataset, small is the most common size for Sporty cars',
-                                                                                  'D. None of the above'),
-                                                                      selected = ''
-                                                          ),
-                                                          br(),
-                                                          div(style = 'text-align: left', 
-                                                              bsButton(inputId = 'cq1check2', 
-                                                                       label = 'Check', 
-                                                                       size = "large"), 
-                                                              bsButton(inputId = 'next2', 
-                                                                       label = 'Next', 
-                                                                       size = "large"))
-                                         ),
+              conditionalPanel(
+                'input.graphId == "The Second Graph"',
+                selectInput('cq2', label = 'Your Interpretation',
+                  choices = c('',
+                    'A. In this dataset, midsized is the most common size for 7Pass cars',
+                    'B. In this dataset, midsized is the most common size for SUV cars',
+                    'C. In this dataset, small is the most common size for Sporty cars',
+                    'D. None of the above'),
+                    selected = ''
+                ),
+                br(),
+                div(style = 'text-align: left', 
+                  bsButton(inputId = 'cq1check2', 
+                    label = 'Check', 
+                    size = "large"), 
+                  bsButton(inputId = 'next2', 
+                    label = 'Next', 
+                    size = "large"))
+              ),
                                          
                                          conditionalPanel('input.graphId == "The Third Graph"',
                                                           selectInput('cq3', label = 'Your Interpretation',
@@ -672,29 +654,29 @@ ui <- list(
                                                   label = "Challenge!", 
                                                   icon = icon('bolt'), 
                                                   size = "large"))
-                            )
-                )),
-        
+          ),
         #Challenge page
         tabItem(
           tabName = "instr1",
-          tabsetPanel(id = "games2",
-            tabPanel(title = h4("Instructions"), 
-            value = "instruct2",
-            fluidPage(theme = 'Muted', 
-            titlePanel('Instructions to Answering the Practice Questions'),
-                                               h4(tags$li('Click on the GO! button to start the game.')),
-                                               h4(tags$li('Select from the dropdown menu the answer you think correct.')),
-                                               h4(tags$li('Click on "Submit!" to see if your answer is correct or not.')),
-                                               br(),
-                                               div(style = "text-align: center", 
-                                                   bsButton(inputId = "bsButton4",
-                                                            label = "GO!", 
-                                                            icon = icon('bolt'), 
-                                                            size = "large"))
-                                     ) 
-                            ),
-            tabPanel(title = h4("Multiple Choice"), value = "cha1",
+          # tabsetPanel(id = "games2",
+            # tabPanel(
+            #   title = h4("Instructions"), 
+            # value = "instruct2",
+            # fluidPage(theme = 'Muted', 
+            # titlePanel('Instructions to Answering the Practice Questions'),
+            #                                    h4(tags$li('Click on the GO! button to start the game.')),
+            #                                    h4(tags$li('Select from the dropdown menu the answer you think correct.')),
+            #                                    h4(tags$li('Click on "Submit!" to see if your answer is correct or not.')),
+            #                                    br(),
+            #                                    div(style = "text-align: center", 
+            #                                        bsButton(inputId = "bsButton4",
+            #                                                 label = "GO!", 
+            #                                                 icon = icon('bolt'), 
+            #                                                 size = "large"))
+            #                          ) 
+            #                 ),
+            # tabPanel(
+            #   title = h4("Multiple Choice"), value = "cha1",
               fluidRow(
                 box(width = 12, 
                 style = 'color: #FFFFFF; background-color: #ffa500',
@@ -722,9 +704,9 @@ ui <- list(
                                                   label = "Continue!",
                                                   icon = icon('bolt'), 
                                                   size = "large"))
-                            )
+                            #)
                             
-                )
+                # )
         ),
         
         #References page
@@ -1152,13 +1134,13 @@ server <- function(input, output, session) {
     updateTabItems(session, 'pages', 'exp3')
   })
   
-  observeEvent(input$bsButton4, {
-    updateTabItems(session, 'games2', 'cha1')
-  })
+  # observeEvent(input$bsButton4, {
+  #   updateTabItems(session, 'games2', 'cha1')
+  # })
   
-  observeEvent(input$bsButton6, {
-    updateTabItems(session, 'games1', 'cha2')
-  })
+  # observeEvent(input$bsButton6, {
+  #   updateTabItems(session, 'games1', 'cha2')
+  # })
   
   observeEvent(input$bsButton7, {
     updateTabItems(session, 'pages', 'references')
