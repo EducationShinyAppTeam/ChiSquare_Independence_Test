@@ -529,7 +529,7 @@ ui <- list(
           tabName = "instr2",
           sidebarLayout(
             sidebarPanel(
-              tags$code("Interpreting the Graph"),
+              h4("Interpreting the Graph"),
               selectInput(inputId = 'graphId', 
                 label = 'Select Your Graph',
                 choices = c('The First Graph', 'The Second Graph', 'The Third Graph', 'The Fourth Graph'),
@@ -620,8 +620,8 @@ ui <- list(
                                                                            )
                                                           ),
                                                           conditionalPanel('input.graphId == "The Second Graph"',
-                                                                           br(),
-                                                                           br(),
+                                                                           # br(),
+                                                                           # br(),
                                                                            plotlyOutput('cha2plot2'),
                                                                            conditionalPanel('input.cq1check2 != 0',
                                                                                             htmlOutput('cq1ans2'),
@@ -629,8 +629,8 @@ ui <- list(
                                                                            )
                                                           ),
                                                           conditionalPanel('input.graphId == "The Third Graph"',
-                                                                           br(),
-                                                                           br(),
+                                                                           # br(),
+                                                                           # br(),
                                                                            plotlyOutput('cha2plot3'),
                                                                            conditionalPanel('input.cq1check3 != 0',
                                                                                             htmlOutput('cq1ans3'),
@@ -638,8 +638,8 @@ ui <- list(
                                                                            )
                                                           ),
                                                           conditionalPanel('input.graphId == "The Fourth Graph"',
-                                                                           br(),
-                                                                           br(),
+                                                                           # br(),
+                                                                           # br(),
                                                                            plotlyOutput('cha2plot4'),
                                                                            conditionalPanel('input.cq1check4 != 0',
                                                                                             htmlOutput('cq1ans4'),
@@ -658,25 +658,6 @@ ui <- list(
         #Challenge page
         tabItem(
           tabName = "instr1",
-          # tabsetPanel(id = "games2",
-            # tabPanel(
-            #   title = h4("Instructions"), 
-            # value = "instruct2",
-            # fluidPage(theme = 'Muted', 
-            # titlePanel('Instructions to Answering the Practice Questions'),
-            #                                    h4(tags$li('Click on the GO! button to start the game.')),
-            #                                    h4(tags$li('Select from the dropdown menu the answer you think correct.')),
-            #                                    h4(tags$li('Click on "Submit!" to see if your answer is correct or not.')),
-            #                                    br(),
-            #                                    div(style = "text-align: center", 
-            #                                        bsButton(inputId = "bsButton4",
-            #                                                 label = "GO!", 
-            #                                                 icon = icon('bolt'), 
-            #                                                 size = "large"))
-            #                          ) 
-            #                 ),
-            # tabPanel(
-            #   title = h4("Multiple Choice"), value = "cha1",
               fluidRow(
                 box(width = 12, 
                 style = 'color: #FFFFFF; background-color: #ffa500',
