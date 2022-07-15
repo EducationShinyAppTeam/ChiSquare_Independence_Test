@@ -525,58 +525,53 @@ ui <- list(
         ),
         
         #Game page
-        tabItem(tabName = "instr2",
-                div(style="display: inline-block;vertical-align:top;",
-                    tags$a(href='https://shinyapps.science.psu.edu/',tags$img(src='homebut.PNG', width = 15))
-                ),
-                tabsetPanel(id = "games1",
-                            tabPanel(title = h4("Instructions"), 
-                                     value = "instruct1",
-                                     fluidPage(theme = 'Muted',
-                                               titlePanel('Instructions to Interpreting the Graph'),
-                                               
-                                               h4(tags$li('Click on the GO! button to start the game.')),
-                                               h4(tags$li('Select from the dropdown menu the most appropriate explanation of the graph present.')),
-                                               br(),
-                                               div(style = "text-align: center", 
-                                                   bsButton(inputId = "bsButton6", 
-                                                            label = "GO!", 
-                                                            icon = icon('bolt'), 
-                                                            size = "large"))
-                                               
-                                     )
-                            ),
-                            tabPanel(title = h4("Interpreting the Graph"), 
-                                     value = "cha2",
-                                     sidebarLayout(
-                                       sidebarPanel(
-                                         tags$code("Interpreting the Graph"),
-                                         
-                                         selectInput(inputId = 'graphId', 
-                                                     label = 'Select Your Graph',
-                                                     choices = c('The First Graph', 'The Second Graph', 'The Third Graph', 'The Fourth Graph'),
-                                                     selected = 'The First Graph'),
-                                         
-                                         conditionalPanel('input.graphId == "The First Graph"',
-                                                          selectInput(inputId = 'cq1', 
-                                                                      label = 'Your Interpretation',
-                                                                      choices = c('',
-                                                                                  'A. The x-axis represents different sandwich fillings',
-                                                                                  'B. The y-axis represents different sandwich bread',
-                                                                                  'C. The color bar represents how many sandwiches are in each Bread & Filling combination',
-                                                                                  'D. A, B, and C'),
-                                                                      selected = ''),
-                                                          br(),
-                                                          div(style = 'text-align: left', 
-                                                              bsButton(inputId = 'cq1check1', 
-                                                                       label = 'Check Answer',  
-                                                                       size = "large"), 
-                                                              bsButton(inputId = 'next1', 
-                                                                       label = 'Next', 
-                                                                       size = "large"))
-                                         ),
-                                         
-                                         conditionalPanel('input.graphId == "The Second Graph"',
+        tabItem(
+          tabName = "instr2",
+          tabsetPanel(
+            id = "games1",
+            tabPanel(
+              title = h4("Instructions"), 
+              value = "instruct1",
+              fluidPage(theme = 'Muted',
+                titlePanel('Instructions to Interpreting the Graph'),
+                  h4(tags$li('Click on the GO! button to start the game.')),
+                  h4(tags$li('Select from the dropdown menu the most appropriate explanation of the graph present.')),
+                  br(),
+                  div(style = "text-align: center", 
+                    bsButton(inputId = "bsButton6", 
+                      label = "GO!", icon = icon('bolt'), 
+                       size = "large"))
+                )
+              ),
+              tabPanel(
+                title = h4("Interpreting the Graph"), 
+                value = "cha2",
+                sidebarLayout(
+                  sidebarPanel(
+                    tags$code("Interpreting the Graph"),
+                    selectInput(inputId = 'graphId', 
+                    label = 'Select Your Graph',
+                    choices = c('The First Graph', 'The Second Graph', 'The Third Graph', 'The Fourth Graph'),
+                    selected = 'The First Graph'),
+                    conditionalPanel('input.graphId == "The First Graph"',
+                    selectInput(inputId = 'cq1', 
+                      label = 'Your Interpretation',
+                        choices = c('',
+                                    'A. The x-axis represents different sandwich fillings',
+                                    'B. The y-axis represents different sandwich bread',
+                                    'C. The color bar represents how many sandwiches are in each Bread & Filling combination',
+                                    'D. A, B, and C'),
+                        selected = ''),
+                    br(),
+                    div(style = 'text-align: left', 
+                      bsButton(inputId = 'cq1check1', 
+                        label = 'Check Answer',  
+                        size = "large"), 
+                      bsButton(inputId = 'next1', 
+                        label = 'Next', 
+                        size = "large"))
+                    ),
+                    conditionalPanel('input.graphId == "The Second Graph"',
                                                           selectInput('cq2', label = 'Your Interpretation',
                                                                       choices = c('',
                                                                                   'A. In this dataset, midsized is the most common size for 7Pass cars',
@@ -632,7 +627,7 @@ ui <- list(
                                        ),
                                        
                                        mainPanel(
-                                         conditionalPanel('input.bsButton6 != 0',
+                                         #conditionalPanel('input.bsButton6 != 0',
                                                           conditionalPanel('input.graphId == "The First Graph"',
                                                                            br(),
                                                                            br(),
@@ -669,7 +664,7 @@ ui <- list(
                                                                                             uiOutput('cq1feed4')
                                                                            )
                                                           )
-                                         )
+
                                        )
                                      ),
                                      div(style = "text-align: left", 
@@ -681,17 +676,13 @@ ui <- list(
                 )),
         
         #Challenge page
-        tabItem(tabName = "instr1",
-                div(style="display: inline-block;vertical-align:top;",
-                    tags$a(href='https://shinyapps.science.psu.edu/',tags$img(src='homebut.PNG',
-                                                                              width = 15))
-                ),
-                tabsetPanel(id = "games2",
-                            tabPanel(title = h4("Instructions"), 
-                                     value = "instruct2",
-                                     fluidPage(theme = 'Muted', 
-                                               titlePanel('Instructions to Answering the Practice Questions'),
-                                               
+        tabItem(
+          tabName = "instr1",
+          tabsetPanel(id = "games2",
+            tabPanel(title = h4("Instructions"), 
+            value = "instruct2",
+            fluidPage(theme = 'Muted', 
+            titlePanel('Instructions to Answering the Practice Questions'),
                                                h4(tags$li('Click on the GO! button to start the game.')),
                                                h4(tags$li('Select from the dropdown menu the answer you think correct.')),
                                                h4(tags$li('Click on "Submit!" to see if your answer is correct or not.')),
@@ -703,14 +694,13 @@ ui <- list(
                                                             size = "large"))
                                      ) 
                             ),
-                            tabPanel(title = h4("Multiple Choice"), value = "cha1",
-                                     fluidRow(
-                                       box(width = 12, 
-                                           style = 'color: #FFFFFF; background-color: #ffa500',
-                                           htmlOutput('questionCha'))
+            tabPanel(title = h4("Multiple Choice"), value = "cha1",
+              fluidRow(
+                box(width = 12, 
+                style = 'color: #FFFFFF; background-color: #ffa500',
+                htmlOutput('questionCha'))
                                      ),
-                                     
-                                     fluidRow(
+                fluidRow(
                                        box(width = 12, 
                                            style = 'color: #000000; background-color: #ffa500',
                                            htmlOutput('choiceCha'))
@@ -944,19 +934,6 @@ server <- function(input, output, session) {
     }
   )
   
-  ############ Display ############
-  ############ ############ ############ ############
-  
-  #test your own dataset
-  # output$fileinput = renderTable({
-  #   inFile = input$file
-  #   req(inFile)
-  #   f <- read.table(inFile$datapath, header = input$header, sep = input$sep, quote = input$quote)
-  #   vars = names(f)
-  #   updateSelectInput(session, "columns", "Select Your X-Axis", choices = vars)
-  #   updateSelectInput(session, "columns2", "Select Your Y-Axis", choices = vars)
-  #   head(f, 5)
-  # })
   
   inputDataset <- reactive({
     
@@ -1145,78 +1122,7 @@ server <- function(input, output, session) {
     chisqSummary1
   })
   
-  ############ Upload Your Own Dataset ############
-  ############ ############ ############ ############
-  # #Argument names:
-  # ArgNames <- reactive({
-  #   Names <- names(formals(input$readFunction)[-1])
-  #   Names <- Names[Names != "..."]
-  #   return(Names)
-  # })
-  # 
-  # #Argument selector:
-  # output$ArgSelect <- renderUI({
-  #   if (length(ArgNames())==0) return(NULL)
-  #   else {
-  #     selectInput("arg", "Argument:", ArgNames())
-  #   }
-  # })
-  # 
-  # #Arg text field:
-  # output$ArgText <- renderUI({
-  #   fun__arg <- paste0(input$readFunction, "__", input$arg)
-  #   if (is.null(input$arg)) return(NULL)
-  #   
-  #   Defaults <- formals(input$readFunction)
-  #   
-  #   if (is.null(input[[fun__arg]])) {
-  #     textInput(fun__arg, label = "Enter value:", value = deparse(Defaults[[input$arg]])) 
-  #   } 
-  #   else {
-  #     textInput(fun__arg, label = "Enter value:", value = input[[fun__arg]]) 
-  #   }
-  # })
-  # 
-  # #Data import:
-  # Dataset <- reactive({
-  #   
-  #   validate(
-  #     need(input$file, 'Please Select Your Datafile')
-  #   )
-  #   
-  #   if (is.null(input$file)) {
-  #     return(data.frame())
-  #   }
-  #   
-  #   args <- grep(paste0("^", input$readFunction, "__"), names(input), value = TRUE)
-  #   
-  #   argList <- list()
-  #   for (i in seq_along(args)) {
-  #     argList[[i]] <- eval(parse(text=input[[args[i]]]))
-  #   }
-  #   names(argList) <- gsub(paste0("^", input$readFunction, "__"), "", args)
-  #   
-  #   argList <- argList[names(argList) %in% ArgNames()]
-  #   
-  #   Dataset <- as.data.frame(do.call(input$readFunction, c(list(input$file$datapath), argList)))
-  #   return(Dataset)
-  # })
-  # 
-  # #X^2 Summary from the file input
-  # output$summaryFile <- renderPrint ({
-  #   summaryInput <- chisq.test(table(Dataset()))
-  #   summaryInput
-  # })
-  # 
-  # #Show table:
-  # output$table <- renderDataTable ({
-  #   datafile <- Dataset()
-  #   data.table::data.table(datafile)
-  # })
-  
-  
   ############ Update Events ############
-  ############ ############ ############ ############
   #set all the buttons
   observeEvent(input$next1, {
     updateSelectInput(session, inputId = 'cq1', label = 'The Second Graph',
@@ -1414,9 +1320,7 @@ server <- function(input, output, session) {
     }
   })
   
-  
   ############ Question Bank ############
-  ############ ############ ############ ############
   question <- read.delim('Workbook2.csv')
   question$Question <- as.character(question$Question)
   question$A <- as.character(question$A)
@@ -1484,6 +1388,3 @@ server <- function(input, output, session) {
 }
 
 boastUtils::boastApp(ui = ui, server = server)
-
-
-#shinyUI(dashboardPage( header, sidebar, body))
