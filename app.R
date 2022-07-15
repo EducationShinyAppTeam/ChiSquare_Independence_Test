@@ -611,8 +611,8 @@ ui <- list(
                                        mainPanel(
                                          #conditionalPanel('input.bsButton6 != 0',
                                                           conditionalPanel('input.graphId == "The First Graph"',
-                                                                           br(),
-                                                                           br(),
+                                                                           # br(),
+                                                                           # br(),
                                                                            plotlyOutput('cha2plot1'),
                                                                            conditionalPanel('input.cq1check1 != 0',
                                                                                             htmlOutput('cq1ans1'),
