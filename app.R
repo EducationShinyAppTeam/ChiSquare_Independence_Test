@@ -551,84 +551,70 @@ ui <- list(
                   choices = c('',
                     'A. The use of desipramine is largely associated with the
                     relapse status',
-                    'B. People who use desipramine as drug treatment are less likely to relapse compared to those who use lithium and placebo',
-                                                                                  'C. The use of placebo is equally associated with the relapse status and non-relapse status',
-                                                                                  'D. The use of lithium is more associated with the non-relapse status than the relapse status'),
-                                                                      selected = ''),
-                                                          br(),
-                                                          div(style = 'text-align: left',
-                                                              bsButton(inputId = 'cq1check3', 
-                                                                       label = 'Check', 
-                                                                       size = "large"),
-                                                              bsButton(inputId = 'next3', 
-                                                                       label = 'Next',
-                                                                       size = "large"))
-                                         ),
-                                         
-                                         conditionalPanel('input.graphId == "The Fourth Graph"',
-                                                          selectInput('cq4', label = 'Your Interpretation',
-                                                                      choices = c('',
-                                                                                  'A. All of the female rates showed empathy',
-                                                                                  'B. The color hows the number of rats in each category',
-                                                                                  'C. Both A and B'),
-                                                                      selected = ''),
-                                                          br(),
-                                                          div(style = 'text-align: left',
-                                                              bsButton(inputId = 'cq1check4', 
-                                                                       label = 'Check', 
-                                                                       size = "large"), 
-                                                              bsButton(inputId = 'next4', 
-                                                                       label = 'Next', 
-                                                                       size = "large"))
-                                         )
-                                       ),
-                                       
-                                       mainPanel(
-                                         #conditionalPanel('input.bsButton6 != 0',
-                                                          conditionalPanel('input.graphId == "The First Graph"',
-                                                                           # br(),
-                                                                           # br(),
-                                                                           plotlyOutput('cha2plot1'),
-                                                                           conditionalPanel('input.cq1check1 != 0',
-                                                                                            htmlOutput('cq1ans1'),
-                                                                                            uiOutput('cq1feed1')
-                                                                           )
-                                                          ),
-                                                          conditionalPanel('input.graphId == "The Second Graph"',
-                                                                           # br(),
-                                                                           # br(),
-                                                                           plotlyOutput('cha2plot2'),
-                                                                           conditionalPanel('input.cq1check2 != 0',
-                                                                                            htmlOutput('cq1ans2'),
-                                                                                            uiOutput('cq1feed2')
-                                                                           )
-                                                          ),
-                                                          conditionalPanel('input.graphId == "The Third Graph"',
-                                                                           # br(),
-                                                                           # br(),
-                                                                           plotlyOutput('cha2plot3'),
-                                                                           conditionalPanel('input.cq1check3 != 0',
-                                                                                            htmlOutput('cq1ans3'),
-                                                                                            uiOutput('cq1feed3')
-                                                                           )
-                                                          ),
-                                                          conditionalPanel('input.graphId == "The Fourth Graph"',
-                                                                           # br(),
-                                                                           # br(),
-                                                                           plotlyOutput('cha2plot4'),
-                                                                           conditionalPanel('input.cq1check4 != 0',
-                                                                                            htmlOutput('cq1ans4'),
-                                                                                            uiOutput('cq1feed4')
-                                                                           )
-                                                          )
-
-                                       )
-                                     ),
-                                     div(style = "text-align: left", 
-                                         bsButton(inputId = "bsButton8", 
-                                                  label = "Challenge!", 
-                                                  icon = icon('bolt'), 
-                                                  size = "large"))
+                    'B. People who use desipramine as drug treatment are less 
+                    likely to relapse compared to those who use lithium and 
+                    placebo',
+                    'C. The use of placebo is equally associated with the 
+                    relapse status and non-relapse status',
+                    'D. The use of lithium is more associated with the 
+                    non-relapse status than the relapse status'),
+                  selected = ''), br(),
+                div(style = 'text-align: left',
+                  bsButton(inputId = 'cq1check3', 
+                    label = 'Check', 
+                    size = "large"),
+                  bsButton(inputId = 'next3', 
+                    label = 'Next', size = "large"))
+              ),
+              conditionalPanel('input.graphId == "The Fourth Graph"',
+                selectInput('cq4', label = 'Your Interpretation',
+                  choices = c('',
+                    'A. All of the female rates showed empathy',
+                    'B. The color hows the number of rats in each category',
+                    'C. Both A and B'),
+                    selected = ''), br(),
+                div(style = 'text-align: left',
+                bsButton(inputId = 'cq1check4', 
+                  label = 'Check', size = "large"), 
+                bsButton(inputId = 'next4', 
+                  label = 'Next', 
+                  size = "large"))
+              )
+            ),
+            mainPanel(
+              conditionalPanel('input.graphId == "The First Graph"',
+                plotlyOutput('cha2plot1'),
+                conditionalPanel('input.cq1check1 != 0',
+                  htmlOutput('cq1ans1'),
+                  uiOutput('cq1feed1')
+                )
+              ),
+              conditionalPanel('input.graphId == "The Second Graph"',
+                plotlyOutput('cha2plot2'),
+                conditionalPanel('input.cq1check2 != 0',
+                  htmlOutput('cq1ans2'),
+                  uiOutput('cq1feed2')
+                )
+              ),
+              conditionalPanel('input.graphId == "The Third Graph"',
+                plotlyOutput('cha2plot3'),
+                conditionalPanel('input.cq1check3 != 0',
+                  htmlOutput('cq1ans3'),
+                  uiOutput('cq1feed3')
+                )
+              ),
+              conditionalPanel('input.graphId == "The Fourth Graph"',
+                plotlyOutput('cha2plot4'),
+                conditionalPanel('input.cq1check4 != 0',
+                  htmlOutput('cq1ans4'),
+                  uiOutput('cq1feed4')
+                )
+              )
+            )
+          ),
+          div(style = "text-align: left", 
+            bsButton(inputId = "bsButton8", 
+              label = "Challenge!", icon = icon('bolt'), size = "large"))
           ),
         #Challenge page
         tabItem(
@@ -637,34 +623,24 @@ ui <- list(
                 box(width = 12, 
                 style = 'color: #FFFFFF; background-color: #ffa500',
                 htmlOutput('questionCha'))
-                                     ),
-                fluidRow(
-                                       box(width = 12, 
-                                           style = 'color: #000000; background-color: #ffa500',
-                                           htmlOutput('choiceCha'))
-                                     ),
-                                     
-                                     conditionalPanel('input.submitX != 0',
-                                                      htmlOutput('challengeFeedback'),
-                                                      htmlOutput('textFeedback')),
-                                     br(),
-                                     div(style = "text-align: left", 
-                                         actionButton(inputId = 'submitX', 
-                                                      label = 'Check Answer',
-                                                      size = "small"),
-                                         actionButton(inputId = 'nextX', 
-                                                      label = 'Next', 
-                                                      size = "small")),
-                                     div(style = "text-align: center", 
-                                         bsButton(inputId = "bsButton7", 
-                                                  label = "Continue!",
-                                                  icon = icon('bolt'), 
-                                                  size = "large"))
-                            #)
-                            
-                # )
+              ),
+              fluidRow(
+                box(width = 12, 
+                  style = 'color: #000000; background-color: #ffa500',
+                  htmlOutput('choiceCha'))
+              ),
+              conditionalPanel('input.submitX != 0',
+                htmlOutput('challengeFeedback'),
+                htmlOutput('textFeedback')),br(),
+              div(style = "text-align: left", 
+                actionButton(inputId = 'submitX', 
+                  label = 'Check Answer',size = "small"),
+                actionButton(inputId = 'nextX', 
+                  label = 'Next', size = "small")),
+              div(style = "text-align: center", 
+                bsButton(inputId = "bsButton7", 
+                  label = "Continue!",icon = icon('bolt'), size = "large"))
         ),
-        
         #References page
         tabItem(
           tabName = "references",
@@ -674,14 +650,12 @@ ui <- list(
             class = "hangingindent",
             "https://educationshinyappteam.github.io/Style_Guide/index.html#organization"
           ),
-          
           p(
             class = "hangingindent",
             "Attali, D.(2020). 
             shinyjs: Easily Improve the User Experience of Your Shiny Apps in Seconds. R package version 2.0.0 [R Package]. 
             Available from https://CRAN.R-project.org/package=shinyjs"
           ),
-          
           p(
             class = "hangingindent",
             "Bailey, E. (2015). shinyBS: Twitter bootstrap components for shiny. 
@@ -692,21 +666,18 @@ ui <- list(
             "Carey, R. (2019). boastUtils: BOAST Utilities, R Package.
                              Available from https://github.com/EducationShinyAppTeam/boastUtils"
           ),
-          
           p(
             class = "hangingindent",
             "Chang, W. and Borges Ribeio, B. (2018). shinydashboard: Create
                              dashboards with 'Shiny', R Package. Available from
                              https://CRAN.R-project.org/package=shinydashboard"
           ),
-          
           p(
             class = "hangingindent",
             "Chang, W., Cheng, J., Allaire, J., Xie, Y., and McPherson, J. (2019). 
             shiny: Web application framework for R. (v1.4.0) [R Package]. 
             Available from https://CRAN.R-project.org/package=shiny"
           ),
-          
           p(
             class = "hangingindent",
             "Wickham, H. (2011), “The Split-apply-combine strategy for data 
@@ -714,12 +685,8 @@ ui <- list(
                              Available at http://www.jstatsoft.org/v40/i01/."
           ),
           boastUtils::copyrightInfo()
-          
         ) #end of tabItem
-        
       )
-      
-      
     )
   )
 )
@@ -969,9 +936,7 @@ server <- function(input, output, session) {
                               simulate.p.value = TRUE)
     carsSummary
   })
-  #chisq.test(table(cars[ , c(input$XCars2015, input$YCars2015)]))
-  #chisq.test(x = hi[ , input$XHeroesInfo], y = hi[ , input$YHeroesInfo],simulate.p.value = TRUE)
-  
+
   #2D histogram for SandwichAnts
   output$saplotly1 <- renderPlotly({
     x <- list(title = 'Filling')
@@ -1063,22 +1028,27 @@ server <- function(input, output, session) {
   ############ Update Events ############
   #set all the buttons
   observeEvent(input$next1, {
-    updateSelectInput(session, inputId = 'cq1', label = 'The Second Graph',
-                      choices = c('',
-                                  'A. In this dataset, midsized is the most common size for 7Pass cars',
-                                  'B. In this dataset, midsized is the most common size for SUV cars',
-                                  'C. In this dataset, small is the most common size for Sporty cars',
-                                  'D. None of the above')
+    updateSelectInput(
+      session, inputId = 'cq1', label = 'The Second Graph',
+      choices = c('',
+        'A. In this dataset, midsized is the most common size for 7Pass cars',
+        'B. In this dataset, midsized is the most common size for SUV cars',
+        'C. In this dataset, small is the most common size for Sporty cars',
+        'D. None of the above')
     )
   })
   
   observeEvent(input$next2, {
-    updateSelectInput(session, inputId = 'cq1', label = 'The Third Graph',
-                      choices = c('',
-                                  'A. The use of desipramine is largely associated with the relapse status',
-                                  'B. People who use desipramine as drug treatment are less likely to relapse compared to those who use lithium and placebo',
-                                  'C. The use of placebo is equally associated with the relapse status and non-relapse status',
-                                  'D. The use of lithium is more associated with the non-relapse status than the relapse status')
+    updateSelectInput(
+      session, inputId = 'cq1', label = 'The Third Graph',
+      choices = c('',
+        'A. The use of desipramine is largely associated with the relapse status',
+        'B. People who use desipramine as drug treatment are less likely to 
+        relapse compared to those who use lithium and placebo',
+        'C. The use of placebo is equally associated with the relapse status 
+        and non-relapse status',
+        'D. The use of lithium is more associated with the non-relapse status 
+        than the relapse status')
     )
   })
   
@@ -1089,14 +1059,7 @@ server <- function(input, output, session) {
   observeEvent(input$bsButton2, {
     updateTabItems(session, 'pages', 'exp3')
   })
-  
-  # observeEvent(input$bsButton4, {
-  #   updateTabItems(session, 'games2', 'cha1')
-  # })
-  
-  # observeEvent(input$bsButton6, {
-  #   updateTabItems(session, 'games1', 'cha2')
-  # })
+
   
   observeEvent(input$bsButton7, {
     updateTabItems(session, 'pages', 'references')
@@ -1126,7 +1089,6 @@ server <- function(input, output, session) {
   })
   
   ############ What's Going On in This Graph? ############
-  ############ ############ ############ ############
   #cha2 plot1
   output$cha2plot1 <- renderPlotly({
     x <- list(title = 'Filling')
@@ -1158,7 +1120,6 @@ server <- function(input, output, session) {
       })
     }
   })
-  
   
   #cha2 plot2
   output$cha2plot2 <- renderPlotly({
@@ -1322,7 +1283,6 @@ server <- function(input, output, session) {
     shinyjs::showElement("challengeFeedback")
     shinyjs::showElement('textFeedback')
   })
-  
 }
 
 boastUtils::boastApp(ui = ui, server = server)
