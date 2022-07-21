@@ -201,7 +201,8 @@ ui <- list(
                 bsPopover(
                   id = "quote", 
                   title = "Quotes", 
-                  content = "Check what kind of data you have and whether you need to use quotes or not"
+                  content = "Check what kind of data you have and whether you 
+                  need to use quotes or not"
                 ),
                 selectInput(
                   inputId = "columns", 
@@ -216,145 +217,143 @@ ui <- list(
               ),
               # Neil stopped reformatting lines here
                     #Cars2015 input conditional panel
-                    conditionalPanel('input.inputs == "Cars2015"', 
-                                     tags$ul(
-                                       tags$li('In the Cars2015 Dataset, there are three categorical variables:Type, Drive, and Size'),
-                                       br(),
-                                       tags$li('The Type variables takes on six levels: 7Pass, Hatchback, Sedan, Sporty, SUV, and Wagon'),
-                                       br(),
-                                       tags$li('The Drive variable takes on three levels: AWD, FWD, and RWD'),
-                                       br(),
-                                       tags$li('The Size variable takes on three levels: Large, Midsized, and Small')
-                                     ),
-                                     br(),
-                                     selectInput(inputId = 'XCars2015', 
-                                                 label = 'Select Your First Variable',
-                                                 choices = c('Type', 'Drive', 'Size')),
-                                     selectInput(inputId = 'YCars2015',
-                                                 label = 'Select Your Second Variable',
-                                                 choices = c('Type', 'Drive', 'Size')),
-                                     tags$code('Challenge Question No.1'),
-                                     tags$em(textOutput('Carsquestion')),
-                                     br(),
-                                     tags$code('Challenge Question No.2'),
-                                     tags$em(textOutput('Carsquestion2')),
-                                     br(),
-                                     downloadButton('CarsDownload', 'Download')
-                    ),
+              conditionalPanel(
+                'input.inputs == "Cars2015"', 
+                tags$ul(
+                  tags$li('In the Cars2015 Dataset, there are three categorical 
+                          variables:Type, Drive, and Size'),
+                  br(),
+                  tags$li('The Type variables takes on six levels: 7Pass, 
+                          Hatchback, Sedan, Sporty, SUV, and Wagon'),
+                  br(),
+                  tags$li('The Drive variable takes on three levels: AWD, FWD, 
+                          and RWD'),
+                  br(),
+                  tags$li('The Size variable takes on three levels: Large, 
+                          Midsized, and Small')
+                ),
+                br(),
+                selectInput(
+                  inputId = 'XCars2015', 
+                  label = 'Select Your First Variable',
+                  choices = c('Type', 'Drive', 'Size')),
+                selectInput(
+                  inputId = 'YCars2015',
+                  label = 'Select Your Second Variable',
+                  choices = c('Type', 'Drive', 'Size')),
+                tags$code('Challenge Question No.1'),
+                tags$em(textOutput('Carsquestion')), br(),
+                tags$code('Challenge Question No.2'),
+                tags$em(textOutput('Carsquestion2')),br(),
+                downloadButton('CarsDownload', 'Download')
+              ),
+              #HeroesInformation input conditional panel
+              conditionalPanel(
+                'input.inputs == "HeroesInformation"',
+                tags$ul(
+                  tags$li('In the HeroesInformation Dataset, there are five 
+                          categorical variables: Gender, EyeColor, Race, 
+                          HairColor, and Alignment'), br(),
+                  tags$li('The Gender variables takes on three levels: Male, 
+                          Female, and Other'),br(),
+                  tags$li('The EyeColor variable takes on three levels: blue, 
+                          -, and Other'),br(),
+                  tags$li('The Race variable takes on three levels: -, Human, 
+                          and Other'),br(),
+                  tags$li('The HairColor variable takes on three levels: -, 
+                          Black, and Other'),br(),
+                  tags$li('The Alignment variable takes on three levels: Good, 
+                          Bad, and Other')
+                ),br(),
+                selectInput(
+                  inputId = 'XHeroesInfo', 
+                  label = 'Select Your First Variable',
+                  choices = c('Gender', 'EyeColor', 'Race', 'HairColor', 'Alignment')),
+                selectInput(
+                  inputId = 'YHeroesInfo', 
+                  label = 'Select Your Second Variable',
+                  choices = c('Gender', 'EyeColor', 'Race', 'HairColor', 'Alignment')),
+                tags$code('Challenge Question'),
+                tags$em(textOutput('HIquestion')), br(),br(),
+                downloadButton('HIDownload', 'Download')
+              ),
+              #CompassionateRats input conditional panel
+              conditionalPanel(
+                'input.inputs == "CompassionateRats"',
+                tags$ul(
+                  tags$li('In the CompassionateRats Dataset, there are only 
+                          two variables: Sex and Empathy'),br(),
+                  tags$li('The Sex variable takes on two levels: Male and 
+                          Female'),br(),
+                  tags$li('The Empathy variable takes on two levels: yes 
+                          and no'),br(),
+                  downloadButton('CRDownload', 'Download')
+                )
+              ),
+              #SandwichAnts input conditional panel
+              conditionalPanel(
+                'input.inputs == "SandwichAnts"',
+                tags$ul(
+                  tags$li('In the SandwichAnts Dataset, there are only two 
+                          categorical variables: Filling and Bread'),br(),
+                  tags$li('The Filling variable takes on three levels: 
+                          Vegemite, Peanut Butter, and Ham & Pickles'),br(),
+                  tags$li('The Bread variable takes on four levels: Rye, 
+                          Wholemeal, Multigrain, and White'),br(),
+                  downloadButton('SADownload', 'Download')
+                )
+              ),
+              #CocaineTreatment input conditional panel
+              conditionalPanel(
+                'input.inputs == "CocaineTreatment"',
+                tags$ul(
+                  tags$li('In the CocaineTreatment Dataset, there are only 
+                          two categorical variables: Drug and Relapse'),br(),
+                  tags$li('The Drug variable takes on three levels: 
+                          Desipramine, Lithium, and Placebo'),br(),
+                  tags$li('The Relapse variable takes on two levels: yes 
+                          and no'),br(),
+                  downloadButton('CTDownload', 'Download')
+              ))
                     
-                    #HeroesInformation input conditional panel
-                    conditionalPanel('input.inputs == "HeroesInformation"',
-                                     tags$ul(
-                                       tags$li('In the HeroesInformation Dataset, there are five categorical variables: Gender, EyeColor, Race, HairColor, and Alignment'),
-                                       br(),
-                                       tags$li('The Gender variables takes on three levels: Male, Female, and Other'),
-                                       br(),
-                                       tags$li('The EyeColor variable takes on three levels: blue, -, and Other'),
-                                       br(),
-                                       tags$li('The Race variable takes on three levels: -, Human, and Other'),
-                                       br(),
-                                       tags$li('The HairColor variable takes on three levels: -, Black, and Other'),
-                                       br(),
-                                       tags$li('The Alignment variable takes on three levels: Good, Bad, and Other')
-                                     ),
-                                     br(),
-                                     selectInput(inputId = 'XHeroesInfo', 
-                                                 label = 'Select Your First Variable',
-                                                 choices = c('Gender', 'EyeColor', 'Race', 'HairColor', 'Alignment')),
-                                     selectInput(inputId = 'YHeroesInfo', 
-                                                 label = 'Select Your Second Variable',
-                                                 choices = c('Gender', 'EyeColor', 'Race', 'HairColor', 'Alignment')),
-                                     tags$code('Challenge Question'),
-                                     tags$em(textOutput('HIquestion')),
-                                     br(),
-                                     # tags$code('Challenge Question No.2'),
-                                     # tags$em(textOutput('HIquestion2')),
-                                     br(),
-                                     downloadButton('HIDownload', 'Download')
-                    ),
-                    
-                    #CompassionateRats input conditional panel
-                    conditionalPanel('input.inputs == "CompassionateRats"',
-                                     tags$ul(
-                                       tags$li('In the CompassionateRats Dataset, there are only two variables: Sex and Empathy'),
-                                       br(),
-                                       tags$li('The Sex variable takes on two levels: Male and Female'),
-                                       br(),
-                                       tags$li('The Empathy variable takes on two levels: yes and no'),
-                                       br(),
-                                       downloadButton('CRDownload', 'Download')
-                                     )
-                    ),
-                    
-                    #SandwichAnts input conditional panel
-                    conditionalPanel('input.inputs == "SandwichAnts"',
-                                     tags$ul(
-                                       tags$li('In the SandwichAnts Dataset, there are only two categorical variables: Filling and Bread'),
-                                       br(),
-                                       tags$li('The Filling variable takes on three levels: Vegemite, Peanut Butter, and Ham & Pickles'),
-                                       br(),
-                                       tags$li('The Bread variable takes on four levels: Rye, Wholemeal, Multigrain, and White'),
-                                       br(),
-                                       downloadButton('SADownload', 'Download')
-                                     )
-                    ),
-                    
-                    #CocaineTreatment input conditional panel
-                    conditionalPanel('input.inputs == "CocaineTreatment"',
-                                     tags$ul(
-                                       tags$li('In the CocaineTreatment Dataset, there are only two categorical variables: Drug and Relapse'),
-                                       br(),
-                                       tags$li('The Drug variable takes on three levels: Desipramine, Lithium, and Placebo'),
-                                       br(),
-                                       tags$li('The Relapse variable takes on two levels: yes and no'),
-                                       br(),
-                                       downloadButton('CTDownload', 'Download')
-                                     ))
-                    
-                  ),
-                  
-                  mainPanel(
-                    conditionalPanel('input.inputs == "Test Your Own Dataset"',
-                                     tableOutput("fileOutput"),
-                                     verbatimTextOutput('fileChiSummary')
-                                     
-                    ),
-                    
-                    #Cars2015.csv output conditional panel
-                    conditionalPanel('input.inputs == "Cars2015"',
-                                     tabsetPanel(type = 'tabs',
-                                                 tabPanel('Data Description',
-                                                          br(),
-                                                          box(style = 'warning', 
-                                                              title = 'Dataset Details', 
-                                                              width = 12, 
-                                                              background = 'yellow', 
-                                                              collapsible = TRUE,
-                                                              'Data for a set of 110 new car models in 2015 based on information in the Consumer Reports New
-                                                          Car Buying Guide.'),
-                                                          br(),
-                                                          br(),
-                                                          box(style = 'info', 
-                                                              title = 'Data Source', 
-                                                              width = 12, 
-                                                              background = 'orange', 
-                                                              collapsible = TRUE,
-                                                              tags$a(href = 'http://www.magastack.com/issue/6053-consumer-reports-new-car-buying-guide-february-2015?page=1', 'Consumer Reports 2015 New Car Buying Guide'))
-                                                 ),
-                                                 tabPanel('Graph and Summary Output',
-                                                          br(),
-                                                          tags$li('2D Histogram Output'),
-                                                          plotlyOutput('carsplotly'),
-                                                          bsPopover(id = 'carsplotly', 
-                                                                    title = NULL, 
-                                                                    content = 'z corresponds to number of count in each category. For example, there are 20 sedans have AWD.'),
-                                                          br(),
-                                                          verbatimTextOutput('carssur')
-                                                 )
-                                     )
-                    ),
-                    
-                    #HeroesInformation output conditional panel
+          ),
+          mainPanel(
+            conditionalPanel(
+              'input.inputs == "Test Your Own Dataset"',
+              tableOutput("fileOutput"),
+              verbatimTextOutput('fileChiSummary')
+            ),
+            #Cars2015.csv output conditional panel
+            conditionalPanel(
+              'input.inputs == "Cars2015"',
+              tabsetPanel(
+                type = 'tabs',
+                tabPanel('Data Description',br(),
+                  box(style = 'warning', 
+                    title = 'Dataset Details',width = 12, 
+                    background = 'yellow', collapsible = TRUE,
+                    'Data for a set of 110 new car models in 2015 based on 
+                    information in the Consumer Reports New Car Buying Guide.'),
+                  br(), br(),
+                  box(style = 'info', 
+                    title = 'Data Source',width = 12, 
+                    background = 'orange', collapsible = TRUE,
+                    tags$a(href = 'http://www.magastack.com/issue/6053-consumer
+                           -reports-new-car-buying-guide-february-2015?page=1', 
+                           'Consumer Reports 2015 New Car Buying Guide'))
+                ),
+                tabPanel('Graph and Summary Output',br(),
+                  tags$li('2D Histogram Output'),
+                  plotlyOutput('carsplotly'),
+                  bsPopover(id = 'carsplotly', 
+                    title = NULL, 
+                    content = 'z corresponds to number of count in each 
+                    category. For example, there are 20 sedans have AWD.'),br(),
+                    verbatimTextOutput('carssur')
+                )
+              )
+            ),
+            #HeroesInformation output conditional panel
                     conditionalPanel('input.inputs == "HeroesInformation"',
                                      tabsetPanel(type = 'tabs',
                                                  tabPanel('Data Description',
