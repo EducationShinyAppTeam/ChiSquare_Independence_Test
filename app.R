@@ -354,175 +354,151 @@ ui <- list(
               )
             ),
             #HeroesInformation output conditional panel
-                    conditionalPanel('input.inputs == "HeroesInformation"',
-                                     tabsetPanel(type = 'tabs',
-                                                 tabPanel('Data Description',
-                                                          br(),
-                                                          box(style = 'info',
-                                                              title = 'Dataset Details', 
-                                                              width = 12, 
-                                                              background = 'olive', 
-                                                              collapsible = TRUE,
-                                                              'This data was collected in June/2017 from superherodb and not updated since. Super Heroes have been in popular culture for a long time and now more than ever. 
-                                                          Since its creation, super heroes have not been very diverse, but that is changing rapidly. This dataset aims to provide an overview about heroes and their physical as well as power characteristics, 
-                                                          helping researchers and curious minds identify trends and patterns.'),
-                                                          br(),
-                                                          br(),
-                                                          box(style = 'info', 
-                                                              title = 'Data Source', 
-                                                              width = 12, 
-                                                              background = 'teal', 
-                                                              collapsible = TRUE,
-                                                              'This data was scraped from SuperHeroDb.')
-                                                 ),
-                                                 tabPanel('Graph and Summary Output',
-                                                          br(),
-                                                          tags$li('2D Histogram Output'),
-                                                          plotlyOutput('hiplotly1'),
-                                                          bsPopover('hiplotly1',
-                                                                    title = NULL, 
-                                                                    content = 'z corresponds to number of count in each category. For example, there are 165 males have bad alignment.'),
-                                                          br(),
-                                                          verbatimTextOutput('hisur')
-                                                 ))
-                    ),
-                    
-                    #SandwichAnts output conditional panel
-                    conditionalPanel('input.inputs == "SandwichAnts"',
-                                     tabsetPanel(type = 'tabs',
-                                                 tabPanel('Data Description',
-                                                          br(),
-                                                          box(style = 'info', 
-                                                              title = 'Experiment Details', 
-                                                              width = 12, 
-                                                              background = 'yellow', 
-                                                              collapsible = TRUE,
-                                                              'As young students, Dominic Kelly and his friends enjoyed watching ants gather on pieces of sandwiches.
-                                                          Later, as a university student, Dominic decided to study this with a more formal experiment.
-                                                          He chose three types of sandwich fillings (vegemite, peanut butter, and ham & pickles), four types
-                                                          of bread (multigrain, rye, white, and wholemeal), and put butter on some of the sandwiches.
-                                                          To conduct the experiment he randomly chose a sandwich, broke off a piece, and left it on the
-                                                          ground near an ant hill. After several minutes he placed a jar over the sandwich bit and counted the
-                                                          number of ants. He repeated the process, allowing time for ants to return to the hill after each trial,
-                                                          until he had two samples for each combination of the three factors.'),
-                                                          br(),
-                                                          br(),
-                                                          box(style = 'info', 
-                                                              title = 'Data Source', 
-                                                              width = 12, 
-                                                              background = 'orange', 
-                                                              collapsible = TRUE,
-                                                              tags$p('Margaret Mackisack, "Favourite Experiments: An Addendum to What is the Use of Experiments
-                                                          Conducted by Statistics Students?"', 
-                                                          tags$a(href = 'https://ww2.amstat.org/publications/jse/v2n1/mackisack.supp.html', 'Journal of Statistics Education (1994)')))
-                                                 ),
-                                                 tabPanel('Graph and Summary Output',
-                                                          br(),
-                                                          tags$li('2D Histogram Output'),
-                                                          plotlyOutput('saplotly1'),
-                                                          bsPopover(id = 'saplotly1', 
-                                                                    title = NULL, 
-                                                                    content = 'z corresponds to number of count in each category. For example, there are 2 white bread with peanut butter filling.'),
-                                                          br(),
-                                                          plotlyOutput('saplotly2'),
-                                                          br(),
-                                                          verbatimTextOutput('sasur')
-                                                 )
-                                     )
-                    ),
-                    
-                    #CompassionateRats output conditional panel
-                    conditionalPanel('input.inputs == "CompassionateRats"',
-                                     tabsetPanel(type = 'tabs',
-                                                 tabPanel('Data Description', 
-                                                          br(),
-                                                          box(style = 'info', 
-                                                              title = 'Experiment Details', 
-                                                              width = 12, 
-                                                              background = 'light-blue',
-                                                              collapsible = TRUE,
-                                                              'In a recent study, some rats showed compassion by freeing another trapped rat, even when chocolate
-                                                          served as a distraction and even when the rats would then have to share the chocolate with their freed
-                                                          companion.',
-                                                          br()),
-                                                          br(),
-                                                          br(),
-                                                          box(style = 'info', 
-                                                              title = 'Data Source', 
-                                                              width = 12, 
-                                                              background = 'blue', 
-                                                              collapsible = TRUE,
-                                                              'Bartal I.B., Decety J., and Mason P., "Empathy and Pro-Social Behavior in Rats," Science, 2011;
-                                                          224(6061):1427-1430.')
-                                                 ),
-                                                 tabPanel('Graph and Summary Output',
-                                                          br(),
-                                                          tags$li('2D Histogram Output'),
-                                                          plotlyOutput('crplotly1'),
-                                                          bsPopover(id = 'crplotly1', 
-                                                                    title = NULL, 
-                                                                    content = 'z corresponds to number of count in each category. For example, there are 6 female rats show signs of compassion.'),
-                                                          br(),
-                                                          plotlyOutput('crplotly2'),
-                                                          br(),
-                                                          verbatimTextOutput('crsur')
-                                                 ))
-                    ),
-                    
-                    #CocaineTreatment output conditional panel
-                    conditionalPanel('input.inputs == "CocaineTreatment"',
-                                     tabsetPanel(type = 'tabs',
-                                                 tabPanel('Data Description',
-                                                          br(),
-                                                          br(),
-                                                          box(style = 'info', 
-                                                              title = 'Experiment Details',
-                                                              width = 12, 
-                                                              background = 'light-blue', 
-                                                              collapsible = TRUE,
-                                                              'Data from an experiment to investigate the effectiveness of the two drugs, desipramine and lithium,
-                                                          in the treatment of cocaine addiction. Subjects (cocaine addicts seeking treatment) were randomly
-                                                          assigned to take one of the treatment drugs or a placebo. The response variable is whether or not
-                                                          the subject relapsed (went back to using cocaine) after the treatment.',
-                                                          br(),
-                                                          br()),
-                                                          br(),
-                                                          br(),
-                                                          box(style = 'info', 
-                                                              title = 'Data Source', 
-                                                              width = 12, 
-                                                              background = 'blue', 
-                                                              collapsible = TRUE,
-                                                              'Gawin, F., et.al., "Desipramine Facilitation of Initial Cocaine Abstinence",
-                                                          Archives of General Psychiatry, 1989; 46(2): 117 - 121.'
-                                                          )
-                                                          
-                                                 ),
-                                                 
-                                                 tabPanel('Graph and Summary Output',
-                                                          br(),
-                                                          tags$li('2D Histogram Output'),
-                                                          plotlyOutput('plotly1'),
-                                                          bsPopover(id = 'plotly1', 
-                                                                    title = NULL, 
-                                                                    content = 'z corresponds to number of count in each category. For example, there are 10 patients relapsed after using desipramine as drug treatment.', placement = 'right'),
-                                                          br(),
-                                                          plotlyOutput('stack1'),
-                                                          br(),
-                                                          verbatimTextOutput('chiSqrSummary1'))
-                                     )
-                    )
-                    
-                    
-                  )
+            conditionalPanel('input.inputs == "HeroesInformation"',
+              tabsetPanel(
+                type = 'tabs',
+                tabPanel('Data Description',br(),
+                  box(style = 'info',
+                    title = 'Dataset Details', width = 12, 
+                    background = 'olive', collapsible = TRUE,
+                    'This data was collected in June/2017 from superherodb and 
+                    not updated since. Super Heroes have been in popular culture 
+                    for a long time and now more than ever. Since its creation, 
+                    super heroes have not been very diverse, but that is 
+                    changing rapidly. This dataset aims to provide an overview 
+                    about heroes and their physical as well as power 
+                    characteristics, helping researchers and curious minds 
+                    identify trends and patterns.'),br(),br(),
+                   box(style = 'info', 
+                    title = 'Data Source', width = 12, 
+                    background = 'teal', collapsible = TRUE,
+                    'This data was scraped from SuperHeroDb.')
                 ),
-                div(style = "text-align: center", 
-                    bsButton(inputId = "bsButton2", 
-                             label = "Play !",
-                             icon = icon('bolt'), 
-                             size = 'large'))
+                tabPanel('Graph and Summary Output',br(),
+                  tags$li('2D Histogram Output'),
+                  plotlyOutput('hiplotly1'),
+                  bsPopover('hiplotly1',
+                    title = NULL, 
+                    content = 'z corresponds to number of count in each
+                    category. For example, there are 165 males have bad 
+                    alignment.'), br(),
+                  verbatimTextOutput('hisur')
+                )
+              )
+            ),
+            #SandwichAnts output conditional panel
+            conditionalPanel('input.inputs == "SandwichAnts"',
+              tabsetPanel(type = 'tabs',
+                tabPanel('Data Description',br(),
+                  box(style = 'info', 
+                    title = 'Experiment Details', width = 12, 
+                    background = 'yellow', collapsible = TRUE,
+                    'As young students, Dominic Kelly and his friends enjoyed 
+                    watching ants gather on pieces of sandwiches. Later, as a 
+                    university student, Dominic decided to study this with a 
+                    formal experiment. He chose three types of sandwich 
+                    fillings (vegemite, peanut butter, and ham & pickles), 
+                    four types of bread (multigrain, rye, white, and wholemeal), 
+                    and put butter on some of the sandwiches. To conduct the 
+                    experiment he randomly chose a sandwich, broke off a piece, 
+                    and left it on the ground near an ant hill. After several 
+                    minutes he placed a jar over the sandwich bit and counted 
+                    the number of ants. He repeated the process, allowing time 
+                    for ants to return to the hill after each trial, until he 
+                    had two samples for each combination of the three factors.'),
+                    br(),br(),
+                  box(style = 'info', 
+                    title = 'Data Source', width = 12, 
+                    background = 'orange', collapsible = TRUE,
+                    tags$p('Margaret Mackisack, "Favourite Experiments: An 
+                    Addendum to What is the Use of Experiments Conducted by 
+                    Statistics Students?"', 
+                    tags$a(href = 'https://ww2.amstat.org/publications/jse/v2n1/mackisack.supp.html', 'Journal of Statistics Education (1994)')))
+                ),
+                tabPanel('Graph and Summary Output', br(),
+                  tags$li('2D Histogram Output'),
+                  plotlyOutput('saplotly1'),
+                  bsPopover(id = 'saplotly1', title = NULL, 
+                    content = 'z corresponds to number of count in each 
+                    category. For example, there are 2 white bread with peanut 
+                    butter filling.'), br(),
+                    plotlyOutput('saplotly2'),br(),
+                    verbatimTextOutput('sasur')
+                )
+              )
+            ),
+            #CompassionateRats output conditional panel
+            conditionalPanel('input.inputs == "CompassionateRats"',
+              tabsetPanel(type = 'tabs',
+                tabPanel('Data Description', br(),
+                  box(style = 'info', 
+                    title = 'Experiment Details', width = 12, 
+                    background = 'light-blue',collapsible = TRUE,
+                    'In a recent study, some rats showed compassion by freeing 
+                    trapped rat, even when chocolate served as a distraction 
+                    and even when the rats would then have to share the 
+                    chocolate with their freed companion.',
+                    br()), br(), br(),
+                  box(style = 'info', 
+                    title = 'Data Source', width = 12, 
+                    background = 'blue', collapsible = TRUE,
+                    'Bartal I.B., Decety J., and Mason P., "Empathy and 
+                    Pro-Social Behavior in Rats," Science, 2011; 
+                    224(6061):1427-1430.')
+                ),
+                tabPanel('Graph and Summary Output', br(),
+                  tags$li('2D Histogram Output'),
+                  plotlyOutput('crplotly1'),
+                  bsPopover(id = 'crplotly1', 
+                    title = NULL, 
+                    content = 'z corresponds to number of count in each 
+                    category. For example, there are 6 female rats show signs 
+                    of compassion.'), br(),
+                  plotlyOutput('crplotly2'),br(),
+                  verbatimTextOutput('crsur')
+                )
+              )
+            ),
+            #CocaineTreatment output conditional panel
+            conditionalPanel('input.inputs == "CocaineTreatment"',
+              tabsetPanel(type = 'tabs',
+                tabPanel('Data Description', br(), br(),
+                  box(style = 'info', 
+                    title = 'Experiment Details', width = 12, 
+                    background = 'light-blue', collapsible = TRUE,
+                    'Data from an experiment to investigate the effectiveness 
+                    of the two drugs, desipramine and lithium, in the 
+                    treatment of cocaine addiction. Subjects (cocaine addicts 
+                    seeking treatment) were randomly assigned to take one of 
+                    the treatment drugs or a placebo. The response variable is 
+                    whether or not the subject relapsed (went back to using 
+                    cocaine) after the treatment.',br(), br()), br(), br(),
+                  box(style = 'info', 
+                    title = 'Data Source', width = 12, 
+                      background = 'blue', collapsible = TRUE,
+                      'Gawin, F., et.al., "Desipramine Facilitation of Initial 
+                      Cocaine Abstinence", Archives of General Psychiatry, 
+                    1989; 46(2): 117 - 121.')
+                ),
+                tabPanel('Graph and Summary Output',br(),
+                  tags$li('2D Histogram Output'),
+                  plotlyOutput('plotly1'),
+                  bsPopover(id = 'plotly1', 
+                    title = NULL, 
+                    content = 'z corresponds to number of count in each 
+                    category. For example, there are 10 patients relapsed 
+                    after using desipramine as drug treatment.', 
+                    placement = 'right'),br(),
+                  plotlyOutput('stack1'),br(),
+                  verbatimTextOutput('chiSqrSummary1'))
+              )
+            )
+          )
         ),
-        
+        div(style = "text-align: center", 
+          bsButton(inputId = "bsButton2", 
+            label = "Play !", icon = icon('bolt'), size = 'large'))
+        ),
         #Game page
         tabItem(
           tabName = "instr2",
@@ -570,12 +546,12 @@ ui <- list(
                     label = 'Next', 
                     size = "large"))
               ),
-                                         
-                                         conditionalPanel('input.graphId == "The Third Graph"',
-                                                          selectInput('cq3', label = 'Your Interpretation',
-                                                                      choices = c('',
-                                                                                  'A. The use of desipramine is largely associated with the relapse status',
-                                                                                  'B. People who use desipramine as drug treatment are less likely to relapse compared to those who use lithium and placebo',
+              conditionalPanel('input.graphId == "The Third Graph"',
+                selectInput('cq3', label = 'Your Interpretation',
+                  choices = c('',
+                    'A. The use of desipramine is largely associated with the
+                    relapse status',
+                    'B. People who use desipramine as drug treatment are less likely to relapse compared to those who use lithium and placebo',
                                                                                   'C. The use of placebo is equally associated with the relapse status and non-relapse status',
                                                                                   'D. The use of lithium is more associated with the non-relapse status than the relapse status'),
                                                                       selected = ''),
