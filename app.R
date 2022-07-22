@@ -35,7 +35,7 @@ ui <- list(
         menuItem("Overview", tabName = "overview", icon = icon("tachometer-alt")),
         menuItem("Prerequisites", tabName = "prerequisite", icon = icon("book")),
         menuItem("Explore", tabName = "exp1", icon = icon('wpexplorer')),
-        menuItem("Game", tabName = "instr2", icon = icon('gamepad')),
+        menuItem("Challenge", tabName = "instr2", icon = icon('cogs')),
         # menuItem("Challenge", tabName = 'instr1', icon = icon('cogs')),
         menuItem("References", tabName = "references", icon = icon("leanpub"))
       ),
@@ -112,7 +112,6 @@ ui <- list(
           h4(tags$li('Compute the value for the chi-square statistic using:')),
           div(style = "font-size: 1.6em", 
               helpText('$${X^2} = {\\sum{{(Observed - Expected)^2}\\over {Expected}}}$$')),
-          #tags$img(src = 'chi_sqr_stats_2.jpg', width = "384px", height = "100px", style = "text-align: center"),
           h4('Find a p-value using the upper tail of a chi-square distribution with (r-1)(c-1) degrees of freedom or use simulation under the null.'),
           h4('The chi-square distribution is appropriate if the expected count is at least five in each cell.'),
           br(),
@@ -215,8 +214,7 @@ ui <- list(
                   choices = NULL
                 )
               ),
-              # Neil stopped reformatting lines here
-                    #Cars2015 input conditional panel
+              #Cars2015 input conditional panel
               conditionalPanel(
                 'input.inputs == "Cars2015"', 
                 tags$ul(
@@ -511,9 +509,12 @@ ui <- list(
               h4("Interpreting the Graph"),
               selectInput(inputId = 'graphId', 
                 label = 'Select Your Graph',
-                choices = c('The First Graph', 'The Second Graph', 'The Third Graph', 'The Fourth Graph'),
-                selected = 'The First Graph'),
-              conditionalPanel('input.graphId == "The First Graph"',
+                choices = c('Sandwich and Ants', 
+                            'Cars', 
+                            'Drug Efficacy', 
+                            'Compassionate Rats'),
+                selected = 'Sandwich and Ants'),
+              conditionalPanel('input.graphId == "Sandwich and Ants"',
                 selectInput(inputId = 'cq1', 
                   label = 'Your Interpretation',
                   choices = c('',
@@ -527,13 +528,10 @@ ui <- list(
                   bsButton(inputId = 'cq1check1', 
                     label = 'Check Answer',  
                     size = "large"), 
-                  # bsButton(inputId = 'next1', 
-                  #   label = 'Next', 
-                  #   size = "large")
                   )
               ),
               conditionalPanel(
-                'input.graphId == "The Second Graph"',
+                'input.graphId == "Cars"',
                 selectInput('cq2', label = 'Your Interpretation',
                   choices = c('',
                     'A. In this dataset, midsized is the most common size for 7Pass cars',
@@ -547,12 +545,9 @@ ui <- list(
                   bsButton(inputId = 'cq1check2', 
                     label = 'Check', 
                     size = "large"), 
-                  # bsButton(inputId = 'next2', 
-                  #   label = 'Next', 
-                  #   size = "large")
                   )
               ),
-              conditionalPanel('input.graphId == "The Third Graph"',
+              conditionalPanel('input.graphId == "Drug Efficacy"',
                 selectInput('cq3', label = 'Your Interpretation',
                   choices = c('',
                     'A. The use of desipramine is largely associated with the
@@ -569,11 +564,9 @@ ui <- list(
                   bsButton(inputId = 'cq1check3', 
                     label = 'Check', 
                     size = "large"),
-                  # bsButton(inputId = 'next3', 
-                  #   label = 'Next', size = "large")
                 )
               ),
-              conditionalPanel('input.graphId == "The Fourth Graph"',
+              conditionalPanel('input.graphId == "Compassionate Rats"',
                 selectInput('cq4', label = 'Your Interpretation',
                   choices = c('',
                     'A. All of the female rates showed empathy',
@@ -583,35 +576,32 @@ ui <- list(
                 div(style = 'text-align: left',
                 bsButton(inputId = 'cq1check4', 
                   label = 'Check', size = "large"), 
-                # bsButton(inputId = 'next4', 
-                #   label = 'Next', 
-                #   size = "large")
                 )
               )
             ),
             mainPanel(
-              conditionalPanel('input.graphId == "The First Graph"',
+              conditionalPanel('input.graphId == "Sandwich and Ants"',
                 plotlyOutput('cha2plot1'),
                 conditionalPanel('input.cq1check1 != 0',
                   htmlOutput('cq1ans1'),
                   uiOutput('cq1feed1')
                 )
               ),
-              conditionalPanel('input.graphId == "The Second Graph"',
+              conditionalPanel('input.graphId == "Cars"',
                 plotlyOutput('cha2plot2'),
                 conditionalPanel('input.cq1check2 != 0',
                   htmlOutput('cq1ans2'),
                   uiOutput('cq1feed2')
                 )
               ),
-              conditionalPanel('input.graphId == "The Third Graph"',
+              conditionalPanel('input.graphId == "Drug Efficacy"',
                 plotlyOutput('cha2plot3'),
                 conditionalPanel('input.cq1check3 != 0',
                   htmlOutput('cq1ans3'),
                   uiOutput('cq1feed3')
                 )
               ),
-              conditionalPanel('input.graphId == "The Fourth Graph"',
+              conditionalPanel('input.graphId == "Compassionate Rats"',
                 plotlyOutput('cha2plot4'),
                 conditionalPanel('input.cq1check4 != 0',
                   htmlOutput('cq1ans4'),
@@ -620,12 +610,10 @@ ui <- list(
               )
             )
           )
-          # div(style = "text-align: left", 
-          #   bsButton(inputId = "bsButton8", 
-          #     label = "Challenge!", icon = icon('bolt'), size = "large"))
         ),
         tabPanel (
           title = "Quiz",
+          br(),
           fluidRow(
             box(width = 12, 
                 style = 'color: #FFFFFF; background-color: #ffa500',
@@ -643,40 +631,9 @@ ui <- list(
               actionButton(inputId = 'submitX', 
                            label = 'Check Answer',size = "small"),
               actionButton(inputId = 'nextX', 
-                           label = 'Next', size = "small")),
-          div(style = "text-align: center", 
-              bsButton(inputId = "bsButton7", 
-                       label = "Continue!",icon = icon('bolt'), size = "large"))
-          
+                           label = 'Next', size = "small"))
         )
-        
-        
         ) ),
-        #Challenge page
-        tabItem(
-          tabName = "instr1"
-              # fluidRow(
-              #   box(width = 12, 
-              #   style = 'color: #FFFFFF; background-color: #ffa500',
-              #   htmlOutput('questionCha'))
-              # ),
-              # fluidRow(
-              #   box(width = 12, 
-              #     style = 'color: #000000; background-color: #ffa500',
-              #     htmlOutput('choiceCha'))
-              # ),
-              # conditionalPanel('input.submitX != 0',
-              #   htmlOutput('challengeFeedback'),
-              #   htmlOutput('textFeedback')),br(),
-              # div(style = "text-align: left", 
-              #   actionButton(inputId = 'submitX', 
-              #     label = 'Check Answer',size = "small"),
-              #   actionButton(inputId = 'nextX', 
-              #     label = 'Next', size = "small")),
-              # div(style = "text-align: center", 
-              #   bsButton(inputId = "bsButton7", 
-              #     label = "Continue!",icon = icon('bolt'), size = "large"))
-        ),
         #References page
         tabItem(
           tabName = "references",
@@ -1062,31 +1019,6 @@ server <- function(input, output, session) {
   })
   
   ############ Update Events ############
-  #set all the buttons
-  # observeEvent(input$next1, {
-  #   updateSelectInput(
-  #     session, inputId = 'cq1', label = 'The Second Graph',
-  #     choices = c('',
-  #       'A. In this dataset, midsized is the most common size for 7Pass cars',
-  #       'B. In this dataset, midsized is the most common size for SUV cars',
-  #       'C. In this dataset, small is the most common size for Sporty cars',
-  #       'D. None of the above')
-  #   )
-  # })
-  
-  # observeEvent(input$next2, {
-  #   updateSelectInput(
-  #     session, inputId = 'cq1', label = 'The Third Graph',
-  #     choices = c('',
-  #       'A. The use of desipramine is largely associated with the relapse status',
-  #       'B. People who use desipramine as drug treatment are less likely to 
-  #       relapse compared to those who use lithium and placebo',
-  #       'C. The use of placebo is equally associated with the relapse status 
-  #       and non-relapse status',
-  #       'D. The use of lithium is more associated with the non-relapse status 
-  #       than the relapse status')
-  #   )
-  # })
   
   observeEvent(input$bsButton1, {
     updateTabItems(session, 'pages', 'prerequisite')
@@ -1097,32 +1029,11 @@ server <- function(input, output, session) {
   })
 
   
-  observeEvent(input$bsButton7, {
-    updateTabItems(session, 'pages', 'references')
-  })
-  
-  # observeEvent(input$bsButton8, {
-  #   updateTabItems(session, 'pages', 'instr1')
+  # observeEvent(input$bsButton7, {
+  #   updateTabItems(session, 'pages', 'references')
   # })
   
-  # observeEvent(input$next1, {
-  #   updateTabItems(session, 'pages', 'cha2_2')
-  #   updateSelectInput(session, inputId = 'graphId', selected = 'The Second Graph')
-  # })
-  
-  # observeEvent(input$next2, {
-  #   updateTabItems(session, 'pages', 'cha2_3')
-  #   updateSelectInput(session, inputId = 'graphId', selected = 'The Third Graph')
-  # })
   cm
-  # observeEvent(input$next3, {
-  #   updateTabItems(session, 'pages', 'cha2_4')
-  #   updateSelectInput(session, inputId = 'graphId', selected = 'The Fourth Graph')
-  # })
-  
-  # observeEvent(input$next4, {
-  #   updateTabItems(session, 'pages', 'instr1')
-  # })
   
   ############ What's Going On in This Graph? ############
   #cha2 plot1
