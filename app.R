@@ -502,6 +502,9 @@ ui <- list(
         #Game page
         tabItem(
           tabName = "instr2",
+          tabsetPanel(
+            tabPanel(
+              title="Interpreting Graphs",
           sidebarLayout(
             sidebarPanel(
               h4("Interpreting the Graph"),
@@ -611,35 +614,63 @@ ui <- list(
                 )
               )
             )
-          ),
-          div(style = "text-align: left", 
-            bsButton(inputId = "bsButton8", 
-              label = "Challenge!", icon = icon('bolt'), size = "large"))
-          ),
-        #Challenge page
-        tabItem(
-          tabName = "instr1",
-              fluidRow(
-                box(width = 12, 
+          )
+          # div(style = "text-align: left", 
+          #   bsButton(inputId = "bsButton8", 
+          #     label = "Challenge!", icon = icon('bolt'), size = "large"))
+        ),
+        tabPanel (
+          title = "Quiz",
+          fluidRow(
+            box(width = 12, 
                 style = 'color: #FFFFFF; background-color: #ffa500',
                 htmlOutput('questionCha'))
-              ),
-              fluidRow(
-                box(width = 12, 
-                  style = 'color: #000000; background-color: #ffa500',
-                  htmlOutput('choiceCha'))
-              ),
-              conditionalPanel('input.submitX != 0',
-                htmlOutput('challengeFeedback'),
-                htmlOutput('textFeedback')),br(),
-              div(style = "text-align: left", 
-                actionButton(inputId = 'submitX', 
-                  label = 'Check Answer',size = "small"),
-                actionButton(inputId = 'nextX', 
-                  label = 'Next', size = "small")),
-              div(style = "text-align: center", 
-                bsButton(inputId = "bsButton7", 
-                  label = "Continue!",icon = icon('bolt'), size = "large"))
+          ),
+          fluidRow(
+            box(width = 12, 
+                style = 'color: #000000; background-color: #ffa500',
+                htmlOutput('choiceCha'))
+          ),
+          conditionalPanel('input.submitX != 0',
+                           htmlOutput('challengeFeedback'),
+                           htmlOutput('textFeedback')),br(),
+          div(style = "text-align: left", 
+              actionButton(inputId = 'submitX', 
+                           label = 'Check Answer',size = "small"),
+              actionButton(inputId = 'nextX', 
+                           label = 'Next', size = "small")),
+          div(style = "text-align: center", 
+              bsButton(inputId = "bsButton7", 
+                       label = "Continue!",icon = icon('bolt'), size = "large"))
+          
+        )
+        
+        
+        ) ),
+        #Challenge page
+        tabItem(
+          tabName = "instr1"
+              # fluidRow(
+              #   box(width = 12, 
+              #   style = 'color: #FFFFFF; background-color: #ffa500',
+              #   htmlOutput('questionCha'))
+              # ),
+              # fluidRow(
+              #   box(width = 12, 
+              #     style = 'color: #000000; background-color: #ffa500',
+              #     htmlOutput('choiceCha'))
+              # ),
+              # conditionalPanel('input.submitX != 0',
+              #   htmlOutput('challengeFeedback'),
+              #   htmlOutput('textFeedback')),br(),
+              # div(style = "text-align: left", 
+              #   actionButton(inputId = 'submitX', 
+              #     label = 'Check Answer',size = "small"),
+              #   actionButton(inputId = 'nextX', 
+              #     label = 'Next', size = "small")),
+              # div(style = "text-align: center", 
+              #   bsButton(inputId = "bsButton7", 
+              #     label = "Continue!",icon = icon('bolt'), size = "large"))
         ),
         #References page
         tabItem(
@@ -1065,9 +1096,9 @@ server <- function(input, output, session) {
     updateTabItems(session, 'pages', 'references')
   })
   
-  observeEvent(input$bsButton8, {
-    updateTabItems(session, 'pages', 'instr1')
-  })
+  # observeEvent(input$bsButton8, {
+  #   updateTabItems(session, 'pages', 'instr1')
+  # })
   
   observeEvent(input$next1, {
     updateTabItems(session, 'pages', 'cha2_2')
