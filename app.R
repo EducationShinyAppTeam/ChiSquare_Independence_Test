@@ -36,7 +36,7 @@ ui <- list(
         menuItem("Prerequisites", tabName = "prerequisite", icon = icon("book")),
         menuItem("Explore", tabName = "exp1", icon = icon('wpexplorer')),
         menuItem("Game", tabName = "instr2", icon = icon('gamepad')),
-        menuItem("Challenge", tabName = 'instr1', icon = icon('cogs')),
+        # menuItem("Challenge", tabName = 'instr1', icon = icon('cogs')),
         menuItem("References", tabName = "references", icon = icon("leanpub"))
       ),
       tags$div(
@@ -505,6 +505,7 @@ ui <- list(
           tabsetPanel(
             tabPanel(
               title="Interpreting Graphs",
+              br(),
           sidebarLayout(
             sidebarPanel(
               h4("Interpreting the Graph"),
@@ -526,9 +527,10 @@ ui <- list(
                   bsButton(inputId = 'cq1check1', 
                     label = 'Check Answer',  
                     size = "large"), 
-                  bsButton(inputId = 'next1', 
-                    label = 'Next', 
-                    size = "large"))
+                  # bsButton(inputId = 'next1', 
+                  #   label = 'Next', 
+                  #   size = "large")
+                  )
               ),
               conditionalPanel(
                 'input.graphId == "The Second Graph"',
@@ -545,9 +547,10 @@ ui <- list(
                   bsButton(inputId = 'cq1check2', 
                     label = 'Check', 
                     size = "large"), 
-                  bsButton(inputId = 'next2', 
-                    label = 'Next', 
-                    size = "large"))
+                  # bsButton(inputId = 'next2', 
+                  #   label = 'Next', 
+                  #   size = "large")
+                  )
               ),
               conditionalPanel('input.graphId == "The Third Graph"',
                 selectInput('cq3', label = 'Your Interpretation',
@@ -566,8 +569,9 @@ ui <- list(
                   bsButton(inputId = 'cq1check3', 
                     label = 'Check', 
                     size = "large"),
-                  bsButton(inputId = 'next3', 
-                    label = 'Next', size = "large"))
+                  # bsButton(inputId = 'next3', 
+                  #   label = 'Next', size = "large")
+                )
               ),
               conditionalPanel('input.graphId == "The Fourth Graph"',
                 selectInput('cq4', label = 'Your Interpretation',
@@ -579,9 +583,10 @@ ui <- list(
                 div(style = 'text-align: left',
                 bsButton(inputId = 'cq1check4', 
                   label = 'Check', size = "large"), 
-                bsButton(inputId = 'next4', 
-                  label = 'Next', 
-                  size = "large"))
+                # bsButton(inputId = 'next4', 
+                #   label = 'Next', 
+                #   size = "large")
+                )
               )
             ),
             mainPanel(
@@ -1058,30 +1063,30 @@ server <- function(input, output, session) {
   
   ############ Update Events ############
   #set all the buttons
-  observeEvent(input$next1, {
-    updateSelectInput(
-      session, inputId = 'cq1', label = 'The Second Graph',
-      choices = c('',
-        'A. In this dataset, midsized is the most common size for 7Pass cars',
-        'B. In this dataset, midsized is the most common size for SUV cars',
-        'C. In this dataset, small is the most common size for Sporty cars',
-        'D. None of the above')
-    )
-  })
+  # observeEvent(input$next1, {
+  #   updateSelectInput(
+  #     session, inputId = 'cq1', label = 'The Second Graph',
+  #     choices = c('',
+  #       'A. In this dataset, midsized is the most common size for 7Pass cars',
+  #       'B. In this dataset, midsized is the most common size for SUV cars',
+  #       'C. In this dataset, small is the most common size for Sporty cars',
+  #       'D. None of the above')
+  #   )
+  # })
   
-  observeEvent(input$next2, {
-    updateSelectInput(
-      session, inputId = 'cq1', label = 'The Third Graph',
-      choices = c('',
-        'A. The use of desipramine is largely associated with the relapse status',
-        'B. People who use desipramine as drug treatment are less likely to 
-        relapse compared to those who use lithium and placebo',
-        'C. The use of placebo is equally associated with the relapse status 
-        and non-relapse status',
-        'D. The use of lithium is more associated with the non-relapse status 
-        than the relapse status')
-    )
-  })
+  # observeEvent(input$next2, {
+  #   updateSelectInput(
+  #     session, inputId = 'cq1', label = 'The Third Graph',
+  #     choices = c('',
+  #       'A. The use of desipramine is largely associated with the relapse status',
+  #       'B. People who use desipramine as drug treatment are less likely to 
+  #       relapse compared to those who use lithium and placebo',
+  #       'C. The use of placebo is equally associated with the relapse status 
+  #       and non-relapse status',
+  #       'D. The use of lithium is more associated with the non-relapse status 
+  #       than the relapse status')
+  #   )
+  # })
   
   observeEvent(input$bsButton1, {
     updateTabItems(session, 'pages', 'prerequisite')
@@ -1100,20 +1105,20 @@ server <- function(input, output, session) {
   #   updateTabItems(session, 'pages', 'instr1')
   # })
   
-  observeEvent(input$next1, {
-    updateTabItems(session, 'pages', 'cha2_2')
-    updateSelectInput(session, inputId = 'graphId', selected = 'The Second Graph')
-  })
+  # observeEvent(input$next1, {
+  #   updateTabItems(session, 'pages', 'cha2_2')
+  #   updateSelectInput(session, inputId = 'graphId', selected = 'The Second Graph')
+  # })
   
-  observeEvent(input$next2, {
-    updateTabItems(session, 'pages', 'cha2_3')
-    updateSelectInput(session, inputId = 'graphId', selected = 'The Third Graph')
-  })
-  
-  observeEvent(input$next3, {
-    updateTabItems(session, 'pages', 'cha2_4')
-    updateSelectInput(session, inputId = 'graphId', selected = 'The Fourth Graph')
-  })
+  # observeEvent(input$next2, {
+  #   updateTabItems(session, 'pages', 'cha2_3')
+  #   updateSelectInput(session, inputId = 'graphId', selected = 'The Third Graph')
+  # })
+  cm
+  # observeEvent(input$next3, {
+  #   updateTabItems(session, 'pages', 'cha2_4')
+  #   updateSelectInput(session, inputId = 'graphId', selected = 'The Fourth Graph')
+  # })
   
   # observeEvent(input$next4, {
   #   updateTabItems(session, 'pages', 'instr1')
