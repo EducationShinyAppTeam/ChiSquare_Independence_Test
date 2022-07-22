@@ -1115,9 +1115,9 @@ server <- function(input, output, session) {
     updateSelectInput(session, inputId = 'graphId', selected = 'The Fourth Graph')
   })
   
-  observeEvent(input$next4, {
-    updateTabItems(session, 'pages', 'instr1')
-  })
+  # observeEvent(input$next4, {
+  #   updateTabItems(session, 'pages', 'instr1')
+  # })
   
   ############ What's Going On in This Graph? ############
   #cha2 plot1
