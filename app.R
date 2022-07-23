@@ -515,14 +515,15 @@ ui <- list(
                             'Compassionate Rats'),
                 selected = 'Sandwich and Ants'),
               conditionalPanel('input.graphId == "Sandwich and Ants"',
-                selectInput(inputId = 'cq1', 
+                radioButtons(
+                  inputId = 'cq1', 
                   label = 'Your Interpretation',
-                  choices = c('',
+                  choices = c(
                     'A. The x-axis represents different sandwich fillings',
                     'B. The y-axis represents different sandwich bread',
                     'C. The color bar represents how many sandwiches are in each Bread & Filling combination',
                     'D. A, B, and C'),
-                  selected = ''),
+                  selected = character(0)),
                 br(),
                 div(style = 'text-align: left', 
                   bsButton(inputId = 'cq1check1', 
@@ -868,12 +869,6 @@ server <- function(input, output, session) {
   
   val <- reactiveValues()
   
-  # #Challenge Question No.2 for HeroesInformation
-  # output$HIquestion2 <- renderText({
-  #   val$num <- sample(4:13, 1, replace = FALSE)
-  #   HIq2 <- qbank$Question[val$num]
-  #   HIq2
-  # })
   
   #2D histogram for HeroesInformation
   output$hiplotly1 <- renderPlotly ({
@@ -1029,9 +1024,6 @@ server <- function(input, output, session) {
   })
 
   
-  # observeEvent(input$bsButton7, {
-  #   updateTabItems(session, 'pages', 'references')
-  # })
   
   cm
   
@@ -1046,7 +1038,12 @@ server <- function(input, output, session) {
   })
   
   observeEvent(input$cq1check1,{
-    if(input$cq1 == 'D. A, B, and C') {
+    if (length(input$cq1) == 0) {
+      output$cq1feed1 <- renderUI({
+        tags$h4('Please Choose an option!')
+      })
+    }
+    else if(input$cq1 == 'D. A, B, and C') {
       output$cq1ans1 <- boastUtils::renderIcon(
         icon = "correct", 
         width = 36,
