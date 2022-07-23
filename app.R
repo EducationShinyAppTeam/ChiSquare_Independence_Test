@@ -98,22 +98,23 @@ ui <- list(
         tabItem(
           tabName = 'prerequisite',
           withMathJax(),
-          h3(strong('Background: Chi-Square Test of Independence')),
+          h1('Background: Chi-Square Test of Independence'),
           br(),
-          h4('To test for an association between two categorical variables, based on a two-way table 
+          p('To test for an association between two categorical variables, based on a two-way table 
                 that has r rows as categories for variable A and c columns as categories for variable B:'),
           br(),
-          h4(tags$li('Set up hypotheses:')),
-          h4('\\(H_{0}\\):  Variable A is not associated with variable B.'),
-          h4('\\(H_{a}\\):  Variable A is associated with variable B.'),
-          h4(tags$li('Compute the expected count under the null for each cell in the table using:')),
-          div(style = "font-size: 1.6em", 
+          h2('Set up hypotheses:'),
+          p('\\(H_{0}\\):  Variable A is not associated with variable B.'),
+          p('\\(H_{a}\\):  Variable A is associated with variable B.'),
+          br(),
+          p('Compute the expected count under the null for each cell in the table using:'),
+          div(style = "font-size: 1.1em", 
               helpText('$${Expected \\ Cell \\ Count} = {Row\\ Total * Column\\ Total\\over Table\\ Total}$$')),
-          h4(tags$li('Compute the value for the chi-square statistic using:')),
-          div(style = "font-size: 1.6em", 
+          p('Compute the value for the chi-square statistic using:'),
+          div(style = "font-size: 1.1em", 
               helpText('$${X^2} = {\\sum{{(Observed - Expected)^2}\\over {Expected}}}$$')),
-          h4('Find a p-value using the upper tail of a chi-square distribution with (r-1)(c-1) degrees of freedom or use simulation under the null.'),
-          h4('The chi-square distribution is appropriate if the expected count is at least five in each cell.'),
+          p('Find a p-value using the upper tail of a chi-square distribution with (r-1)(c-1) degrees of freedom or use simulation under the null.'),
+          p('The chi-square distribution is appropriate if the expected count is at least five in each cell.'),
           br(),
           div(
             style = "text-align: center;",
@@ -533,13 +534,13 @@ ui <- list(
               ),
               conditionalPanel(
                 'input.graphId == "Cars"',
-                selectInput('cq2', label = 'Your Interpretation',
-                  choices = c('',
+                radioButtons('cq2', label = 'Your Interpretation',
+                  choices = c(
                     'A. In this dataset, midsized is the most common size for 7Pass cars',
                     'B. In this dataset, midsized is the most common size for SUV cars',
                     'C. In this dataset, small is the most common size for Sporty cars',
                     'D. None of the above'),
-                    selected = ''
+                    selected = character(0)
                 ),
                 br(),
                 div(style = 'text-align: left', 
@@ -549,8 +550,8 @@ ui <- list(
                   )
               ),
               conditionalPanel('input.graphId == "Drug Efficacy"',
-                selectInput('cq3', label = 'Your Interpretation',
-                  choices = c('',
+                radioButtons('cq3', label = 'Your Interpretation',
+                  choices = c(
                     'A. The use of desipramine is largely associated with the
                     relapse status',
                     'B. People who use desipramine as drug treatment are less 
@@ -560,7 +561,7 @@ ui <- list(
                     relapse status and non-relapse status',
                     'D. The use of lithium is more associated with the 
                     non-relapse status than the relapse status'),
-                  selected = ''), br(),
+                  selected = character(0)), br(),
                 div(style = 'text-align: left',
                   bsButton(inputId = 'cq1check3', 
                     label = 'Check', 
@@ -568,12 +569,12 @@ ui <- list(
                 )
               ),
               conditionalPanel('input.graphId == "Compassionate Rats"',
-                selectInput('cq4', label = 'Your Interpretation',
-                  choices = c('',
+                radioButtons('cq4', label = 'Your Interpretation',
+                  choices = c(
                     'A. All of the female rates showed empathy',
                     'B. The color hows the number of rats in each category',
                     'C. Both A and B'),
-                    selected = ''), br(),
+                    selected = character(0)), br(),
                 div(style = 'text-align: left',
                 bsButton(inputId = 'cq1check4', 
                   label = 'Check', size = "large"), 
@@ -1075,7 +1076,12 @@ server <- function(input, output, session) {
   })
   #cha2 answer2 + feed2
   observeEvent(input$cq1check2,{
-    if(input$cq2 == 'C. In this dataset, small is the most common size for Sporty cars') {
+    if (length(input$cq2) == 0) {
+      output$cq1feed2 <- renderUI({
+        tags$h4('Please Choose an option!')
+      })
+    }
+    else if(input$cq2 == 'C. In this dataset, small is the most common size for Sporty cars') {
       output$cq1ans2 <- boastUtils::renderIcon(
         icon = "correct", 
         width = 36,
@@ -1108,6 +1114,12 @@ server <- function(input, output, session) {
   
   #cha2 answer3 + feed3
   observeEvent(input$cq1check3,{
+    if (length(input$cq3) == 0) {
+      output$cq1feed3 <- renderUI({
+        tags$h4('Please Choose an option!')
+      })
+    }
+    else
     if(input$cq3 == 'B. People who use desipramine as drug treatment are less likely to relapse compared to those who use lithium and placebo') {
       output$cq1ans3 <- boastUtils::renderIcon(
         icon = "correct", 
@@ -1141,7 +1153,12 @@ server <- function(input, output, session) {
   
   #cha2 answer4 + feed4
   observeEvent(input$cq1check4,{
-    if(input$cq4 == 'C. Both A and B') {
+    if (length(input$cq4) == 0) {
+      output$cq1feed4 <- renderUI({
+        tags$h4('Please Choose an option!')
+      })
+    }
+    else if(input$cq4 == 'C. Both A and B') {
       output$cq1ans4 <- boastUtils::renderIcon(
         icon = "correct", 
         width = 36,
