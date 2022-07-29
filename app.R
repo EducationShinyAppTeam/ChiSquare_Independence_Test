@@ -138,8 +138,8 @@ ui <- list(
                 label = 'Select A Dataset to Explore', 
                 selected = 'None',
                 choices = c('None', 'Cars2015', 'HeroesInformation', 
-                            'CompassionateRats', 'SandwichAnts', 'CocaineTreatment', 
-                            'Test Your Own Dataset')
+                            'Compassionate Rats', 'Sandwiches and Ants', 
+                            'Cocaine Treatment', 'Test Your Own Dataset')
               ),
               br(),
               #### Use your own data ----
@@ -278,7 +278,7 @@ ui <- list(
               ),
               #CompassionateRats input conditional panel
               conditionalPanel(
-                'input.inputs == "CompassionateRats"',
+                'input.inputs == "Compassionate Rats"',
                 tags$ul(
                   tags$li('In the CompassionateRats Dataset, there are only 
                           two variables: Sex and Empathy'),br(),
@@ -291,7 +291,7 @@ ui <- list(
               ),
               #SandwichAnts input conditional panel
               conditionalPanel(
-                'input.inputs == "SandwichAnts"',
+                'input.inputs == "Sandwiches and Ants"',
                 tags$ul(
                   tags$li('In the SandwichAnts Dataset, there are only two 
                           categorical variables: Filling and Bread'),br(),
@@ -304,7 +304,7 @@ ui <- list(
               ),
               #CocaineTreatment input conditional panel
               conditionalPanel(
-                'input.inputs == "CocaineTreatment"',
+                'input.inputs == "Cocaine Treatment"',
                 tags$ul(
                   tags$li('In the CocaineTreatment Dataset, there are only 
                           two categorical variables: Drug and Relapse'),br(),
@@ -386,7 +386,7 @@ ui <- list(
               )
             ),
             #SandwichAnts output conditional panel
-            conditionalPanel('input.inputs == "SandwichAnts"',
+            conditionalPanel('input.inputs == "Sandwiches and Ants"',
               tabsetPanel(type = 'tabs',
                 tabPanel('Data Description',br(),
                   box(style = 'info', 
@@ -427,7 +427,7 @@ ui <- list(
               )
             ),
             #CompassionateRats output conditional panel
-            conditionalPanel('input.inputs == "CompassionateRats"',
+            conditionalPanel('input.inputs == "Compassionate Rats"',
               tabsetPanel(type = 'tabs',
                 tabPanel('Data Description', br(),
                   box(style = 'info', 
@@ -459,7 +459,7 @@ ui <- list(
               )
             ),
             #CocaineTreatment output conditional panel
-            conditionalPanel('input.inputs == "CocaineTreatment"',
+            conditionalPanel('input.inputs == "Cocaine Treatment"',
               tabsetPanel(type = 'tabs',
                 tabPanel('Data Description', br(), br(),
                   box(style = 'info', 
@@ -843,7 +843,9 @@ server <- function(input, output, session) {
     
     inFile = input$file
     req(inFile)
-    inputDataset <- read.table(inFile$datapath, header = input$header, sep = input$sep, quote = input$quote)
+    inputDataset <- read.table(inFile$datapath, 
+                               header = input$header, sep = input$sep, 
+                               quote = input$quote)
     return(inputDataset)
     
   })
@@ -865,7 +867,9 @@ server <- function(input, output, session) {
   
   #Challenge Question No.1 for HeroesInformation
   output$HIquestion <- renderText({
-    paste('Is the variable', input$XHeroesInfo, 'independent from the variable', input$YHeroesInfo, '?')
+    paste('Is the variable', 
+          input$XHeroesInfo, 'independent from the variable', 
+          input$YHeroesInfo, '?')
   })
   
   val <- reactiveValues()
@@ -875,20 +879,27 @@ server <- function(input, output, session) {
   output$hiplotly1 <- renderPlotly ({
     x <- list(title = input$XHeroesInfo)
     y <- list(title = input$YHeroesInfo)
-    hip <- plot_ly(x = hi[ , input$XHeroesInfo], y = hi[ , input$YHeroesInfo], type = "histogram2d") %>%
-      layout(xaxis = x, yaxis = y)
+    hip <- plot_ly(x = hi[ , input$XHeroesInfo], 
+                   y = hi[ , input$YHeroesInfo], 
+                   type = "histogram2d") %>%
+      layout(xaxis = x, yaxis = y) %>%
+      plotly::config(displaylogo = FALSE) %>%
+      plotly::config(modeBarButtonsToRemove = c("zoomIn2d", "zoomOut2d", "pan2d",
+                                                "autoScale2d", "hoverCompareCartesian", 
+                                                "hoverClosestCartesian","toImage"))
     hip
   })
   
   #X^2 summary for HeroesInformation
   output$hisur <- renderPrint({
-    hiSummary <- chisq.test(x = hi[ , input$XHeroesInfo], y = hi[ , input$YHeroesInfo], simulate.p.value = TRUE)
+    hiSummary <- chisq.test(x = hi[ , input$XHeroesInfo],
+                            y = hi[ , input$YHeroesInfo], 
+                            simulate.p.value = TRUE)
     hiSummary
   })
   #chisq.test(table(hi[ , c(input$XHeroesInfo, input$YHeroesInfo)]))
   #Warning in chisq.test(table(hi[, c(input$XHeroesInfo, input$YHeroesInfo)])) :
   #Chi-squared approximation may be incorrect
-  #chisq.test(x = hi[ , input$XHeroesInfo], y = hi[ , input$YHeroesInfo],simulate.p.value = TRUE)
   
   #Challenge Question No.1 for Cars2015
   output$Carsquestion <- renderText({
@@ -914,7 +925,11 @@ server <- function(input, output, session) {
                                    colorscale = 'Reds', 
                                    reversescale = TRUE),
                      type = "histogram2d") %>%
-      layout(xaxis = x, yaxis = y)
+      layout(xaxis = x, yaxis = y) %>%
+      plotly::config(displaylogo = FALSE) %>%
+      plotly::config(modeBarButtonsToRemove = c("zoomIn2d", "zoomOut2d", "pan2d",
+                                                "autoScale2d", "hoverCompareCartesian", 
+                                                "hoverClosestCartesian","toImage"))
     carsp
   })
   
@@ -936,8 +951,8 @@ server <- function(input, output, session) {
       layout(xaxis = x, 
              yaxis = y, 
              title = '2D Histogram for the Sandwich & Ants Example') %>%
-      config(displaylogo = FALSE) %>%
-      config(modeBarButtonsToRemove = c("zoomIn2d", "zoomOut2d", "pan2d",
+      plotly::config(displaylogo = FALSE) %>%
+      plotly::config(modeBarButtonsToRemove = c("zoomIn2d", "zoomOut2d", "pan2d",
                   "autoScale2d", "hoverCompareCartesian", 
                   "hoverClosestCartesian","toImage"))
     sap1
@@ -957,7 +972,11 @@ server <- function(input, output, session) {
                 name = 'vegemite') %>%
       layout(xaxis = x, 
              yaxis = list(title = 'Count'), 
-             barmode = 'stacked')
+             barmode = 'stacked') %>%
+      plotly::config(displaylogo = FALSE) %>%
+      plotly::config(modeBarButtonsToRemove = c("zoomIn2d", "zoomOut2d", "pan2d",
+                                                "autoScale2d", "hoverCompareCartesian", 
+                                                "hoverClosestCartesian","toImage"))
     sap2
   })
   
@@ -976,7 +995,11 @@ server <- function(input, output, session) {
                    type = "histogram2d") %>%
       layout(xaxis = x, 
              yaxis = y, 
-             title = '2D Histogram for the Compassionate Rats Example')
+             title = '2D Histogram for the Compassionate Rats Example') %>%
+      plotly::config(displaylogo = FALSE) %>%
+      plotly::config(modeBarButtonsToRemove = c("zoomIn2d", "zoomOut2d", "pan2d",
+                                                "autoScale2d", "hoverCompareCartesian", 
+                                                "hoverClosestCartesian","toImage"))
     cr1
   })
   
@@ -985,7 +1008,12 @@ server <- function(input, output, session) {
     x <- list(title = 'Sex')
     cr2 <- plot_ly(crData, x = ~sex, y = ~no1, type = 'bar', name = 'No') %>%
       add_trace(y = ~yes1, name = 'yes') %>%
-      layout(xaxis = x, yaxis = list(title = 'Count'), barmode = 'stacked')
+      layout(xaxis = x, yaxis = list(title = 'Count'), 
+             barmode = 'stacked') %>%
+      plotly::config(displaylogo = FALSE) %>%
+      plotly::config(modeBarButtonsToRemove = c("zoomIn2d", "zoomOut2d", "pan2d",
+                                                "autoScale2d", "hoverCompareCartesian", 
+                                                "hoverClosestCartesian","toImage"))
     cr2
   })
   
@@ -1000,7 +1028,11 @@ server <- function(input, output, session) {
     x <- list(title = 'Drug Treatment')
     y <- list(title = 'Relapse Status')
     ctp1 <- plot_ly(x = ct$Drug, y = ct$Relapse,type="histogram2d") %>%
-      layout(xaxis = x, yaxis = y)
+      layout(xaxis = x, yaxis = y) %>%
+      plotly::config(displaylogo = FALSE) %>%
+      plotly::config(modeBarButtonsToRemove = c("zoomIn2d", "zoomOut2d", "pan2d",
+                                                "autoScale2d", "hoverCompareCartesian", 
+                                                "hoverClosestCartesian","toImage"))
     ctp1
   })
   
@@ -1009,7 +1041,12 @@ server <- function(input, output, session) {
     x <- list(title = 'Drug Treatment')
     p2 <- plot_ly(treatmentData, x = ~treatment, y = ~no, type = 'bar', name = 'No') %>%
       add_trace(y = ~yes, name = 'Yes') %>%
-      layout(xaxis = x, axis = list(title = 'Treatment'), yaxis = list(title = 'Count'), barmode = 'stacked')
+      layout(xaxis = x, axis = list(title = 'Treatment'), 
+             yaxis = list(title = 'Count'), barmode = 'stacked') %>%
+      plotly::config(displaylogo = FALSE) %>%
+      plotly::config(modeBarButtonsToRemove = c("zoomIn2d", "zoomOut2d", "pan2d",
+                                                "autoScale2d", "hoverCompareCartesian", 
+                                                "hoverClosestCartesian","toImage"))
     p2
   })
   #X^2 summary for CocaineTreatment
@@ -1028,7 +1065,6 @@ server <- function(input, output, session) {
     updateTabItems(session, 'pages', 'exp3')
   })
 
-  
   
   cm
   
@@ -1080,7 +1116,11 @@ server <- function(input, output, session) {
     x <- list(title = 'Type')
     y <- list(title = 'Size')
     cha2p2 <- plot_ly(x = cars$Type, y = cars$Size,type="histogram2d") %>%
-      layout(xaxis = x, yaxis = y, title = '2D Histogram for the Cars Example')
+      layout(xaxis = x, yaxis = y, title = '2D Histogram for the Cars Example') %>%
+      plotly::config(displaylogo = FALSE) %>%
+      plotly::config(modeBarButtonsToRemove = c("zoomIn2d", "zoomOut2d", "pan2d",
+                                                "autoScale2d", "hoverCompareCartesian", 
+                                                "hoverClosestCartesian","toImage"))
     cha2p2
   })
   #cha2 answer2 + feed2
@@ -1107,7 +1147,8 @@ server <- function(input, output, session) {
         html = FALSE
       )
       output$cq1feed2 <- renderUI({
-        tags$h4(strong('Start with each car types and then go through the sizes corresponding to each type!'))
+        tags$h4('Start with each car types and then go through the sizes 
+                corresponding to each type!')
       })
     }
   })
@@ -1117,7 +1158,12 @@ server <- function(input, output, session) {
     x <- list(title = 'Drug')
     y <- list(title = 'Relapse Status')
     cha2p3 <- plot_ly(x = ct$Drug, y = ct$Relapse,type="histogram2d") %>%
-      layout(xaxis = x, yaxis = y, title = '2D Histogram for the Drug Treatment and Relapse Status')
+      layout(xaxis = x, yaxis = y, 
+             title = '2D Histogram for the Drug Treatment and Relapse Status')%>%
+      plotly::config(displaylogo = FALSE) %>%
+      plotly::config(modeBarButtonsToRemove = c("zoomIn2d", "zoomOut2d", "pan2d",
+                                                "autoScale2d", "hoverCompareCartesian", 
+                                                "hoverClosestCartesian","toImage"))
     cha2p3
   })
   
@@ -1156,7 +1202,13 @@ server <- function(input, output, session) {
     x <- list(title = 'Sex')
     y <- list(title = 'Empathy')
     cha2p4 <- plot_ly(x = cr$Sex, y = cr$Empathy,type="histogram2d") %>%
-      layout(xaxis = x, yaxis = y, title = '2D Histogram for the Compassionate Rats Example')
+      layout(xaxis = x, 
+             yaxis = y, 
+             title = '2D Histogram for the Compassionate Rats Example')%>%
+      plotly::config(displaylogo = FALSE) %>%
+      plotly::config(modeBarButtonsToRemove = c("zoomIn2d", "zoomOut2d", "pan2d",
+                                                "autoScale2d", "hoverCompareCartesian", 
+                                                "hoverClosestCartesian","toImage"))
     cha2p4
   })
   
@@ -1184,7 +1236,8 @@ server <- function(input, output, session) {
         html = FALSE
       )
       output$cq1feed4 <- renderUI({
-        tags$h4(strong('Think about what could be done to make the graph more informative!'))
+        tags$h4('Think about what could be done to make the graph more 
+                informative!')
       })
     }
   })
