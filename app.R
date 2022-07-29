@@ -293,7 +293,7 @@ ui <- list(
               conditionalPanel(
                 'input.inputs == "Sandwiches and Ants"',
                 tags$ul(
-                  tags$li('In the SandwichAnts Dataset, there are only two 
+                  tags$li('In the Sandwich and Ants Dataset, there are only two 
                           categorical variables: Filling and Bread'),br(),
                   tags$li('The Filling variable takes on three levels: 
                           Vegemite, Peanut Butter, and Ham & Pickles'),br(),
@@ -416,13 +416,13 @@ ui <- list(
                 ),
                 tabPanel('Graph and Summary Output', br(),
                   tags$li('2D Histogram Output'),
-                  plotlyOutput('saplotly1'),
-                  bsPopover(id = 'saplotly1', title = NULL, 
-                    content = 'z corresponds to number of count in each 
-                    category. For example, there are 2 white bread with peanut 
-                    butter filling.'), br(),
-                    plotlyOutput('saplotly2'),br(),
-                    verbatimTextOutput('sasur')
+                  plotlyOutput('saplotly1') #,
+                  # bsPopover(id = 'saplotly1', title = NULL, 
+                  #   content = 'z corresponds to number of count in each 
+                  #   category. For example, there are 2 white bread with peanut 
+                  #   butter filling.'), br(),
+                  #   plotlyOutput('saplotly2'),br(),
+                  #   verbatimTextOutput('sasur')
                 )
               )
             ),
