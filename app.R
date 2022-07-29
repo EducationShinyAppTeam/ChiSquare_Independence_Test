@@ -935,7 +935,11 @@ server <- function(input, output, session) {
                     type = "histogram2d") %>%
       layout(xaxis = x, 
              yaxis = y, 
-             title = '2D Histogram for the Sandwich & Ants Example')
+             title = '2D Histogram for the Sandwich & Ants Example') %>%
+      config(displaylogo = FALSE) %>%
+      config(modeBarButtonsToRemove = c("zoomIn2d", "zoomOut2d", "pan2d",
+                  "autoScale2d", "hoverCompareCartesian", 
+                  "hoverClosestCartesian","toImage"))
     sap1
   })
   
@@ -1034,7 +1038,12 @@ server <- function(input, output, session) {
     x <- list(title = 'Filling')
     y <- list(title = 'Bread')
     cha2p1 <- plot_ly(x = sa$Filling, y = sa$Bread,type="histogram2d") %>%
-      layout(xaxis = x, yaxis = y, title = '2D Histogram for the Sandwich & Ants Example')
+      layout(xaxis = x, yaxis = y, 
+             title = '2D Histogram for the Sandwich & Ants Example') %>%
+      plotly::config(displaylogo = FALSE) %>%
+      plotly::config(modeBarButtonsToRemove = c("zoomIn2d", "zoomOut2d", "pan2d",
+                                        "autoScale2d", "hoverCompareCartesian", 
+                                        "hoverClosestCartesian","toImage"))
     cha2p1
   })
   
