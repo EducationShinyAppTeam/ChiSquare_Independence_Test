@@ -712,9 +712,9 @@ crData <- data.frame(sex, no1, yes1)
 #import dataset: SandwichAnts.csv
 sa <- read.csv('SandwichAnts.csv')
 bread <- c('Multigrain', 'Rye', 'White', 'Wholemeal')
-hpickles <- c(2, 2, 2, 2)
-pbutter <- c(2, 2, 2, 2)
-vegemite <- c(2, 2, 2, 2)
+hpickles <- c(36, 44, 53, 65)
+pbutter <- c(22, 43, 21, 47)
+vegemite <- c(42, 18, 25, 21)
 saData <- data.frame(bread, hpickles, pbutter, vegemite)
 
 
