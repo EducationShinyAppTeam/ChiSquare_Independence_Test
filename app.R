@@ -416,13 +416,13 @@ ui <- list(
                 ),
                 tabPanel('Graph and Summary Output', br(),
                   tags$li('2D Histogram Output'),
-                  plotlyOutput('saplotly1') #,
-                  # bsPopover(id = 'saplotly1', title = NULL, 
-                  #   content = 'z corresponds to number of count in each 
-                  #   category. For example, there are 2 white bread with peanut 
-                  #   butter filling.'), br(),
-                  #   plotlyOutput('saplotly2'),br(),
-                  #   verbatimTextOutput('sasur')
+                  plotlyOutput('saplotly1') ,
+                  bsPopover(id = 'saplotly1', title = NULL,
+                    content = 'z corresponds to number of count in each
+                    category. For example, there are 2 white bread with peanut
+                    butter filling.'), br(),
+                    plotlyOutput('saplotly2'),br(),
+                    verbatimTextOutput('sasur')
                 )
               )
             ),
@@ -680,7 +680,7 @@ ui <- list(
                              Available at http://www.jstatsoft.org/v40/i01/."
           ),
           boastUtils::copyrightInfo()
-        ) #end of tabItem
+        ) 
       )
     )
   )
@@ -964,11 +964,10 @@ server <- function(input, output, session) {
     sap2 <- plot_ly(saData, x = ~bread, 
                     y = ~hpickles, 
                     type = 'bar', 
-                    name = 'Ham & Pickles',
-                    type = "histogram2d") %>%
+                    name = 'Ham & Pickles') %>%
       add_trace(y = ~pbutter, 
                 name = 'Peanut Butter') %>%
-      add_trace(y = ~vegemite, 
+      add_trace(y = ~vegemite,
                 name = 'vegemite') %>%
       layout(xaxis = x, 
              yaxis = list(title = 'Count'), 
