@@ -1038,7 +1038,8 @@ server <- function(input, output, session) {
   #stacked bar chart for CocaineTreatment
   output$stack1 <- renderPlotly({
     x <- list(title = 'Drug Treatment')
-    p2 <- plot_ly(treatmentData, x = ~treatment, y = ~no, type = 'bar', name = 'No') %>%
+    p2 <- plot_ly(treatmentData, x = ~treatment, y = ~no, type = 'bar', 
+                  name = 'No') %>%
       add_trace(y = ~yes, name = 'Yes') %>%
       layout(xaxis = x, axis = list(title = 'Treatment'), 
              yaxis = list(title = 'Count'), barmode = 'stacked') %>%
