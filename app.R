@@ -417,7 +417,7 @@ ui <- list(
                 ),
                 tabPanel('Graph and Summary Output', br(),
                   tags$li('2D Histogram Output'),
-                  plotlyOutput('saplotly1') ,
+                  plotOutput('saplotly1') ,
                   bsPopover(id = 'saplotly1', title = NULL,
                     content = 'z corresponds to number of count in each
                     category. For example, there are 2 white bread with peanut
@@ -943,19 +943,13 @@ server <- function(input, output, session) {
   })
 
   #2D histogram for SandwichAnts
-  output$saplotly1 <- renderPlotly({
+  output$saplotly1 <- renderPlot({
     x <- list(title = 'Filling')
     y <- list(title = 'Bread')
-    sap1 <- plot_ly(x = sa$Filling, 
-                    y = sa$Bread,
-                    type = "histogram2d") %>%
-      layout(xaxis = x, 
-             yaxis = y, 
-             title = '2D Histogram for the Sandwich & Ants Example') %>%
-      plotly::config(displaylogo = FALSE) %>%
-      plotly::config(modeBarButtonsToRemove = c("zoomIn2d", "zoomOut2d", "pan2d",
-                  "autoScale2d", "hoverCompareCartesian", 
-                  "hoverClosestCartesian","toImage"))
+    sap1 <-  ggplot(sa, aes(Filling, Bread)) + 
+      geom_bin2d( color = "black") +
+      ggtitle('2D Histogram for the Sandwich & Ants Example')+
+      theme_bw()
     sap1
   })
   
@@ -1072,18 +1066,10 @@ server <- function(input, output, session) {
   ############ What's Going On in This Graph? ############
   #cha2 plot1
   output$cha2plot1 <- renderPlot({
-    x <- list(title = 'Filling')
-    y <- list(title = 'Bread')
-    # cha2p1 <- plot_ly(x = sa$Filling, y = sa$Bread,type="histogram2d") %>%
-    #   layout(xaxis = x, yaxis = y, 
-    #          title = '2D Histogram for the Sandwich & Ants Example') %>%
-    #   plotly::config(displaylogo = FALSE) %>%
-    #   plotly::config(modeBarButtonsToRemove = c("zoomIn2d", "zoomOut2d", "pan2d",
-    #                                     "autoScale2d", "hoverCompareCartesian", 
-    #                                     "hoverClosestCartesian","toImage"))
-    #  
     cha2p1 <- ggplot(sa, aes(Filling, Bread)) + 
-      stat_bin2d()
+      geom_bin2d( color = "black") +
+      ggtitle('2D Histogram for the Sandwich & Ants Example')+
+      theme_bw()
     cha2p1
   })
   
