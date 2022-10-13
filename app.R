@@ -888,6 +888,7 @@ server <- function(input, output, session) {
       plotly::config(modeBarButtonsToRemove = c("zoomIn2d", "zoomOut2d", "pan2d",
                                                 "autoScale2d", "hoverCompareCartesian", 
                                                 "hoverClosestCartesian","toImage"))
+    
     hip
   })
   
