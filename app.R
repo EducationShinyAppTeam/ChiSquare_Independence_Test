@@ -7,6 +7,7 @@ library(shinyDND)
 library(plotly)
 library(boastUtils)
 library(ggplot2)
+library(viridis)
 
 # Load files ----
 
@@ -598,14 +599,14 @@ ui <- list(
                 )
               ),
               conditionalPanel('input.graphId == "Drug Efficacy"',
-                plotlyOutput('cha2plot3'),
+                plotOutput('cha2plot3'),
                 conditionalPanel('input.cq1check3 != 0',
                   htmlOutput('cq1ans3'),
                   uiOutput('cq1feed3')
                 )
               ),
               conditionalPanel('input.graphId == "Compassionate Rats"',
-                plotlyOutput('cha2plot4'),
+                plotOutput('cha2plot4'),
                 conditionalPanel('input.cq1check4 != 0',
                   htmlOutput('cq1ans4'),
                   uiOutput('cq1feed4')
@@ -1069,7 +1070,14 @@ server <- function(input, output, session) {
   output$cha2plot1 <- renderPlot({
     cha2p1 <- ggplot(sa, aes(Filling, Bread)) + 
       geom_bin2d( color = "black") +
-      ggtitle('2D Histogram for the Sandwich & Ants Example')+
+      ggtitle('2D Histogram for the Sandwich & Ants')+
+      theme(
+        plot.title = element_text(size =24),
+        axis.text.x = element_text(size = 14),
+        axis.text.y = element_text(size = 14),
+        axis.title = element_text(size = 18)
+      ) +
+      scale_color_continuous(low = "blue", high = "red")+
       theme_bw()
     cha2p1
   })
@@ -1109,9 +1117,16 @@ server <- function(input, output, session) {
     
     cha2p1 <- ggplot(cars, aes(Type, Size)) + 
       geom_bin2d( color = "black") +
-      ggtitle('2D Histogram for the Cars Example')+
-     # theme_bw() + 
-      scale_color_gradient(low = "blue", high="red")
+      ggtitle('2D Histogram for the Cars Example') +
+      scale_fill_viridis(option = "D", direction = -1) +
+      theme_bw() +
+      theme(
+        plot.title = element_text(size =24),
+        axis.text.x = element_text(size = 14),
+        axis.text.y = element_text(size = 14),
+        axis.title = element_text(size = 18)
+      )
+      
     cha2p1
   })
   #cha2 answer2 + feed2
@@ -1145,16 +1160,28 @@ server <- function(input, output, session) {
   })
   
   #cha2 plot3
-  output$cha2plot3 <- renderPlotly({
+  output$cha2plot3 <- renderPlot({
     x <- list(title = 'Drug')
     y <- list(title = 'Relapse Status')
-    cha2p3 <- plot_ly(x = ct$Drug, y = ct$Relapse,type="histogram2d") %>%
-      layout(xaxis = x, yaxis = y, 
-             title = '2D Histogram for the Drug Treatment and Relapse Status')%>%
-      plotly::config(displaylogo = FALSE) %>%
-      plotly::config(modeBarButtonsToRemove = c("zoomIn2d", "zoomOut2d", "pan2d",
-                                                "autoScale2d", "hoverCompareCartesian", 
-                                                "hoverClosestCartesian","toImage"))
+    # cha2p3 <- plot_ly(x = ct$Drug, y = ct$Relapse,type="histogram2d") %>%
+    #   layout(xaxis = x, yaxis = y, 
+    #          title = '2D Histogram for the Drug Treatment and Relapse Status')%>%
+    #   plotly::config(displaylogo = FALSE) %>%
+    #   plotly::config(modeBarButtonsToRemove = c("zoomIn2d", "zoomOut2d", "pan2d",
+    #                                             "autoScale2d", "hoverCompareCartesian", 
+    #                                             "hoverClosestCartesian","toImage"))
+    # 
+    cha2p3 <- ggplot(ct, aes(Drug, Relapse)) + 
+      geom_bin2d( color = "black") +
+      ggtitle('2D Histogram for the Drug Treatment and Relapse') +
+      scale_fill_viridis(option = "D", direction = -1) +
+      theme_bw() +
+      theme(
+        plot.title = element_text(size =24),
+        axis.text.x = element_text(size = 14),
+        axis.text.y = element_text(size = 14),
+        axis.title = element_text(size = 18)
+      )
     cha2p3
   })
   
@@ -1189,17 +1216,29 @@ server <- function(input, output, session) {
   })
   
   #cha2 plot4
-  output$cha2plot4 <- renderPlotly({
+  output$cha2plot4 <- renderPlot({
     x <- list(title = 'Sex')
     y <- list(title = 'Empathy')
-    cha2p4 <- plot_ly(x = cr$Sex, y = cr$Empathy,type="histogram2d") %>%
-      layout(xaxis = x, 
-             yaxis = y, 
-             title = '2D Histogram for the Compassionate Rats Example')%>%
-      plotly::config(displaylogo = FALSE) %>%
-      plotly::config(modeBarButtonsToRemove = c("zoomIn2d", "zoomOut2d", "pan2d",
-                                                "autoScale2d", "hoverCompareCartesian", 
-                                                "hoverClosestCartesian","toImage"))
+    # cha2p4 <- plot_ly(x = cr$Sex, y = cr$Empathy,type="histogram2d") %>%
+    #   layout(xaxis = x, 
+    #          yaxis = y, 
+    #          title = '2D Histogram for the Compassionate Rats Example')%>%
+    #   plotly::config(displaylogo = FALSE) %>%
+    #   plotly::config(modeBarButtonsToRemove = c("zoomIn2d", "zoomOut2d", "pan2d",
+    #                                             "autoScale2d", "hoverCompareCartesian", 
+    #                                             "hoverClosestCartesian","toImage"))
+    # 
+    cha2p4 <- ggplot(cr, aes(Sex, Empathy)) + 
+      geom_bin2d( color = "black") +
+      ggtitle('2D Histogram for the Compassionate Rats') +
+      scale_fill_viridis(option = "D", direction = -1) +
+      theme_bw() +
+      theme(
+        plot.title = element_text(size =24),
+        axis.text.x = element_text(size = 14),
+        axis.text.y = element_text(size = 14),
+        axis.title = element_text(size = 18)
+      )
     cha2p4
   })
   
