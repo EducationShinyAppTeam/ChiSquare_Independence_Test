@@ -1106,17 +1106,12 @@ server <- function(input, output, session) {
   output$cha2plot2 <- renderPlot({
     x <- list(title = 'Type')
     y <- list(title = 'Size')
-    # cha2p2 <- plot_ly(x = cars$Type, y = cars$Size,type="histogram2d") %>%
-    #   layout(xaxis = x, yaxis = y, title = '2D Histogram for the Cars Example') %>%
-    #   plotly::config(displaylogo = FALSE) %>%
-    #   plotly::config(modeBarButtonsToRemove = c("zoomIn2d", "zoomOut2d", "pan2d",
-    #                                             "autoScale2d", "hoverCompareCartesian", 
-    #                                             "hoverClosestCartesian","toImage"))
-    # cha2p2
+    
     cha2p1 <- ggplot(cars, aes(Type, Size)) + 
       geom_bin2d( color = "black") +
       ggtitle('2D Histogram for the Cars Example')+
-      theme_bw()
+     # theme_bw() + 
+      scale_color_gradient(low = "blue", high="red")
     cha2p1
   })
   #cha2 answer2 + feed2
