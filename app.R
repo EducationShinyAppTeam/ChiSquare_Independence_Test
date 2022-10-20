@@ -1069,7 +1069,7 @@ server <- function(input, output, session) {
   #cha2 plot1
   output$cha2plot1 <- renderPlot({
     cha2p1 <- ggplot(sa, aes(Filling, Bread)) + 
-      geom_bin2d( color = "black") +
+      geom_bin2d( color = "black", drop = FALSE) +
       ggtitle('2D Histogram for the Sandwich & Ants')+
       theme(
         plot.title = element_text(size =24),
@@ -1116,8 +1116,8 @@ server <- function(input, output, session) {
     y <- list(title = 'Size')
     
     cha2p1 <- ggplot(cars, aes(Type, Size)) + 
-      geom_bin2d( color = "black") +
-      ggtitle('2D Histogram for the Cars Example') +
+      geom_bin_2d( color = "black", drop = FALSE) +
+      ggtitle('2D Histogram for the Vehicles Example') +
       scale_fill_viridis(option = "D", direction = -1) +
       theme_bw() +
       theme(
