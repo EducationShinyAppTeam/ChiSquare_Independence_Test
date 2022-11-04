@@ -8,6 +8,7 @@ library(plotly)
 library(boastUtils)
 library(ggplot2)
 library(viridis)
+library(dplyr)
 
 # Load files ----
 
@@ -1115,7 +1116,26 @@ server <- function(input, output, session) {
     x <- list(title = 'Type')
     y <- list(title = 'Size')
     
-    cha2p1 <- ggplot(cars, aes(Type, Size)) + 
+    sumCars <- cars %>%
+      group_by(Type, Size) %>%
+      summarize(
+        count = n()
+      )
+    
+    filler <- data.frame(
+      Type = c("7Pass", "Hatchback", "Hatchback"),
+      Size = c("Small", "Large", "Midsized"),
+      count = c(0, 0, 0)
+    )
+    
+    sumCars <- rbind(
+      sumCars,
+      filler
+    )
+    
+    cha2p1 <- ggplot(
+      data = sumCars, 
+      mapping = aes(x = Type, y = Size, weight = count)) + 
       geom_bin_2d( color = "black", drop = FALSE) +
       ggtitle('2D Histogram for the Vehicles Example') +
       scale_fill_viridis(option = "D", direction = -1) +
