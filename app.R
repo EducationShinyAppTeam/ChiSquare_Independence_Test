@@ -135,11 +135,32 @@ ui <- list(
         tabItem(
           tabName = "example",
           withMathJax(),
-          h1("Understanding 2D Histogram"), br(),
+          h1("Understanding a 2D Histogram"), br(),
           p("Here is a 2D histogram plot for the Vehicle type dataset. The vehicle dataset 
             is a collection of different types of vehicles and their specifications like
-            type, MPG, etc.")
-          #plotOutput('cha2plot2')
+            type, MPG, etc."), br(),
+          fluidRow(
+            column(
+              width = 4,
+              h2("Features of a 2D Histogram"),
+              tags$ol(
+                tags$li("The axes indicate the two features of focus. In our
+                        example, the x-axis is the vehicle type, and the y-axis is
+                        the vehicle size."),
+                tags$li("Each sqaure represents the combination of vehicle type 
+                        and vehicle size"),
+                tags$li("The color of each square represents the frequency of the 
+                        combination occuring in the dataset. Darker the color translates
+                        to higher occurences.")
+                
+              )
+            ),
+            column(
+              width = 7,
+              style = "backgroud-color: #EAF2F8",
+              plotOutput('examplePlot')
+            )
+          )
           
         ),
         ### Explore page ----
@@ -764,6 +785,45 @@ server <- function(input, output, session) {
     
     return(response)
   }
+  
+  # Example Page plot
+  output$examplePlot <- renderPlot({
+    x <- list(title = 'Type')
+    y <- list(title = 'Size')
+    
+    sumCars <- cars %>%
+      group_by(Type, Size) %>%
+      summarize(
+        count = n()
+      )
+    
+    filler <- data.frame(
+      Type = c("7Pass", "Hatchback", "Hatchback"),
+      Size = c("Small", "Large", "Midsized"),
+      count = c(0, 0, 0)
+    )
+    
+    sumCars <- rbind(
+      sumCars,
+      filler
+    )
+    
+    cha2p1 <- ggplot(
+      data = sumCars, 
+      mapping = aes(x = Type, y = Size, weight = count)) + 
+      geom_bin_2d( color = "black", drop = FALSE) +
+      ggtitle('2D Histogram for the Vehicles Example') +
+      scale_fill_viridis(option = "D", direction = -1) +
+      theme_bw() +
+      theme(
+        plot.title = element_text(size =24),
+        axis.text.x = element_text(size = 14),
+        axis.text.y = element_text(size = 14),
+        axis.title = element_text(size = 18)
+      )
+    
+    cha2p1
+  })
   
   .generateAnsweredStatement <- 
     function(session, 
