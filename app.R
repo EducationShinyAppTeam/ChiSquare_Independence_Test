@@ -95,7 +95,7 @@ ui <- list(
             boastUtils::citeApp(),
             br(),
             br(),
-            div(class = "updated", "Last Update: 7/9/2021 by LSB.")
+            div(class = "updated", "Last Update: 7/9/2021 by SMV")
           )
         ),
         ### Prerequisite ----
@@ -135,47 +135,12 @@ ui <- list(
         tabItem(
           tabName = "example",
           withMathJax(),
-          h1("The", HTML("&chi;<sup>2</sup>"), "Test of Independence"),
-          p('In this app you will explore examples of', HTML('&chi;<sup>2</sup>'),
-            'Test of Independence; you will also be able to test your own dataset.
-            The Fill in the Blanks exercise would serve to test your
-            understandings about this topic.'),
-          br(),
-          h2("Instructions"),
-          tags$ol(
-            tags$li('In this application, you will first explore a variety of
-                    real life examples using both graphical displays and the',
-                    HTML('&chi;<sup>2</sup>'), 'test for independence.'),
-            tags$li('By uploading your own datafile, you would be given back a',
-                    HTML('&chi;<sup>2</sup>'), 'test for independence result of
-                    the variables selected.'),
-            tags$li('Read the instructions for Fill in the Blanks first and then
-                    click on Go button to get started!')
-          ),
-          div(
-            style = "text-align: center;",
-            bsButton(
-              inputId = "bsButton1", 
-              label = "GO !",
-              icon = icon('bolt'),
-              size = 'large')
-          ),
-          br(),
-          h2("Acknowledgements"),
-          p('This application was coded, developed by Anna (Yinqi) Zhang and
-            further updated by Jiayue He in 2021. Special Thanks to Dr. Pearl,
-            Alex Chen, James M. Kopf, Angela Ting, Yingjie (Chealsea) Wang,
-            and Yubaihe Zhou for being really supportive throughout the
-            program.',
-            br(),
-            br(),
-            "Cite this app as:",
-            br(),
-            boastUtils::citeApp(),
-            br(),
-            br(),
-            div(class = "updated", "Last Update: 7/9/2021 by LSB.")
-          )
+          h1("Understanding 2D Histogram"), br(),
+          p("Here is a 2D histogram plot for the Vehicle type dataset. The vehicle dataset 
+            is a collection of different types of vehicles and their specifications like
+            type, MPG, etc.")
+          #plotOutput('cha2plot2')
+          
         ),
         ### Explore page ----
         tabItem(
