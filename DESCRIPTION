@@ -1,0 +1,22 @@
+Title: Chi-Square Independence Test
+ShortName: Chi-Square Independence Test
+Date: 2021-06-17
+Lifecycle: questioning
+Authors@R: c(
+    person(given = "Anna (Yinqi)", family = "Zhang", email = "", role = c("aut", "cre")),
+    person(given = "Jiayue", family = "He", email = "jph6197@psu.edu", role = c("aut"))
+  )
+Chapter: Chapter 10
+Description: In this app you will explore examples of the Chi-Square Test of Independence;
+             you will also be able to test your own dataset. The Fill in the Blanks exercise would serve to 
+             test your understandings about this topic.
+LearningObjectives: c(
+    "The student will will explore examples of x2 Test of Independence and also be able to test your own dataset",
+    "The student will learn the concept of Chi-square independence test."
+  )
+DisplayMode: Normal
+URL: https://psu-eberly.shinyapps.io/Sample_App
+BugReports: https://github.com/EducationShinyAppTeam/Sample_App/issues
+License: CC-BY-NC-SA-4.0
+Tags: simulation
+Type: Shiny
