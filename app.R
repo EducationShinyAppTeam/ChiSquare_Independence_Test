@@ -77,7 +77,7 @@ ui <- list(
             style = "text-align: center;",
             bsButton(
               inputId = "bsButton1", 
-              label = "GO !",
+              label = "Prerequisites",
               icon = icon('bolt'),
               size = 'large')
           ),
@@ -126,7 +126,6 @@ ui <- list(
               inputId = "goover", 
               label = "Explore !", 
               icon = icon("bolt"), 
-              style = "color: #ffffff;",
               size = "large"
             )
           )
